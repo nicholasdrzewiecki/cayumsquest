@@ -1,0 +1,30 @@
+/* Import */
+
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+/* Elements */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e5e5e5;
+}
+
+h1 {
+    color: #222229;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em;
+    margin: 1.5em;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
