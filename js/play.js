@@ -75,6 +75,9 @@ var playState = {
 
         this.movePlayer();
         this.addEnemy();
+        
+        // Test for collision
+        game.physics.arcade.overlap(this.bullets, this.enemies, this.collisionHandler, null, this);
     },
 
     fire: function() {
@@ -165,5 +168,10 @@ var playState = {
     startMenu: function() {
         game.state.start('menu');
     },
+    
+    collisionHandler: function(bullets, enemies) {
+        bullets.kill();
+        enemies.kill();
+    }
 
 };

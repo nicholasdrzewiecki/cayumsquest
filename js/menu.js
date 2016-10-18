@@ -3,7 +3,7 @@ var menuState = {
     create: function() {
         // Game information:
         var nameLabel = game.add.text(game.world.centerX, -50, 'Cayums Quest', {
-            font: '36pt Raleway',
+            font: '48pt VT323',
             fill: '#ffffff'
         });
         nameLabel.anchor.setTo(0.5, 0.5);
@@ -15,7 +15,7 @@ var menuState = {
         // How to start the adventure:
         var startLabel = game.add.text(game.world.centerX, game.world.height - 80,
             'Press the up arrow key to begin your journey', {
-                font: '14pt Raleway',
+                font: '18pt VT323',
                 fill: '#ffffff'
             });
         startLabel.anchor.setTo(0.5, 0.5);
