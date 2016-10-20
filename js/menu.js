@@ -2,27 +2,32 @@ var menuState = {
 
     create: function() {
         // Game information:
-        var nameLabel = game.add.text(game.world.centerX, -50, 'Cayums Quest', {
+        var nameLabel = "";
+        nameLabel = game.add.text(0, 0, 'CAYUMS QUEST', {
             font: '48pt VT323',
-            fill: '#ffffff'
+            fill: '#ffffff',
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
         });
-        nameLabel.anchor.setTo(0.5, 0.5);
+        nameLabel.setTextBounds(0, 0, 800, 50); // Change 800 to whatever canvas width is
         game.add.tween(nameLabel).to({
                 y: 80
             }, 1000).easing(Phaser.Easing.Bounce.Out)
             .start();
 
         // How to start the adventure:
-        var startLabel = game.add.text(game.world.centerX, game.world.height - 80,
+        var startLabel = game.add.text(0, 400,
             'Press the up arrow key to begin your journey', {
                 font: '18pt VT323',
-                fill: '#ffffff'
+                fill: '#ffffff',
+                boundsAlignH: "center",
+                boundsAlignV: "middle"
             });
-        startLabel.anchor.setTo(0.5, 0.5);
+        startLabel.setTextBounds(0, 0, 800, 100); // Change 800 to whatever canvas width is
         game.add.tween(startLabel).to({
-                angle: -2
+                alpha: 0.3
             }, 500).to({
-                angle: 2
+                alpha: 1
             }, 500).loop()
             .start();
 

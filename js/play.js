@@ -31,6 +31,7 @@ var playState = {
         // Particles emitter:
         this.emitter = game.add.emitter(0, 0, 5); // Create emitter with five particles (x, y, quantity);
         this.emitter.makeParticles('deathParticle'); // Set the image for the particles from load state
+        this.emitter.makeParticles('arrow');
         this.emitter.setYSpeed(-100, 100);
         this.emitter.setXSpeed(-100, 100);
         this.emitter.gravity = 0;
@@ -46,7 +47,7 @@ var playState = {
         this.bullets.enableBody = true;
         this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
-        this.bullets.createMultiple(50, 'deathParticle');
+        this.bullets.createMultiple(50, 'arrow');
         this.bullets.setAll('checkWorldBounds', true);
         this.bullets.setAll('outOfBoundsKill', true);
         this.fireRate = 500;
@@ -85,7 +86,7 @@ var playState = {
             this.nextFire = game.time.now + this.fireRate;
             this.bullet = this.bullets.getFirstDead();
             this.bullet.reset(this.player.x - 8, this.player.y - 8);
-            game.physics.arcade.moveToPointer(this.bullet, 500);
+            this.bullet.rotation = game.physics.arcade.moveToPointer(this.bullet, 500);
         }
     },
 
@@ -145,7 +146,8 @@ var playState = {
         this.emitter.x = this.player.x;
         this.emitter.y = this.player.y;
         this.emitter.start(true, 600, null, 15);
-        game.time.events.add(1000, this.startMenu, this);
+        //game.time.events.add(1000, this.startMenu, this);
+        this.game.state.start('menu');
     },
 
     addEnemy: function() {

@@ -19,6 +19,7 @@ var loadState = {
         game.load.tilemap('map', 'assets/tiles/map.json', null, Phaser.Tilemap.TILED_JSON); // Map json data
         game.load.image('enemy', 'assets/images/enemy.png');
         game.load.image('deathParticle', 'assets/images/deathParticle.png');
+        game.load.image('arrow', 'assets/images/arrow.png');
 
 
         // Load player spritesheets:
