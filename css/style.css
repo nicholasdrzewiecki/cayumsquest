@@ -1,0 +1,16 @@
+@font-face {
+    font-family: bitmap;
+    src: url(../assets/fonts/bitmap.ttf);
+}
+
+body {
+    font-family: 'bitmap', cursive;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'bitmap', cursive;
+    display: none;
+}
