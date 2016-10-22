@@ -1,31 +1,16 @@
-/* Import */
-
-@import 'https://fonts.googleapis.com/css?family=VT323';
-
-/* Elements */
+@font-face {
+    font-family: bitmap;
+    src: url(../assets/fonts/bitmap.ttf);
+}
 
 body {
+    font-family: 'bitmap', cursive;
+    background-color: #1a1a1a;
     margin: 0;
     padding: 0;
-    background-color: #e5e5e5;
-    font-family: 'VT323', sans-serif;
 }
 
 h1 {
-    color: #222229;
-    font-family: 'VT323', sans-serif;
-    font-size: 2em;
-    margin: 1.5em;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-}
-
-canvas {
-    display: block;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    font-family: 'bitmap', cursive;
+    display: none;
 }
