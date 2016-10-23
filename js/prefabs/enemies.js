@@ -13,9 +13,10 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.data.attack = +this.data.attack;
     this.data.defense = +this.data.defense;
     this.data.health = +this.data.health;
-    this.data.speed = +this.data.speed;
+    this.data.hasBow = +this.data.hasBow;
 
     this.game.physics.arcade.enable(this);
+    this.body.immovable = true;
 };
 
 CAYUMSQUEST.Enemy.prototype = Object.create(Phaser.Sprite.prototype);

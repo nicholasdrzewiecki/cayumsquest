@@ -49,7 +49,7 @@ CAYUMSQUEST.GameState = {
     update: function() {
         this.game.physics.arcade.collide(this.player, this.collisionLayer); // Player will only collide with second layer in map.json
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer); // Enemy will only collide with second layer in map.json
-        this.game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this); // If player and enemies overlap: player dies
+        this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this); // Player will only collide with second layer in map.json
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this); // Collect items
 
@@ -107,7 +107,7 @@ CAYUMSQUEST.GameState = {
     },
 
     fire: function() {
-        if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0) {
+        if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0 && this.player.data.hasBow === 1) {
             this.nextFire = this.game.time.now + this.fireRate;
             this.arrow = this.arrows.getFirstDead();
             this.arrow.reset(this.player.x - 8, this.player.y - 8);
@@ -133,10 +133,9 @@ CAYUMSQUEST.GameState = {
             return;
         }
 
-        enemy.anchor.setTo(0.5, 1);
-        enemy.reset(this.game.world.randomX, this.game.world.randomY);
-        enemy.body.velocity.x = 20 * Phaser.Utils.randomChoice(1, -1);
-        enemy.body.velocity.y = 20 * Phaser.Utils.randomChoice(1, -1);
+        enemy.anchor.setTo(0.5, 0.5);
+        enemy.body.velocity.x = 20;
+        enemy.body.velocity.y = 20;
         enemy.checkWorldBounds = true;
         enemy.outOfBoundsKill = true;
 
@@ -165,16 +164,18 @@ CAYUMSQUEST.GameState = {
                 questCompleted: false
             }],
             health: 100,
-            attack: 10,
-            defense: 10,
+            attack: 20,
+            defense: 12,
             speed: 50,
             gold: 0,
+            hasBow: 0
         };
 
         this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
         this.player.anchor.setTo(0.5, 0.5);
-        this.game.camera.follow(this.player);
         this.player.direction = 0;
+
+        this.game.camera.follow(this.player);
 
         // Add player to the world
         this.add.existing(this.player);
@@ -182,23 +183,19 @@ CAYUMSQUEST.GameState = {
         // Group of items
         this.items = this.add.group();
 
-        var potion = new CAYUMSQUEST.Item(this, 454, 208, 'heart', {
-            health: 25
-        });
-        this.items.add(potion);
+        // Group of enemies
+        this.enemies = this.add.group();
 
-        var boots = new CAYUMSQUEST.Item(this, 198, 286, 'boots', {
-            speed: 50,
-            isQuestItem: true,
-            questCode: 'getBoots'
+        this.enemy = new CAYUMSQUEST.Enemy(this, 400, 300, 'wolf', {
+            attack: 15,
+            defense: 10,
+            health: 50
         });
-        this.items.add(boots);
+        this.enemies.add(this.enemy);
 
-        var scroll = new CAYUMSQUEST.Item(this, 359, 450, 'scroll', {
-            isQuestItem: true,
-            questCode: 'getScroll'
-        });
-        this.items.add(scroll);
+        this.battle = new CAYUMSQUEST.Battle(this.game);
+
+        this.loadItems();
 
         this.initInterface();
     },
@@ -239,6 +236,49 @@ CAYUMSQUEST.GameState = {
     refreshStats: function() {
         this.healthLabel.text = this.player.data.health;
         this.speedLabel.text = this.player.data.speed;
+    },
+
+    findObjectsByType: function(type, tilemap, layer) {
+        var result = [];
+
+        tilemap.objects[layer].forEach(function(item) {
+            if (item.properties.type === type) {
+                item.y -= tilemap.tileHeight / 2;
+                item.x += tilemap.tileHeight / 2;
+                result.push(item);
+            }
+        }, this);
+        return result;
+    },
+
+    loadItems: function() {
+        var itemsArray = this.findObjectsByType('item', this.world, 'objectsLayer');
+        var itemsObject;
+
+        itemsArray.forEach(function(item) {
+            itemsObject = new CAYUMSQUEST.Item(this, item.x, item.y, item.properties.asset, item.properties);
+            this.items.add(itemsObject);
+        }, this);
+    },
+
+    attack: function(player, enemy) {
+        this.battle.attack(player, enemy);
+        this.battle.attack(enemy, player);
+
+        if (player.body.touching.up) {
+            player.y += 25;
+        }
+        if (player.body.touching.down) {
+            player.y -= 25;
+        }
+        if (player.body.touching.left) {
+            player.x += 25;
+        }
+        if (player.body.touching.right) {
+            player.x -= 25;
+        }
+
+        this.refreshStats();
     },
 
     collisionHandler: function(arrows, enemies) {
