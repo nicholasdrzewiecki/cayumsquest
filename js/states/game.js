@@ -50,8 +50,8 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
+        this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
-        this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this); // Collect items
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
 
         this.player.body.collideWorldBounds = true;
