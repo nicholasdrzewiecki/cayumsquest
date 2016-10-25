@@ -47,13 +47,14 @@ CAYUMSQUEST.GameState = {
     },
 
     update: function() {
-        this.game.physics.arcade.collide(this.player, this.collisionLayer); // Player will only collide with second layer in map.json
-        this.game.physics.arcade.collide(this.enemies, this.collisionLayer); // Enemy will only collide with second layer in map.json
-        this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this); // Player will only collide with second layer in map.json
+        this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
+        this.game.physics.arcade.collide(this.player, this.collisionLayer);
+        this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this); // Collect items
+        this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
 
-        this.player.body.collideWorldBounds = true; // Collision for world boundaries
+        this.player.body.collideWorldBounds = true;
 
         // Enemy follows player
         this.enemies.forEach(function(enemy) {
@@ -284,6 +285,10 @@ CAYUMSQUEST.GameState = {
     collisionHandler: function(arrows, enemies) {
         arrows.kill();
         enemies.kill();
+    },
+
+    killArrows: function(arrows) {
+        arrows.kill();
     },
 
     startMenu: function() {
