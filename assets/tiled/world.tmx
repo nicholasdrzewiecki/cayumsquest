@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="21">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="16" tileheight="16" nextobjectid="23">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="510" columns="30">
   <image source="../images/tilesheet.png" width="480" height="272"/>
  </tileset>
@@ -221,6 +221,15 @@
     <property name="asset" value="bow"/>
     <property name="attack" value="15"/>
     <property name="type" value="item"/>
+   </properties>
+  </object>
+  <object id="21" gid="449" x="832" y="276" width="16" height="16">
+   <properties>
+    <property name="asset" value="wolf"/>
+    <property name="attack" value="15"/>
+    <property name="defense" value="10"/>
+    <property name="health" value="50"/>
+    <property name="type" value="enemy"/>
    </properties>
   </object>
  </objectgroup>

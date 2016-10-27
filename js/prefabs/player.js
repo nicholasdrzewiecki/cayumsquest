@@ -22,13 +22,13 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
 
 CAYUMSQUEST.Player.prototype = Object.create(Phaser.Sprite.prototype);
 CAYUMSQUEST.Player.prototype.constructor = CAYUMSQUEST.Player;
-
 CAYUMSQUEST.Player.prototype.collectItem = function(item) {
-    // Quest items and consumables
+
     if (item.data.isQuestItem) {
         this.data.speed += item.data.speed ? item.data.speed : 0;
         this.data.items.push(item);
         this.checkQuestCompletion(item);
+        this.state.refreshStats();
     } else {
         this.data.health += item.data.health ? item.data.health : 0;
         this.data.attack += item.data.attack ? item.data.attack : 0;

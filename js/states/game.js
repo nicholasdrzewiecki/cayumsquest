@@ -187,16 +187,11 @@ CAYUMSQUEST.GameState = {
         // Group of enemies
         this.enemies = this.add.group();
 
-        this.enemy = new CAYUMSQUEST.Enemy(this, 400, 300, 'wolf', {
-            attack: 15,
-            defense: 10,
-            health: 50
-        });
-        this.enemies.add(this.enemy);
-
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
         this.loadItems();
+
+        this.loadEnemies();
 
         this.initInterface();
     },
@@ -262,9 +257,37 @@ CAYUMSQUEST.GameState = {
         }, this);
     },
 
+    loadEnemies: function() {
+        var enemiesArray = this.findObjectsByType('enemy', this.world, 'objectsLayer');
+        var enemiesObject;
+
+        enemiesArray.forEach(function(enemy) {
+            enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
+            this.enemies.add(enemiesObject);
+        }, this);
+    },
+
     attack: function(player, enemy) {
         this.battle.attack(player, enemy);
         this.battle.attack(enemy, player);
+
+        this.game.add.tween(enemy.scale).to({
+                x: 1.2,
+                y: 1.2
+            }, 50).to({
+                x: 1,
+                y: 1
+            }, 100)
+            .start();
+
+        this.game.add.tween(enemy).to({
+                tint: 0xf44b42
+            }, 50).to({
+                tint: 0xffffff
+            }, 100)
+            .start();
+
+
 
         if (player.body.touching.up) {
             player.y += 25;
