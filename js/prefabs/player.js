@@ -38,6 +38,11 @@ CAYUMSQUEST.Player.prototype.collectItem = function(item) {
         this.state.refreshStats();
     }
 
+    if (this.data.health > 100) {
+        this.data.health = 100;
+        this.state.refreshStats();
+    }
+
     item.kill();
 };
 
@@ -57,10 +62,10 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
 
             this.bar = this.game.add.graphics();
             this.bar.beginFill(0x000000, 0.25);
-            this.bar.drawRect(0, this.game.centerY, this.game.width, 100);
+            this.bar.drawRect(0, 200, this.game.width, 100);
             this.bar.fixedToCamera = true;
 
-            this.text = this.game.add.text(0, 0, this.data.quests[i].questName, this.style);
+            this.text = this.game.add.text(0, 200, this.data.quests[i].questName, this.style);
             this.text.setShadow(1, 1, 'rgba(0,0,0,0.5)', 2);
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, this.game.centerY, this.game.width, 100);

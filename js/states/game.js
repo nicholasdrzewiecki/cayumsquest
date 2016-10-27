@@ -287,8 +287,6 @@ CAYUMSQUEST.GameState = {
             }, 100)
             .start();
 
-
-
         if (player.body.touching.up) {
             player.y += 25;
         }
