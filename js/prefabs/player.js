@@ -62,13 +62,13 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
 
             this.bar = this.game.add.graphics();
             this.bar.beginFill(0x000000, 0.25);
-            this.bar.drawRect(0, 200, this.game.width, 100);
+            this.bar.drawRect(0, 0, this.game.width, 100);
             this.bar.fixedToCamera = true;
 
             this.text = this.game.add.text(0, 200, this.data.quests[i].questName, this.style);
             this.text.setShadow(1, 1, 'rgba(0,0,0,0.5)', 2);
             this.text.fixedToCamera = true;
-            this.text.setTextBounds(0, this.game.centerY, this.game.width, 100);
+            this.text.setTextBounds(0, 0, this.game.width, 100);
 
             this.game.time.events.add(3000, this.bar.destroy, this.bar);
             this.game.time.events.add(3000, this.text.destroy, this.text);
