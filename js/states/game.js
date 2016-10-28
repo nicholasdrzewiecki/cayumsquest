@@ -208,6 +208,14 @@ CAYUMSQUEST.GameState = {
 
     collect: function(player, item) {
         this.player.collectItem(item);
+        this.game.add.tween(player.scale).to({
+                x: 1.2,
+                y: 1.2
+            }, 50).to({
+                x: 1,
+                y: 1
+            }, 100)
+            .start();
     },
 
     initHud: function() {

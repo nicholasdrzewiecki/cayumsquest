@@ -65,7 +65,7 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
             this.bar.drawRect(0, 0, this.game.width, 100);
             this.bar.fixedToCamera = true;
 
-            this.text = this.game.add.text(0, 200, this.data.quests[i].questName, this.style);
+            this.text = this.game.add.text(0, 0, this.data.quests[i].questName, this.style);
             this.text.setShadow(1, 1, 'rgba(0,0,0,0.5)', 2);
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, 0, this.game.width, 100);

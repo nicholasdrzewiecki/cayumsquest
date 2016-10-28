@@ -32,6 +32,7 @@ CAYUMSQUEST.LoadState = {
 
         // Audio
         this.game.load.audio('bgm', ['assets/audio/forest.mp3']);
+        this.game.load.audio('hit', ['assets/audio/hit.wav']);
     },
 
     create: function() {
