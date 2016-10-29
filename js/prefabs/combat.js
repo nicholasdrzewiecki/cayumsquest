@@ -9,9 +9,6 @@ CAYUMSQUEST.Battle = function(game) {
 CAYUMSQUEST.Battle.prototype.attack = function(attacker, attacked) {
     var damage = Math.max(0, attacker.data.attack - attacked.data.defense);
 
-    console.log(damage);
-    console.log(attacked.data.health);
-
     attacked.data.health -= damage;
 
     if (attacked.data.health <= 0) {

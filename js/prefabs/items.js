@@ -14,8 +14,8 @@ CAYUMSQUEST.Item = function(state, x, y, key, data) {
     // Data for stats
     this.data.health = +this.data.health;
     this.data.attack = +this.data.attack;
-    this.data.hasBow = +this.data.hasBow;
     this.data.speed = +this.data.speed;
+    this.data.hasBow = +this.data.hasBow;
 
     // Enable physics for collision, velocity etc.
     this.game.physics.arcade.enable(this);

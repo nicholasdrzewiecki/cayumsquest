@@ -308,6 +308,10 @@ CAYUMSQUEST.GameState = {
             player.x -= 25;
         }
 
+        this.soundHit = this.game.add.audio('hit');
+        this.soundHit.volume = 0.5;
+        this.soundHit.play();
+
         this.refreshStats();
     },
 
