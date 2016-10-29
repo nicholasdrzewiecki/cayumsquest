@@ -16,8 +16,14 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
     this.animations.add('left', [6, 8], 6, false); // Spritesheet animates from frame 6-8
     this.animations.add('right', [9, 11], 6, false); // Spritesheet animates from frame 9-11
 
+    this.healthBar = new Phaser.Sprite(state.game, this.x, this.y, 'healthBar');
+    this.game.add.existing(this.healthBar);
+    this.healthBar.anchor.setTo(0.5);
+    this.refreshHealth();
+
     // Enable physics for collision, velocity etc.
     this.game.physics.arcade.enable(this);
+    this.game.physics.arcade.enable(this.healthBar);
 };
 
 CAYUMSQUEST.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -29,6 +35,7 @@ CAYUMSQUEST.Player.prototype.collectItem = function(item) {
         this.data.items.push(item);
         this.checkQuestCompletion(item);
         this.state.refreshStats();
+        this.refreshHealth();
     } else {
         this.data.health += item.data.health ? item.data.health : 0;
         this.data.attack += item.data.attack ? item.data.attack : 0;
@@ -36,6 +43,7 @@ CAYUMSQUEST.Player.prototype.collectItem = function(item) {
         this.data.gold += item.data.gold ? item.data.gold : 0;
         this.data.hasBow += item.data.hasBow ? item.data.hasBow : 0;
         this.state.refreshStats();
+        this.refreshHealth();
     }
 
     if (this.data.health > 100) {
@@ -70,4 +78,14 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
         }
         i++;
     }
+};
+
+CAYUMSQUEST.Player.prototype.refreshHealth = function() {
+    this.healthBar.scale.setTo(this.data.health, 5);
+};
+
+CAYUMSQUEST.Player.prototype.update = function() {
+    this.healthBar.x = this.x;
+    this.healthBar.y = this.y - 25;
+    this.healthBar.body.velocity = this.body.velocity;
 };

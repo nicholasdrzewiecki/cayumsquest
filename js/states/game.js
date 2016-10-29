@@ -3,7 +3,7 @@ var CAYUMSQUEST = CAYUMSQUEST || {};
 CAYUMSQUEST.GameState = {
 
     init: function(currentLevel) {
-        this.currentLevel = currentLevel ? currentLevel : 'world';
+        this.currentLevel = currentLevel ? currentLevel : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 
         this.wasd = {
@@ -145,10 +145,11 @@ CAYUMSQUEST.GameState = {
 
     loadWorld: function() {
         this.world = this.add.tilemap(this.currentLevel);
-        this.world.addTilesetImage('tileset', 'tileset');
+        this.world.addTilesetImage('tiles', 'tiles');
         this.backgroundLayer = this.world.createLayer('backgroundLayer');
         this.collisionLayer = this.world.createLayer('collisionLayer');
-        this.world.setCollisionBetween(1, 512, true, 'collisionLayer');
+        this.foregroundLayer = this.world.createLayer('foregroundLayer');
+        this.world.setCollisionBetween(1, 5000, true, 'collisionLayer');
         this.game.world.sendToBack(this.backgroundLayer);
         this.collisionLayer.resizeWorld();
 
@@ -164,9 +165,9 @@ CAYUMSQUEST.GameState = {
                 questCode: 'getScroll',
                 questCompleted: false
             }],
-            health: 100,
-            attack: 20,
-            defense: 12,
+            health: 50,
+            attack: 10,
+            defense: 5,
             speed: 50,
             gold: 0,
             hasBow: 0
@@ -306,6 +307,10 @@ CAYUMSQUEST.GameState = {
         }
         if (player.body.touching.right) {
             player.x -= 25;
+        }
+
+        if (player.data.health <= 0) {
+            this.gameOver();
         }
 
         this.soundHit = this.game.add.audio('hit');
