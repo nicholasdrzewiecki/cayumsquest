@@ -145,11 +145,11 @@ CAYUMSQUEST.GameState = {
 
     loadWorld: function() {
         this.world = this.add.tilemap(this.currentLevel);
-        this.world.addTilesetImage('tiles', 'tiles');
+        this.world.addTilesetImage('tileset', 'tileset');
         this.backgroundLayer = this.world.createLayer('backgroundLayer');
         this.collisionLayer = this.world.createLayer('collisionLayer');
         this.foregroundLayer = this.world.createLayer('foregroundLayer');
-        this.world.setCollisionBetween(1, 5000, true, 'collisionLayer');
+        this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
         this.game.world.sendToBack(this.backgroundLayer);
         this.collisionLayer.resizeWorld();
 

@@ -11,8 +11,7 @@ CAYUMSQUEST.LoadState = {
         this.load.setPreloadSprite(this.progressBar);
 
         // General assets
-        this.load.image('tileset', 'assets/images/tilesheet.png?v=1'); // Map tileset
-        this.load.image('tiles', 'assets/images/tiles.png?v=1'); // Map tileset
+        this.load.image('tileset', 'assets/images/tileset.png?v=1'); // Map tileset
         this.load.image('healthBar', 'assets/images/healthBar.png?v=1');
         this.load.image('heart', 'assets/images/heart.png?v=1');
         this.load.image('arrow', 'assets/images/arrow.png?v=1');
@@ -27,11 +26,10 @@ CAYUMSQUEST.LoadState = {
         this.load.image('wolf', 'assets/images/wolf.png?v=1');
 
         // Tilemap
-        this.load.tilemap('world', 'assets/tiled/world.json?v=1', null, Phaser.Tilemap.TILED_JSON); // Map json data
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json?v=1', null, Phaser.Tilemap.TILED_JSON); // Map json data
 
         // Load player spritesheets:
-        this.load.spritesheet('player', 'assets/images/spritesheet.png?v=1', 14, 32);
+        this.load.spritesheet('player', 'assets/images/spritesheet.png?v=1', 19, 30);
 
         // Audio
         this.game.load.audio('bgm', ['assets/audio/AmbientKingdom.mp3']);
