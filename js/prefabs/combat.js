@@ -2,7 +2,6 @@
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
 CAYUMSQUEST.Battle = function(game) {
-    // Setting context for arguments
     this.game = game;
 };
 

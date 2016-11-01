@@ -5,6 +5,7 @@ Phaser.Plugin.mobileControls = function(game, parent) {
 };
 
 Phaser.Plugin.mobileControls.prototype = Object.create(Phaser.Plugin.prototype);
+
 Phaser.Plugin.mobileControls.prototype.constructor = Phaser.Plugin.mobileControls;
 
 Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
@@ -37,12 +38,12 @@ Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
     this.bitmapDirection.ctx.fillStyle = "#f2f2f2";
     this.bitmapDirection.ctx.fillRect(0, 0, this.buttonWidth, this.buttonHeight);
 
-    // Diagonal buttons
+    /* Diagonal buttons
     this.bitmapDiagonal = this.game.add.bitmapData(this.buttonWidth, this.buttonHeight);
     this.bitmapDiagonal.ctx.fillStyle = "#f2f2f2";
     this.bitmapDiagonal.ctx.fillRect(0, 0, this.buttonWidth, this.buttonHeight);
 
-    /* Action button
+    Action button
     this.bitmapAction = this.game.add.bitmapData(this.sizeOfActionButton, this.sizeOfActionButton);
     this.bitmapAction.ctx.fillStyle = "#f2f2f2";
     this.bitmapAction.ctx.fillRect(0, 0, this.sizeOfActionButton, this.sizeOfActionButton);

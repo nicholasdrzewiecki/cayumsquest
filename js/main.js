@@ -1,9 +1,9 @@
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
-CAYUMSQUEST.dimensions = CAYUMSQUEST.getGameLandscapeDimensions(900, 540);
+CAYUMSQUEST.dimensions = CAYUMSQUEST.getGameLandscapeDimensions(1280, 720);
 
 // Arguments are width, height and renderer between canvas or webgl
-CAYUMSQUEST.game = new Phaser.Game(CAYUMSQUEST.dimensions.width, CAYUMSQUEST.dimensions.height, Phaser.WEBGL);
+CAYUMSQUEST.game = new Phaser.Game(CAYUMSQUEST.dimensions.width, CAYUMSQUEST.dimensions.height, Phaser.CANVAS);
 
 CAYUMSQUEST.game.state.add('boot', CAYUMSQUEST.BootState);
 CAYUMSQUEST.game.state.add('preload', CAYUMSQUEST.LoadState);

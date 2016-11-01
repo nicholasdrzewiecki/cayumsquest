@@ -4,9 +4,8 @@ var CAYUMSQUEST = CAYUMSQUEST || {};
 CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     Phaser.Sprite.call(this, state.game, x, y, key);
 
-    // Setting context for arguments
     this.state = state;
-    this.data = data;
+    this.data = Object.create(data);
     this.game = state.game;
     this.anchor.setTo(0.5);
 
@@ -25,6 +24,7 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
 };
 
 CAYUMSQUEST.Enemy.prototype = Object.create(Phaser.Sprite.prototype);
+
 CAYUMSQUEST.Enemy.prototype.constructor = CAYUMSQUEST.Enemy;
 
 CAYUMSQUEST.Enemy.prototype.refreshHealth = function() {

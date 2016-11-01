@@ -1,6 +1,7 @@
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
 CAYUMSQUEST.BootState = {
+
     init: function() {
         this.game.stage.backgroundColor = '#1a1a1a';
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -16,4 +17,5 @@ CAYUMSQUEST.BootState = {
     create: function() {
         this.state.start('preload');
     }
+
 };

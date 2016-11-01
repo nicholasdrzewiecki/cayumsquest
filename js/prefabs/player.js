@@ -4,9 +4,8 @@ var CAYUMSQUEST = CAYUMSQUEST || {};
 CAYUMSQUEST.Player = function(state, x, y, data) {
     Phaser.Sprite.call(this, state.game, x, y, 'player');
 
-    // Setting context for arguments
     this.state = state;
-    this.data = data;
+    this.data = Object.create(data);
     this.game = state.game;
     this.anchor.setTo(0.5);
 
@@ -21,15 +20,15 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
     this.healthBar.anchor.setTo(0.5);
     this.refreshHealth();
 
-    // Enable physics for collision, velocity etc.
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
 };
 
 CAYUMSQUEST.Player.prototype = Object.create(Phaser.Sprite.prototype);
-CAYUMSQUEST.Player.prototype.constructor = CAYUMSQUEST.Player;
-CAYUMSQUEST.Player.prototype.collectItem = function(item) {
 
+CAYUMSQUEST.Player.prototype.constructor = CAYUMSQUEST.Player;
+
+CAYUMSQUEST.Player.prototype.collectItem = function(item) {
     if (item.data.isQuestItem) {
         this.data.speed += item.data.speed ? item.data.speed : 0;
         this.data.items.push(item);
@@ -58,6 +57,7 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
     var i = 0;
 
     while (i < this.data.quests.length) {
+
         if (this.data.quests[i].questCode == item.data.questCode) {
             this.data.quests[i].questCompleted = true;
 
@@ -69,13 +69,14 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
             };
 
             this.text = this.game.add.text(0, 50, this.data.quests[i].questName, this.style);
-            this.text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 1);
+            this.text.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, 0, this.game.width, this.game.height);
 
-            this.game.time.events.add(3000, this.text.destroy, this.text);
+            this.game.time.events.add(5000, this.text.destroy, this.text);
             break;
         }
+
         i++;
     }
 };

@@ -1,10 +1,12 @@
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
 CAYUMSQUEST.LoadState = {
+
     preload: function() {
         // Turn off antialiasing to disable blurriness
         this.game.antialias = false;
         this.game.stage.smoothed = false;
+        Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
 
         this.progressBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progressBar');
         this.progressBar.anchor.setTo(0.5);
@@ -39,4 +41,5 @@ CAYUMSQUEST.LoadState = {
     create: function() {
         this.state.start('menu');
     }
+
 };

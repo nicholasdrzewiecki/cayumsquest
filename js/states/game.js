@@ -29,14 +29,13 @@ CAYUMSQUEST.GameState = {
         this.enemies.createMultiple(5, 'wolf');
         this.game.time.events.loop(10000, this.spawnMonster, this);
 
-        // Spells
+        // Ranged attack
         this.arrows = this.game.add.group();
         this.arrows.enableBody = true;
         this.arrows.physicsBodyType = Phaser.Physics.ARCADE;
         this.arrows.createMultiple(50, 'arrow');
         this.arrows.setAll('checkWorldBounds', true);
         this.arrows.setAll('outOfBoundsKill', true);
-
         this.fireRate = 500;
         this.nextFire = 0;
 
@@ -56,9 +55,9 @@ CAYUMSQUEST.GameState = {
 
         this.player.body.collideWorldBounds = true;
 
-        // Enemy follows player
+        // Enemy movement
         this.enemies.forEach(function(enemy) {
-            if (!enemy.alive) {
+            if (!enemy.alive) { // If there are no enemies alive, do not execute the rest of this statement (enemy movement)
                 return;
             }
             this.game.physics.arcade.moveToObject(enemy, this.player, enemy.speed);
@@ -117,9 +116,6 @@ CAYUMSQUEST.GameState = {
     },
 
     playerDie: function() {
-        if (!this.player.alive) {
-            return;
-        }
         this.player.kill();
         this.emitter.x = this.player.x;
         this.emitter.y = this.player.y;
@@ -157,7 +153,7 @@ CAYUMSQUEST.GameState = {
         var playerData = {
             items: [],
             quests: [{
-                questName: 'These boots are rough in shape but will help to traverse the world.',
+                questName: 'These boots are in rough shape but they\'ll do for now.',
                 questCode: 'getBoots',
                 questCompleted: false
             }, {
@@ -179,7 +175,6 @@ CAYUMSQUEST.GameState = {
 
         this.game.camera.follow(this.player);
 
-        // Add player to the world
         this.add.existing(this.player);
 
         // Group of items
@@ -230,12 +225,14 @@ CAYUMSQUEST.GameState = {
 
         this.healthLabel = this.add.text(55, 30, this.player.data.health, style);
         this.healthLabel.fixedToCamera = true;
+        this.healthLabel.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
 
         this.speedIcon = this.add.sprite(90, 30, 'boots');
         this.speedIcon.fixedToCamera = true;
 
         this.speedLabel = this.add.text(110, 30, this.player.data.speed, style);
         this.speedLabel.fixedToCamera = true;
+        this.speedLabel.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
     },
 
     refreshStats: function() {
@@ -336,4 +333,5 @@ CAYUMSQUEST.GameState = {
     gameOver: function() {
         this.game.state.start('game', true, false, this.currentLevel);
     }
+
 };

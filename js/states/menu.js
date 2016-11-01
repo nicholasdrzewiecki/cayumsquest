@@ -12,7 +12,7 @@ CAYUMSQUEST.MenuState = {
 
         // Style for title font
         this.titleStyle = {
-            font: "72pt bitmap",
+            font: "48pt bitmap",
             fill: "#f2f2f2",
             boundsAlignH: "center",
             boundsAlignV: "middle"
