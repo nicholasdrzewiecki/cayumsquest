@@ -1,6 +1,6 @@
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
-CAYUMSQUEST.dimensions = CAYUMSQUEST.getGameLandscapeDimensions(1280, 720);
+CAYUMSQUEST.dimensions = CAYUMSQUEST.getGameLandscapeDimensions(640, 480);
 
 // Arguments are width, height and renderer between canvas or webgl
 CAYUMSQUEST.game = new Phaser.Game(CAYUMSQUEST.dimensions.width, CAYUMSQUEST.dimensions.height, Phaser.CANVAS);

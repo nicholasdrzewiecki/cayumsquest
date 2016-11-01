@@ -27,6 +27,9 @@ CAYUMSQUEST.LoadState = {
         // Enemies
         this.load.image('wolf', 'assets/images/wolf.png?v=1');
 
+        // Npcs
+        this.load.image('npcLumberjack', 'assets/images/npcLumberjack.png?v=1');
+
         // Tilemap
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json?v=1', null, Phaser.Tilemap.TILED_JSON); // Map json data
 

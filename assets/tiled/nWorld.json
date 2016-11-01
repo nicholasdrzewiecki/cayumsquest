@@ -287,6 +287,30 @@
                  "width":16,
                  "x":1144,
                  "y":1220
+                }, 
+                {
+                 "gid":9409,
+                 "height":30,
+                 "id":21,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"npcLumberjack",
+                     "dialogue":"Hello world!",
+                     "type":"npc"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "dialogue":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":17,
+                 "x":440,
+                 "y":1740
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -295,7 +319,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":18,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,
@@ -312,6 +336,19 @@
          "tilecount":9408,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "columns":1,
+         "firstgid":9409,
+         "image":"..\/images\/npcLumberjack.png",
+         "imageheight":30,
+         "imagewidth":17,
+         "margin":0,
+         "name":"npcLumberjack",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":30,
+         "tilewidth":17
         }],
  "tilewidth":16,
  "version":1,

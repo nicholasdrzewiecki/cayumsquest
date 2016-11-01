@@ -48,6 +48,7 @@ CAYUMSQUEST.GameState = {
     update: function() {
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
+        this.game.physics.arcade.collide(this.player, this.npcs);
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
         this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
@@ -183,11 +184,16 @@ CAYUMSQUEST.GameState = {
         // Group of enemies
         this.enemies = this.add.group();
 
+        // Group of enemies
+        this.npcs = this.add.group();
+
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
         this.loadItems();
 
         this.loadEnemies();
+
+        this.loadNpcs();
 
         this.initInterface();
     },
@@ -270,6 +276,16 @@ CAYUMSQUEST.GameState = {
         enemiesArray.forEach(function(enemy) {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
+        }, this);
+    },
+
+    loadNpcs: function() {
+        var npcsArray = this.findObjectsByType('npc', this.world, 'objectsLayer');
+        var npcsObject;
+
+        npcsArray.forEach(function(npc) {
+            npcsObject = new CAYUMSQUEST.Enemy(this, npc.x, npc.y, npc.properties.asset, npc.properties);
+            this.npcs.add(npcsObject);
         }, this);
     },
 
