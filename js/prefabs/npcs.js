@@ -1,7 +1,7 @@
 // Enemy information will go here so we don't have a massive game.js file
 var CAYUMSQUEST = CAYUMSQUEST || {};
 
-CAYUMSQUEST.Npc = function(state, x, y, key, data) {
+CAYUMSQUEST.Npcs = function(state, x, y, key, data) {
     Phaser.Sprite.call(this, state.game, x, y, key);
 
     this.state = state;

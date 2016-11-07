@@ -25,7 +25,7 @@ CAYUMSQUEST.LoadState = {
         this.load.image('scroll', 'assets/images/scroll.png?v=1');
 
         // Enemies
-        this.load.image('wolf', 'assets/images/wolf.png?v=1');
+        this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png?v=1', 15, 17, [11]);
 
         // Npcs
         this.load.image('npcLumberjack', 'assets/images/npcLumberjack.png?v=1');

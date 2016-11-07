@@ -99,7 +99,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -127,7 +127,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -155,7 +155,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -183,7 +183,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -211,7 +211,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -239,7 +239,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -267,7 +267,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"wolf",
+                     "asset":"dogSpritesheet",
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
@@ -311,6 +311,30 @@
                  "width":17,
                  "x":440,
                  "y":1740
+                }, 
+                {
+                 "gid":9409,
+                 "height":30,
+                 "id":22,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"npcLumberjack",
+                     "dialogue":"Hello world!",
+                     "type":"npc"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "dialogue":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":17,
+                 "x":280,
+                 "y":236
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -319,7 +343,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":22,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,

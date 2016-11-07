@@ -26,8 +26,6 @@ CAYUMSQUEST.GameState = {
         // Enemies
         this.enemies = this.game.add.group();
         this.enemies.enableBody = true;
-        this.enemies.createMultiple(5, 'wolf');
-        this.game.time.events.loop(10000, this.spawnMonster, this);
 
         // Ranged attack
         this.arrows = this.game.add.group();
@@ -70,7 +68,7 @@ CAYUMSQUEST.GameState = {
         }
 
         this.movement();
-        this.spawnMonster();
+        this.enemyHandler();
     },
 
     movement: function() {
@@ -124,20 +122,36 @@ CAYUMSQUEST.GameState = {
         this.game.time.events.add(1000, this.gameOver, this);
     },
 
-    spawnMonster: function() {
+    enemyHandler: function() {
         var enemy = this.enemies.getFirstDead();
 
         if (!enemy) {
             return;
         }
 
-        enemy.anchor.setTo(0.5, 0.5);
-        enemy.body.velocity.x = 20;
-        enemy.body.velocity.y = 20;
-        enemy.checkWorldBounds = true;
-        enemy.outOfBoundsKill = true;
+        this.enemies.forEachAlive(function(enemy) {
+            if (enemy.visible && enemy.inCamera) {
+                this.game.physics.arcade.moveToObject(enemy, this.player, enemy.speed);
+                this.enemyMovementHandler(enemy);
+            }
+        }, this);
+    },
 
-        this.game.physics.arcade.moveToObject(enemy, this.player, 50);
+    enemyMovementHandler: function(enemy) {
+        enemy.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
+        enemy.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
+        enemy.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
+        enemy.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
+
+        if (enemy.body.velocity.x < 0 && enemy.body.velocity.x <= -Math.abs(enemy.body.velocity.y)) { // Absolute distance between two values
+            enemy.animations.play('left');
+        } else if (enemy.body.velocity.x > 0 && enemy.body.velocity.x >= Math.abs(enemy.body.velocity.y)) {
+            enemy.animations.play('right');
+        } else if (enemy.body.velocity.y < 0 && enemy.body.velocity.y <= -Math.abs(enemy.body.velocity.x)) {
+            enemy.animations.play('up');
+        } else {
+            enemy.animations.play('down');
+        }
     },
 
     loadWorld: function() {
@@ -184,7 +198,7 @@ CAYUMSQUEST.GameState = {
         // Group of enemies
         this.enemies = this.add.group();
 
-        // Group of enemies
+        // Group of npcs
         this.npcs = this.add.group();
 
         this.battle = new CAYUMSQUEST.Battle(this.game);
@@ -284,7 +298,7 @@ CAYUMSQUEST.GameState = {
         var npcsObject;
 
         npcsArray.forEach(function(npc) {
-            npcsObject = new CAYUMSQUEST.Enemy(this, npc.x, npc.y, npc.properties.asset, npc.properties);
+            npcsObject = new CAYUMSQUEST.Npcs(this, npc.x, npc.y, npc.properties.asset, npc.properties);
             this.npcs.add(npcsObject);
         }, this);
     },
