@@ -9,6 +9,15 @@ CAYUMSQUEST.Npcs = function(state, x, y, key, data) {
     this.game = state.game;
     this.anchor.setTo(0.5);
 
+    this.npcNameStyle = {
+        font: "8pt bitmap",
+        fill: "#f2f2f2",
+    };
+
+    this.npcName = this.game.add.text(this.x, this.y - 25, this.data.name, this.npcNameStyle);
+    this.npcName.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+    this.npcName.anchor.setTo(0.5);
+
     this.game.physics.arcade.enable(this);
     this.body.immovable = true;
 };

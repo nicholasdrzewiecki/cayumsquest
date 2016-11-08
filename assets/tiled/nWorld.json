@@ -6,7 +6,7 @@
          "name":"backgroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"collisionLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -28,7 +28,7 @@
          "name":"foregroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -103,6 +103,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -111,6 +112,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -131,6 +133,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -139,6 +142,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -159,6 +163,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -167,6 +172,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -187,6 +193,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -195,6 +202,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -215,6 +223,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -223,6 +232,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -243,6 +253,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -251,6 +262,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -271,6 +283,7 @@
                      "attack":"8",
                      "defense":"2",
                      "health":"24",
+                     "name":"Wolf",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -279,6 +292,7 @@
                      "attack":"string",
                      "defense":"string",
                      "health":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -321,12 +335,14 @@
                     {
                      "asset":"npcLumberjack",
                      "dialogue":"Hello world!",
+                     "name":"James",
                      "type":"npc"
                     },
                  "propertytypes":
                     {
                      "asset":"string",
                      "dialogue":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,

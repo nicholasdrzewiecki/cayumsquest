@@ -18,6 +18,15 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.healthBar.anchor.setTo(0.5);
     this.refreshHealth();
 
+    this.enemyNameStyle = {
+        font: "8pt bitmap",
+        fill: "#f2f2f2",
+    };
+
+    this.enemyName = this.game.add.text(0, 0, this.data.name, this.enemyNameStyle);
+    this.enemyName.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+    this.enemyName.anchor.setTo(0.5);
+
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
     this.body.immovable = true;
@@ -39,9 +48,13 @@ CAYUMSQUEST.Enemy.prototype.update = function() {
     this.healthBar.x = this.x;
     this.healthBar.y = this.y - 25;
     this.healthBar.body.velocity = this.body.velocity;
+
+    this.enemyName.x = this.x;
+    this.enemyName.y = this.y - 35;
 };
 
 CAYUMSQUEST.Enemy.prototype.kill = function() {
     Phaser.Sprite.prototype.kill.call(this);
     this.healthBar.kill();
+    this.enemyName.kill();
 };

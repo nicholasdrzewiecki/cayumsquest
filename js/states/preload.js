@@ -25,10 +25,10 @@ CAYUMSQUEST.LoadState = {
         this.load.image('scroll', 'assets/images/scroll.png?v=1');
 
         // Enemies
-        this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png?v=1', 15, 17, [11]);
+        this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png?v=1', 15, 17);
 
         // Npcs
-        this.load.image('npcLumberjack', 'assets/images/npcLumberjack.png?v=1');
+        this.load.spritesheet('npcLumberjack', 'assets/images/npcDefaultSpritesheet.png?v=1', 17, 30);
 
         // Tilemap
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json?v=1', null, Phaser.Tilemap.TILED_JSON); // Map json data

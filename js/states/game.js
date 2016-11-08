@@ -69,6 +69,7 @@ CAYUMSQUEST.GameState = {
 
         this.movement();
         this.enemyHandler();
+        this.npcHandler();
     },
 
     movement: function() {
@@ -123,7 +124,7 @@ CAYUMSQUEST.GameState = {
     },
 
     enemyHandler: function() {
-        var enemy = this.enemies.getFirstDead();
+        var enemy = this.enemies.getFirstExists();
 
         if (!enemy) {
             return;
@@ -151,6 +152,37 @@ CAYUMSQUEST.GameState = {
             enemy.animations.play('up');
         } else {
             enemy.animations.play('down');
+        }
+    },
+
+    npcHandler: function() {
+        var npc = this.npcs.getFirstExists();
+
+        if (!npc) {
+            return;
+        }
+
+        this.npcs.forEachAlive(function(npc) {
+            if (npc.visible && npc.inCamera) {
+                this.npcPositionHandler(npc);
+            }
+        }, this);
+    },
+
+    npcPositionHandler: function(npc) {
+        npc.animations.add('down', [0, 1], 2, false); // Spritesheet animates from frame 0-2
+        npc.animations.add('left', [1, 2], 2, false); // Spritesheet animates from frame 3-5
+        npc.animations.add('right', [2, 3], 2, false); // Spritesheet animates from frame 6-8
+        npc.animations.add('up', [3, 2], 2, false); // Spritesheet animates from frame 9-11
+
+        if (this.player.body.velocity.x > 0 && this.player.body.velocity.x >= -Math.abs(this.player.body.velocity.y)) { // Absolute distance between two values
+            npc.animations.play('left');
+        } else if (this.player.body.velocity.x < 0 && this.player.body.velocity.x <= Math.abs(this.player.body.velocity.y)) {
+            npc.animations.play('right');
+        } else if (this.player.body.velocity.y < 0 && this.player.body.velocity.y <= -Math.abs(this.player.body.velocity.x)) {
+            npc.animations.play('up');
+        } else {
+            npc.animations.play('down');
         }
     },
 
