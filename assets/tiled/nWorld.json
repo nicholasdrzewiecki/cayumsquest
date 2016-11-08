@@ -309,14 +309,16 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"npcLumberjack",
+                     "asset":"npcFishermanSpritesheet",
                      "dialogue":"Hello world!",
+                     "name":"Fisherman Dylan",
                      "type":"npc"
                     },
                  "propertytypes":
                     {
                      "asset":"string",
                      "dialogue":"string",
+                     "name":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -333,7 +335,7 @@
                  "name":"",
                  "properties":
                     {
-                     "asset":"npcLumberjack",
+                     "asset":"npcDefaultSpritesheet",
                      "dialogue":"Hello world!",
                      "name":"James",
                      "type":"npc"

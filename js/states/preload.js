@@ -28,7 +28,8 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png?v=1', 15, 17);
 
         // Npcs
-        this.load.spritesheet('npcLumberjack', 'assets/images/npcDefaultSpritesheet.png?v=1', 17, 30);
+        this.load.spritesheet('npcDefaultSpritesheet', 'assets/images/npcDefaultSpritesheet.png?v=1', 17, 30);
+        this.load.spritesheet('npcFishermanSpritesheet', 'assets/images/npcFishermanSpritesheet.png?v=1', 17, 30);
 
         // Tilemap
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json?v=1', null, Phaser.Tilemap.TILED_JSON); // Map json data
@@ -37,7 +38,7 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('player', 'assets/images/spritesheet.png?v=1', 19, 30);
 
         // Audio
-        this.game.load.audio('bgm', ['assets/audio/AmbientKingdom.mp3']);
+        this.game.load.audio('bgm', ['assets/audio/ForestLoop.mp3']);
         this.game.load.audio('hit', ['assets/audio/hit.wav']);
     },
 

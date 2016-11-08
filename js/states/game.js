@@ -170,10 +170,10 @@ CAYUMSQUEST.GameState = {
     },
 
     npcPositionHandler: function(npc) {
-        npc.animations.add('down', [0, 1], 2, false); // Spritesheet animates from frame 0-2
-        npc.animations.add('left', [1, 2], 2, false); // Spritesheet animates from frame 3-5
-        npc.animations.add('right', [2, 3], 2, false); // Spritesheet animates from frame 6-8
-        npc.animations.add('up', [3, 2], 2, false); // Spritesheet animates from frame 9-11
+        npc.animations.add('down', [0], 1, true);
+        npc.animations.add('left', [1], 1, true);
+        npc.animations.add('right', [2], 1, true);
+        npc.animations.add('up', [3], 1, true);
 
         if (this.player.body.velocity.x > 0 && this.player.body.velocity.x >= -Math.abs(this.player.body.velocity.y)) { // Absolute distance between two values
             npc.animations.play('left');
