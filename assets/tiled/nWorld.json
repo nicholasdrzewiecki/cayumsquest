@@ -327,6 +327,32 @@
                  "width":16,
                  "x":276,
                  "y":240
+                }, 
+                {
+                 "gid":99,
+                 "height":16,
+                 "id":30,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"npcFishermanSpritesheet",
+                     "dialogue":"Hello world!",
+                     "name":"Fisherman Dylan",
+                     "type":"npc"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "dialogue":"string",
+                     "name":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":440,
+                 "y":1740
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -335,7 +361,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":30,
+ "nextobjectid":31,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,

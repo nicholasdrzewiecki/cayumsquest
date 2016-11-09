@@ -63,7 +63,7 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
 
             this.style = {
                 font: "8px Press Start 2P",
-                fill: "#f2f2f2",
+                fill: "#e5e5e5",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };

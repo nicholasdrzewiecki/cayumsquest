@@ -20,7 +20,7 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
 
     this.enemyNameStyle = {
         font: "8px Press Start 2P",
-        fill: "#f2f2f2",
+        fill: "#e5e5e5",
     };
 
     this.enemyName = this.game.add.text(0, 0, this.data.name, this.enemyNameStyle);

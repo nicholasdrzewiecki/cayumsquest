@@ -11,7 +11,7 @@ CAYUMSQUEST.Npcs = function(state, x, y, key, data) {
 
     this.npcNameStyle = {
         font: "8px Press Start 2P",
-        fill: "#f2f2f2"
+        fill: "#e5e5e5"
     };
 
     this.npcName = this.game.add.text(this.x, this.y - 25, this.data.name, this.npcNameStyle);

@@ -3,16 +3,14 @@ var CAYUMSQUEST = CAYUMSQUEST || {};
 CAYUMSQUEST.GameState = {
 
     init: function(currentLevel) {
-        this.currentLevel = currentLevel
-            ? currentLevel
-            : 'nWorld';
+        this.currentLevel = currentLevel ? currentLevel : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 
         this.wasd = {
             up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
             down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
             left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-            right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
+            right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
         };
     },
 
@@ -141,18 +139,10 @@ CAYUMSQUEST.GameState = {
     },
 
     enemyMovementHandler: function(enemy) {
-        enemy.animations.add('down', [
-            0, 2
-        ], 10, true); // Spritesheet animates from frame 0-2
-        enemy.animations.add('left', [
-            3, 5
-        ], 10, true); // Spritesheet animates from frame 3-5
-        enemy.animations.add('right', [
-            6, 8
-        ], 10, true); // Spritesheet animates from frame 6-8
-        enemy.animations.add('up', [
-            9, 11
-        ], 10, true); // Spritesheet animates from frame 9-11
+        enemy.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
+        enemy.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
+        enemy.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
+        enemy.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
 
         if (enemy.body.velocity.x < 0 && enemy.body.velocity.x <= -Math.abs(enemy.body.velocity.y)) { // Absolute distance between two values
             enemy.animations.play('left');
@@ -203,23 +193,22 @@ CAYUMSQUEST.GameState = {
         this.collisionLayer = this.world.createLayer('collisionLayer');
         this.foregroundLayer = this.world.createLayer('foregroundLayer');
         this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
+        this.backgroundLayer.renderSettings.enableScrollDelta = false;
         this.game.world.sendToBack(this.backgroundLayer);
         this.collisionLayer.resizeWorld();
 
         // Create player
         var playerData = {
             items: [],
-            quests: [
-                {
-                    questName: 'These boots are in rough shape\n but they\'ll do for now.',
-                    questCode: 'getBoots',
-                    questCompleted: false
-                }, {
-                    questName: 'You have found the first scroll.\n Somebody may be interested in this item.',
-                    questCode: 'getScroll',
-                    questCompleted: false
-                }
-            ],
+            quests: [{
+                questName: 'These boots are in rough shape\n but they\'ll do for now.',
+                questCode: 'getBoots',
+                questCompleted: false
+            }, {
+                questName: 'You have found the first scroll.\n Somebody may be interested in this item.',
+                questCode: 'getScroll',
+                questCompleted: false
+            }],
             health: 50,
             attack: 10,
             defense: 5,
@@ -261,7 +250,7 @@ CAYUMSQUEST.GameState = {
             up: true,
             down: true,
             left: true,
-            right: true
+            right: true,
         });
         this.initHud();
     },
@@ -269,18 +258,19 @@ CAYUMSQUEST.GameState = {
     collect: function(player, item) {
         this.player.collectItem(item);
         this.game.add.tween(player.scale).to({
-            x: 1.2,
-            y: 1.2
-        }, 50).to({
-            x: 1,
-            y: 1
-        }, 100).start();
+                x: 1.2,
+                y: 1.2
+            }, 50).to({
+                x: 1,
+                y: 1
+            }, 100)
+            .start();
     },
 
     initHud: function() {
         var style = {
             font: "12px Press Start 2P",
-            fill: "#f2f2f2"
+            fill: "#e5e5e5",
         };
 
         this.healthIcon = this.add.sprite(30, 30, 'heart');
@@ -353,18 +343,20 @@ CAYUMSQUEST.GameState = {
         this.battle.attack(enemy, player);
 
         this.game.add.tween(enemy.scale).to({
-            x: 1.2,
-            y: 1.2
-        }, 50).to({
-            x: 1,
-            y: 1
-        }, 100).start();
+                x: 1.2,
+                y: 1.2
+            }, 50).to({
+                x: 1,
+                y: 1
+            }, 100)
+            .start();
 
         this.game.add.tween(enemy).to({
-            tint: 0xf44b42
-        }, 50).to({
-            tint: 0xffffff
-        }, 100).start();
+                tint: 0xf44b42
+            }, 50).to({
+                tint: 0xffffff
+            }, 100)
+            .start();
 
         if (player.body.touching.up) {
             player.y += 25;

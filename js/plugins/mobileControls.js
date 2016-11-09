@@ -35,7 +35,7 @@ Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
 
     // Bitmap buttons
     this.bitmapDirection = this.game.add.bitmapData(this.buttonWidth, this.buttonHeight);
-    this.bitmapDirection.ctx.fillStyle = "#f2f2f2";
+    this.bitmapDirection.ctx.fillStyle = "#e5e5e5";
     this.bitmapDirection.ctx.fillRect(0, 0, this.buttonWidth, this.buttonHeight);
 
     /* Diagonal buttons
