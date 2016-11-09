@@ -62,14 +62,15 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
             this.data.quests[i].questCompleted = true;
 
             this.style = {
-                font: "18px bitmap",
+                font: "8px Press Start 2P",
                 fill: "#f2f2f2",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             };
 
             this.text = this.game.add.text(0, 50, this.data.quests[i].questName, this.style);
-            this.text.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+            this.text.stroke = "#000000";
+            this.text.strokeThickness = 2;
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, 0, this.game.width, this.game.height);
 

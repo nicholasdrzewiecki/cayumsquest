@@ -19,12 +19,13 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.refreshHealth();
 
     this.enemyNameStyle = {
-        font: "8pt bitmap",
+        font: "8px Press Start 2P",
         fill: "#f2f2f2",
     };
 
     this.enemyName = this.game.add.text(0, 0, this.data.name, this.enemyNameStyle);
-    this.enemyName.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+    this.enemyName.stroke = "#000000";
+    this.enemyName.strokeThickness = 2;
     this.enemyName.anchor.setTo(0.5);
 
     this.game.physics.arcade.enable(this);

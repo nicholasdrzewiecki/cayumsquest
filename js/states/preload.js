@@ -38,7 +38,6 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('player', 'assets/images/spritesheet.png?v=1', 19, 30);
 
         // Audio
-        this.game.load.audio('bgm', ['assets/audio/ForestLoop.mp3']);
         this.game.load.audio('hit', ['assets/audio/hit.wav']);
     },
 

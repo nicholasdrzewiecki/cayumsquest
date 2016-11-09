@@ -3,14 +3,16 @@ var CAYUMSQUEST = CAYUMSQUEST || {};
 CAYUMSQUEST.GameState = {
 
     init: function(currentLevel) {
-        this.currentLevel = currentLevel ? currentLevel : 'nWorld';
+        this.currentLevel = currentLevel
+            ? currentLevel
+            : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 
         this.wasd = {
             up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
             down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
             left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-            right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
+            right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
         };
     },
 
@@ -139,10 +141,18 @@ CAYUMSQUEST.GameState = {
     },
 
     enemyMovementHandler: function(enemy) {
-        enemy.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
-        enemy.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
-        enemy.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
-        enemy.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
+        enemy.animations.add('down', [
+            0, 2
+        ], 10, true); // Spritesheet animates from frame 0-2
+        enemy.animations.add('left', [
+            3, 5
+        ], 10, true); // Spritesheet animates from frame 3-5
+        enemy.animations.add('right', [
+            6, 8
+        ], 10, true); // Spritesheet animates from frame 6-8
+        enemy.animations.add('up', [
+            9, 11
+        ], 10, true); // Spritesheet animates from frame 9-11
 
         if (enemy.body.velocity.x < 0 && enemy.body.velocity.x <= -Math.abs(enemy.body.velocity.y)) { // Absolute distance between two values
             enemy.animations.play('left');
@@ -175,11 +185,11 @@ CAYUMSQUEST.GameState = {
         npc.animations.add('right', [2], 1, true);
         npc.animations.add('up', [3], 1, true);
 
-        if (this.player.body.velocity.x > 0 && this.player.body.velocity.x >= -Math.abs(this.player.body.velocity.y)) { // Absolute distance between two values
+        if (this.player.x < npc.x) { // Absolute distance between two values
             npc.animations.play('left');
-        } else if (this.player.body.velocity.x < 0 && this.player.body.velocity.x <= Math.abs(this.player.body.velocity.y)) {
+        } else if (this.player.x > npc.x) {
             npc.animations.play('right');
-        } else if (this.player.body.velocity.y < 0 && this.player.body.velocity.y <= -Math.abs(this.player.body.velocity.x)) {
+        } else if (this.player.y < npc.y) {
             npc.animations.play('up');
         } else {
             npc.animations.play('down');
@@ -199,15 +209,17 @@ CAYUMSQUEST.GameState = {
         // Create player
         var playerData = {
             items: [],
-            quests: [{
-                questName: 'These boots are in rough shape but they\'ll do for now.',
-                questCode: 'getBoots',
-                questCompleted: false
-            }, {
-                questName: 'You have found the first scroll. Somebody may be interested in this item.',
-                questCode: 'getScroll',
-                questCompleted: false
-            }],
+            quests: [
+                {
+                    questName: 'These boots are in rough shape\n but they\'ll do for now.',
+                    questCode: 'getBoots',
+                    questCompleted: false
+                }, {
+                    questName: 'You have found the first scroll.\n Somebody may be interested in this item.',
+                    questCode: 'getScroll',
+                    questCompleted: false
+                }
+            ],
             health: 50,
             attack: 10,
             defense: 5,
@@ -249,7 +261,7 @@ CAYUMSQUEST.GameState = {
             up: true,
             down: true,
             left: true,
-            right: true,
+            right: true
         });
         this.initHud();
     },
@@ -257,19 +269,18 @@ CAYUMSQUEST.GameState = {
     collect: function(player, item) {
         this.player.collectItem(item);
         this.game.add.tween(player.scale).to({
-                x: 1.2,
-                y: 1.2
-            }, 50).to({
-                x: 1,
-                y: 1
-            }, 100)
-            .start();
+            x: 1.2,
+            y: 1.2
+        }, 50).to({
+            x: 1,
+            y: 1
+        }, 100).start();
     },
 
     initHud: function() {
         var style = {
-            font: '18px bitmap',
-            fill: '#f2f2f2'
+            font: "12px Press Start 2P",
+            fill: "#f2f2f2"
         };
 
         this.healthIcon = this.add.sprite(30, 30, 'heart');
@@ -277,14 +288,16 @@ CAYUMSQUEST.GameState = {
 
         this.healthLabel = this.add.text(55, 30, this.player.data.health, style);
         this.healthLabel.fixedToCamera = true;
-        this.healthLabel.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+        this.healthLabel.stroke = "#000000";
+        this.healthLabel.strokeThickness = 2;
 
         this.speedIcon = this.add.sprite(90, 30, 'boots');
         this.speedIcon.fixedToCamera = true;
 
         this.speedLabel = this.add.text(110, 30, this.player.data.speed, style);
         this.speedLabel.fixedToCamera = true;
-        this.speedLabel.setShadow(1, 1, 'rgba(0,0,0,0.8)', 1);
+        this.speedLabel.stroke = "#000000";
+        this.speedLabel.strokeThickness = 2;
     },
 
     refreshStats: function() {
@@ -340,20 +353,18 @@ CAYUMSQUEST.GameState = {
         this.battle.attack(enemy, player);
 
         this.game.add.tween(enemy.scale).to({
-                x: 1.2,
-                y: 1.2
-            }, 50).to({
-                x: 1,
-                y: 1
-            }, 100)
-            .start();
+            x: 1.2,
+            y: 1.2
+        }, 50).to({
+            x: 1,
+            y: 1
+        }, 100).start();
 
         this.game.add.tween(enemy).to({
-                tint: 0xf44b42
-            }, 50).to({
-                tint: 0xffffff
-            }, 100)
-            .start();
+            tint: 0xf44b42
+        }, 50).to({
+            tint: 0xffffff
+        }, 100).start();
 
         if (player.body.touching.up) {
             player.y += 25;

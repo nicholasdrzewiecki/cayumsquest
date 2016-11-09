@@ -6,7 +6,7 @@
          "name":"backgroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"collisionLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -28,7 +28,7 @@
          "name":"foregroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -303,35 +303,9 @@
                  "y":1220
                 }, 
                 {
-                 "gid":9409,
-                 "height":30,
-                 "id":21,
-                 "name":"",
-                 "properties":
-                    {
-                     "asset":"npcFishermanSpritesheet",
-                     "dialogue":"Hello world!",
-                     "name":"Fisherman Dylan",
-                     "type":"npc"
-                    },
-                 "propertytypes":
-                    {
-                     "asset":"string",
-                     "dialogue":"string",
-                     "name":"string",
-                     "type":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":17,
-                 "x":440,
-                 "y":1740
-                }, 
-                {
-                 "gid":9409,
-                 "height":30,
-                 "id":22,
+                 "gid":99,
+                 "height":16,
+                 "id":28,
                  "name":"",
                  "properties":
                     {
@@ -350,9 +324,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":17,
-                 "x":280,
-                 "y":236
+                 "width":16,
+                 "x":276,
+                 "y":240
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -361,7 +335,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":23,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,
@@ -378,19 +352,6 @@
          "tilecount":9408,
          "tileheight":16,
          "tilewidth":16
-        }, 
-        {
-         "columns":1,
-         "firstgid":9409,
-         "image":"..\/images\/npcLumberjack.png",
-         "imageheight":30,
-         "imagewidth":17,
-         "margin":0,
-         "name":"npcLumberjack",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":30,
-         "tilewidth":17
         }],
  "tilewidth":16,
  "version":1,

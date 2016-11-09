@@ -1,16 +1,13 @@
-@font-face {
-    font-family: bitmap;
-    src: url(../assets/fonts/bitmap.ttf);
-}
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-body {
-    font-family: 'bitmap', cursive;
+html, body {
+    font-family: 'Press Start 2P', cursive;
     background-color: #1a1a1a;
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    font-family: 'bitmap', cursive;
-    display: none;
+.hiddenText {
+    font-family: 'Press Start 2P', cursive;
+    visibility: hidden;
 }
