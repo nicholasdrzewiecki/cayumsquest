@@ -45,6 +45,7 @@ CAYUMSQUEST.GameState = {
 
     update: function() {
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
+        this.game.physics.arcade.collide(this.enemies, this.enemies);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.npcs);
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
@@ -198,14 +199,18 @@ CAYUMSQUEST.GameState = {
         this.collisionLayer.resizeWorld();
 
         // Create player
-        var playerData = {
+        this.playerData = {
             items: [],
             quests: [{
-                questName: 'These boots are in rough shape\n but they\'ll do for now.',
+                questName: 'Found a pair of running boots',
                 questCode: 'getBoots',
                 questCompleted: false
             }, {
-                questName: 'You have found the first scroll.\n Somebody may be interested in this item.',
+                questName: 'Found a bow ',
+                questCode: 'getBow',
+                questCompleted: false
+            }, {
+                questName: 'You have found the first scroll.\nSomebody may be interested in this item.',
                 questCode: 'getScroll',
                 questCompleted: false
             }],
@@ -217,12 +222,10 @@ CAYUMSQUEST.GameState = {
             hasBow: 0
         };
 
-        this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
+        this.player = new CAYUMSQUEST.Player(this, 150, 150, this.playerData);
         this.player.anchor.setTo(0.5, 0.5);
         this.player.direction = 0;
-
         this.game.camera.follow(this.player);
-
         this.add.existing(this.player);
 
         // Group of items
@@ -243,6 +246,16 @@ CAYUMSQUEST.GameState = {
         this.loadNpcs();
 
         this.initInterface();
+
+        this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.healthRegen, this);
+    },
+
+    healthRegen: function() {
+        if (this.player.data.health >= 50) {
+            this.player.data.health = 49;
+        }
+        this.player.data.health += 1;
+        this.refreshStats();
     },
 
     initInterface: function() {
