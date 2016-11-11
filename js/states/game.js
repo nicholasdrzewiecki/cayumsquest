@@ -45,7 +45,6 @@ CAYUMSQUEST.GameState = {
 
     update: function() {
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
-        this.game.physics.arcade.collide(this.enemies, this.enemies);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.npcs);
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
@@ -199,7 +198,7 @@ CAYUMSQUEST.GameState = {
         this.collisionLayer.resizeWorld();
 
         // Create player
-        this.playerData = {
+        var playerData = {
             items: [],
             quests: [{
                 questName: 'Found a pair of running boots',
@@ -218,11 +217,10 @@ CAYUMSQUEST.GameState = {
             attack: 10,
             defense: 5,
             speed: 50,
-            gold: 0,
             hasBow: 0
         };
 
-        this.player = new CAYUMSQUEST.Player(this, 150, 150, this.playerData);
+        this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
         this.player.anchor.setTo(0.5, 0.5);
         this.player.direction = 0;
         this.game.camera.follow(this.player);

@@ -30,26 +30,20 @@ CAYUMSQUEST.Player.prototype.constructor = CAYUMSQUEST.Player;
 
 CAYUMSQUEST.Player.prototype.collectItem = function(item) {
     if (item.data.isQuestItem) {
-        this.data.speed += item.data.speed ? item.data.speed : 0;
         this.data.items.push(item);
         this.checkQuestCompletion(item);
         this.state.refreshStats();
         this.refreshHealth();
-    } else {
-        this.data.health += item.data.health ? item.data.health : 0;
-        this.data.attack += item.data.attack ? item.data.attack : 0;
-        this.data.defense += item.data.defense ? item.data.defense : 0;
-        this.data.gold += item.data.gold ? item.data.gold : 0;
-        this.data.hasBow += item.data.hasBow ? item.data.hasBow : 0;
-        this.state.refreshStats();
-        this.refreshHealth();
     }
 
-    if (this.data.health > 100) {
-        this.data.health = 100;
-        this.state.refreshStats();
-    }
+    this.data.health += item.data.health ? item.data.health : 0;
+    this.data.attack += item.data.attack ? item.data.attack : 0;
+    this.data.defense += item.data.defense ? item.data.defense : 0;
+    this.data.speed += item.data.speed ? item.data.speed : 0;
+    this.data.hasBow += item.data.hasBow ? item.data.hasBow : 0;
 
+    this.state.refreshStats();
+    this.refreshHealth();
     item.kill();
 };
 
@@ -90,4 +84,5 @@ CAYUMSQUEST.Player.prototype.update = function() {
     this.healthBar.x = this.x;
     this.healthBar.y = this.y - 25;
     this.healthBar.body.velocity = this.body.velocity;
+    this.refreshHealth();
 };
