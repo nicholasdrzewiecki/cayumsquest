@@ -273,6 +273,11 @@ CAYUMSQUEST.GameState = {
             fill: "#e5e5e5",
         };
 
+        var questStyle = {
+            font: '8px Press Start 2P',
+            fill: '#e5e5e5'
+        };
+
         this.healthIcon = this.add.sprite(30, 30, 'heart');
         this.healthIcon.fixedToCamera = true;
 
@@ -288,6 +293,58 @@ CAYUMSQUEST.GameState = {
         this.speedLabel.fixedToCamera = true;
         this.speedLabel.stroke = "#000000";
         this.speedLabel.strokeThickness = 2;
+
+        this.questIcon = this.add.sprite(this.game.width - 35, 20, 'scroll');
+        this.questIcon.fixedToCamera = true;
+
+        this.overlay = this.add.bitmapData(this.game.width, this.game.height);
+        this.overlay.ctx.fillStyle = '#1a1a1a';
+        this.overlay.ctx.fillRect(0, 0, this.game.width, this.game.height);
+
+        this.questHudGroup = this.add.group();
+        this.questHudGroup.y = this.game.height;
+
+        this.questHud = new Phaser.Sprite(this.game, 0, 0, this.overlay);
+        this.questHud.fixedToCamera = true;
+        this.questHud.alpha = 0.5;
+        this.questHudGroup.add(this.questHud);
+
+        this.questDescription = new Phaser.Text(this.game, 50, 50, '', questStyle);
+        this.questDescription.fixedToCamera = true;
+        this.questHudGroup.add(this.questDescription);
+
+        this.questHud.inputEnabled = true;
+        this.questHud.events.onInputDown.add(this.hideQuests, this);
+
+        this.questIcon.inputEnabled = true;
+        this.questIcon.events.onInputDown.add(this.showQuests, this);
+    },
+
+    showQuests: function() {
+        this.hudBlocked = true;
+
+        this.showPanelTween = this.add.tween(this.questHudGroup);
+        this.showPanelTween.to({
+            y: 0
+        }, 100);
+
+        this.showPanelTween.onComplete.add(function() {
+            var questText = 'Quests:\n\n';
+
+            this.player.data.quests.forEach(function(quest) {
+                questText += quest.questName + (quest.questCompleted ? ' has been completed' : '') + '\n\n';
+            }, this);
+
+            this.questDescription.text = questText;
+        }, this);
+
+        this.showPanelTween.start();
+    },
+
+    hideQuests: function() {
+        this.hudBlocked = false;
+        this.questHudGroup.y = this.game.height;
+        this.questDescription.text = '';
     },
 
     refreshStats: function() {
