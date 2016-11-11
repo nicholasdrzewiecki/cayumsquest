@@ -20,6 +20,8 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
     this.healthBar.anchor.setTo(0.5);
     this.refreshHealth();
 
+    this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.healthRegeneration, this);
+
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
 };
@@ -85,4 +87,12 @@ CAYUMSQUEST.Player.prototype.update = function() {
     this.healthBar.y = this.y - 25;
     this.healthBar.body.velocity = this.body.velocity;
     this.refreshHealth();
+};
+
+CAYUMSQUEST.Player.prototype.healthRegeneration = function() {
+    if (this.data.health >= 50) {
+        this.data.health = 49;
+    }
+    this.data.health += 1;
+    this.state.refreshStats();
 };

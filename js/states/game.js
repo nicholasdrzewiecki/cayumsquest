@@ -209,8 +209,8 @@ CAYUMSQUEST.GameState = {
                 questCode: 'getBow',
                 questCompleted: false
             }, {
-                questName: 'You have found the first scroll.\nSomebody may be interested in this item.',
-                questCode: 'getScroll',
+                questName: 'Found the first scroll',
+                questCode: 'getFirstScroll',
                 questCompleted: false
             }],
             health: 50,
@@ -238,22 +238,9 @@ CAYUMSQUEST.GameState = {
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
         this.loadItems();
-
         this.loadEnemies();
-
         this.loadNpcs();
-
         this.initInterface();
-
-        this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.healthRegen, this);
-    },
-
-    healthRegen: function() {
-        if (this.player.data.health >= 50) {
-            this.player.data.health = 49;
-        }
-        this.player.data.health += 1;
-        this.refreshStats();
     },
 
     initInterface: function() {
