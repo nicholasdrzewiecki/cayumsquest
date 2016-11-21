@@ -413,17 +413,34 @@ CAYUMSQUEST.GameState = {
             }, 100)
             .start();
 
+        // Temporary fix for knockback, player is overlapping collisionLayer every time
+        // for some reason but the difference in coordinates makes it so character
+        // doesn't clip through things anymore
+        
         if (player.body.touching.up) {
             player.y += 25;
+            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                player.y -= 16;
+            }
+            
         }
         if (player.body.touching.down) {
             player.y -= 25;
+            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                player.y += 16;
+            }
         }
         if (player.body.touching.left) {
             player.x += 25;
+            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                player.x -= 16;
+            }
         }
         if (player.body.touching.right) {
             player.x -= 25;
+            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                player.x += 16;
+            }
         }
 
         if (player.data.health <= 0) {
