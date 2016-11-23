@@ -6,6 +6,7 @@ CAYUMSQUEST.GameState = {
         this.currentLevel = currentLevel ? currentLevel : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 
+        //loadFunc(this)
         this.wasd = {
             up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
             down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
@@ -16,34 +17,33 @@ CAYUMSQUEST.GameState = {
 
     create: function() {
         // Particles emitter
-        this.emitter = this.game.add.emitter(0, 0, 3); // Create emitter with five particles (x, y, quantity);
+        this.emitter = this.game.add.emitter(0, 0, 1);
         this.emitter.makeParticles('heart');
         this.emitter.makeParticles('arrow');
-        this.emitter.setYSpeed(-100, 100);
-        this.emitter.setXSpeed(-100, 100);
-        this.emitter.gravity = 0;
-
         // Enemies
         this.enemies = this.game.add.group();
         this.enemies.enableBody = true;
 
-        // Ranged attack
+        // Bow and arrow
         this.arrows = this.game.add.group();
         this.arrows.enableBody = true;
         this.arrows.physicsBodyType = Phaser.Physics.ARCADE;
-        this.arrows.createMultiple(50, 'arrow');
+        this.arrows.createMultiple(100, 'arrow');
         this.arrows.setAll('checkWorldBounds', true);
         this.arrows.setAll('outOfBoundsKill', true);
-        this.fireRate = 500;
+
+        this.fireRate = 1000;
         this.nextFire = 0;
 
-        // Add mobile controls from our plugin
+        // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
 
+        // Load the world
         this.loadWorld();
     },
 
     update: function() {
+        // Set collision and overlap handlers
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.npcs);
@@ -52,6 +52,7 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
 
+        // Player can't pass world bounds
         this.player.body.collideWorldBounds = true;
 
         // Enemy movement
@@ -65,6 +66,25 @@ CAYUMSQUEST.GameState = {
         // Fire in direction of mouse pointer
         if (this.game.input.activePointer.isDown) {
             this.fire();
+        }
+
+        // Camera for smartphones: avoids constantly re-drawing the screen every pixel of movement
+        if (!this.game.device.desktop) {
+            var camera = this.game.camera;
+            var player = this.player;
+
+            var horizontalEdge = player.x - camera.x;
+            var verticalEdge = player.y - camera.y;
+
+            if (horizontalEdge < this.cameraDeadzone.left || horizontalEdge > this.cameraDeadzone.right || verticalEdge < this.cameraDeadzone.top || verticalEdge > this.cameraDeadzone.bottom) {
+                var cameraCenter = {
+                    x: camera.x + (camera.width / 2),
+                    y: camera.y + (camera.height / 2)
+                };
+                var difference = Phaser.Point.subtract(player, cameraCenter);
+                camera.x += difference.x * 1.8;
+                camera.y += difference.y * 1.8;
+            }
         }
 
         this.movement();
@@ -110,6 +130,7 @@ CAYUMSQUEST.GameState = {
         if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0 && this.player.data.hasBow === 1) {
             this.nextFire = this.game.time.now + this.fireRate;
             this.arrow = this.arrows.getFirstDead();
+            this.arrow.data.attack = 12; // Arrow damage value
             this.arrow.reset(this.player.x - 8, this.player.y - 8);
             this.arrow.rotation = this.game.physics.arcade.moveToPointer(this.arrow, 500);
         }
@@ -139,11 +160,6 @@ CAYUMSQUEST.GameState = {
     },
 
     enemyMovementHandler: function(enemy) {
-        enemy.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
-        enemy.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
-        enemy.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
-        enemy.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
-
         if (enemy.body.velocity.x < 0 && enemy.body.velocity.x <= -Math.abs(enemy.body.velocity.y)) { // Absolute distance between two values
             enemy.animations.play('left');
         } else if (enemy.body.velocity.x > 0 && enemy.body.velocity.x >= Math.abs(enemy.body.velocity.y)) {
@@ -187,17 +203,18 @@ CAYUMSQUEST.GameState = {
     },
 
     loadWorld: function() {
+        // Create world from tiled layers
         this.world = this.add.tilemap(this.currentLevel);
         this.world.addTilesetImage('tileset', 'tileset');
         this.backgroundLayer = this.world.createLayer('backgroundLayer');
         this.collisionLayer = this.world.createLayer('collisionLayer');
         this.foregroundLayer = this.world.createLayer('foregroundLayer');
         this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
-        this.backgroundLayer.renderSettings.enableScrollDelta = false;
+        this.backgroundLayer.renderSettings.enableScrollDelta = false; // Optimization
         this.game.world.sendToBack(this.backgroundLayer);
         this.collisionLayer.resizeWorld();
 
-        // Create player
+        // Player data
         var playerData = {
             items: [],
             quests: [{
@@ -217,14 +234,23 @@ CAYUMSQUEST.GameState = {
             attack: 10,
             defense: 5,
             speed: 50,
-            hasBow: 0
+            hasBow: 0 // Initially false
         };
 
+        // Create player
         this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
         this.player.anchor.setTo(0.5, 0.5);
         this.player.direction = 0;
-        this.game.camera.follow(this.player);
         this.add.existing(this.player);
+
+        // Set player camera
+        var distanceFromEdge = 100;
+        this.cameraDeadzone = new Phaser.Rectangle(distanceFromEdge, distanceFromEdge, this.game.camera.width - (distanceFromEdge * 2), this.game.camera.height - (distanceFromEdge * 2));
+        this.game.camera.focusOn(this.player);
+
+        if (this.game.device.desktop) {
+            this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+        }
 
         // Group of items
         this.items = this.add.group();
@@ -235,8 +261,10 @@ CAYUMSQUEST.GameState = {
         // Group of npcs
         this.npcs = this.add.group();
 
+        // Battle reference
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
+        // Call item, enemy, npc, and user interface functions
         this.loadItems();
         this.loadEnemies();
         this.loadNpcs();
@@ -380,6 +408,10 @@ CAYUMSQUEST.GameState = {
         enemiesArray.forEach(function(enemy) {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
+            enemiesObject.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
+            enemiesObject.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
+            enemiesObject.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
+            enemiesObject.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
         }, this);
     },
 
@@ -416,13 +448,13 @@ CAYUMSQUEST.GameState = {
         // Temporary fix for knockback, player is overlapping collisionLayer every time
         // for some reason but the difference in coordinates makes it so character
         // doesn't clip through things anymore
-        
+
         if (player.body.touching.up) {
             player.y += 25;
             if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
                 player.y -= 16;
             }
-            
+
         }
         if (player.body.touching.down) {
             player.y -= 25;
@@ -454,17 +486,13 @@ CAYUMSQUEST.GameState = {
         this.refreshStats();
     },
 
-    collisionHandler: function(arrows, enemies) {
-        arrows.kill();
-        enemies.kill();
-    },
-
     killArrows: function(arrows) {
-        arrows.kill();
+      arrows.kill();
     },
 
-    startMenu: function() {
-        this.game.state.start('menu');
+    collisionHandler: function(arrows, enemies) {
+        this.attack(arrows, enemies);
+        arrows.kill();
     },
 
     gameOver: function() {
