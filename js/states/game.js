@@ -20,9 +20,11 @@ CAYUMSQUEST.GameState = {
         this.emitter = this.game.add.emitter(0, 0, 1);
         this.emitter.makeParticles('heart');
         this.emitter.makeParticles('arrow');
+        
         // Enemies
         this.enemies = this.game.add.group();
         this.enemies.enableBody = true;
+        this.vulnerable = null;
 
         // Bow and arrow
         this.arrows = this.game.add.group();
@@ -426,64 +428,70 @@ CAYUMSQUEST.GameState = {
     },
 
     attack: function(player, enemy) {
-        this.battle.attack(player, enemy);
-        this.battle.attack(enemy, player);
+        console.log(this.vulnerable, this.game.time.now, this.vulnerable - this.game.time.now);
+        
+        if ((this.game.time.now - this.vulnerable > 1000) || this.vulnerable == null) {
+            this.battle.attack(player, enemy);
+            this.battle.attack(enemy, player);
 
-        this.game.add.tween(enemy.scale).to({
-                x: 1.2,
-                y: 1.2
-            }, 50).to({
-                x: 1,
-                y: 1
-            }, 100)
-            .start();
+            this.game.add.tween(enemy.scale).to({
+                    x: 1.2,
+                    y: 1.2
+                }, 50).to({
+                    x: 1,
+                    y: 1
+                }, 100)
+                .start();
 
-        this.game.add.tween(enemy).to({
-                tint: 0xf44b42
-            }, 50).to({
-                tint: 0xffffff
-            }, 100)
-            .start();
+            this.game.add.tween(enemy).to({
+                    tint: 0xf44b42
+                }, 50).to({
+                    tint: 0xffffff
+                }, 100)
+                .start();
 
-        // Temporary fix for knockback, player is overlapping collisionLayer every time
-        // for some reason but the difference in coordinates makes it so character
-        // doesn't clip through things anymore
+            // Temporary fix for knockback, player is overlapping collisionLayer every time
+            // for some reason but the difference in coordinates makes it so character
+            // doesn't clip through things anymore
 
-        if (player.body.touching.up) {
-            player.y += 25;
-            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
-                player.y -= 16;
+            if (player.body.touching.up) {
+                player.y += 25;
+                if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                    player.y -= 16;
+                }
+
+            }
+            if (player.body.touching.down) {
+                player.y -= 25;
+                if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                    player.y += 16;
+                }
+            }
+            if (player.body.touching.left) {
+                player.x += 25;
+                if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                    player.x -= 16;
+                }
+            }
+            if (player.body.touching.right) {
+                player.x -= 25;
+                if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
+                    player.x += 16;
+                }
             }
 
-        }
-        if (player.body.touching.down) {
-            player.y -= 25;
-            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
-                player.y += 16;
+            if (player.data.health <= 0) {
+                this.gameOver();
             }
-        }
-        if (player.body.touching.left) {
-            player.x += 25;
-            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
-                player.x -= 16;
-            }
-        }
-        if (player.body.touching.right) {
-            player.x -= 25;
-            if (this.game.physics.arcade.overlap(this.player, this.collisionLayer)) {
-                player.x += 16;
-            }
-        }
 
-        if (player.data.health <= 0) {
-            this.gameOver();
+            this.soundHit = this.game.add.audio('hit');
+            this.soundHit.volume = 0.5;
+            this.soundHit.play();
+
+            this.refreshStats();
+            
+            this.vulnerable = this.game.time.now;
         }
-
-        this.soundHit = this.game.add.audio('hit');
-        this.soundHit.volume = 0.5;
-        this.soundHit.play();
-
-        this.refreshStats();
     },
 
     killArrows: function(arrows) {
