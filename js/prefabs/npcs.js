@@ -9,6 +9,8 @@ CAYUMSQUEST.Npcs = function(state, x, y, key, data) {
     this.game = state.game;
     this.anchor.setTo(0.5);
 
+    this.data.speed = +this.data.speed;
+
     this.npcNameStyle = {
         font: "8px Press Start 2P",
         fill: "#e5e5e5"
