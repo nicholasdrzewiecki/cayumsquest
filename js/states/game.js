@@ -33,7 +33,6 @@ CAYUMSQUEST.GameState = {
     this.arrows.createMultiple(100, 'arrow');
     this.arrows.setAll('checkWorldBounds', true);
     this.arrows.setAll('outOfBoundsKill', true);
-    this.arrows.bringToTop();
 
     this.fireRate = 1000;
     this.nextFire = 0;
@@ -205,6 +204,7 @@ CAYUMSQUEST.GameState = {
     this.backgroundLayer.renderSettings.enableScrollDelta = false; // Optimization
     this.game.world.sendToBack(this.backgroundLayer);
     this.collisionLayer.resizeWorld();
+    this.game.world.bringToTop(this.arrows);
 
     // Player data
     var playerData = {
