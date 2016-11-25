@@ -33,6 +33,7 @@ CAYUMSQUEST.GameState = {
     this.arrows.createMultiple(100, 'arrow');
     this.arrows.setAll('checkWorldBounds', true);
     this.arrows.setAll('outOfBoundsKill', true);
+    this.arrows.bringToTop();
 
     this.fireRate = 1000;
     this.nextFire = 0;

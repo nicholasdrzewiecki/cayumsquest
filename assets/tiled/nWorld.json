@@ -136,8 +136,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":64,
-                 "y":688
+                 "x":960,
+                 "y":1520
                 }, 
                 {
                  "gid":3259,
@@ -168,8 +168,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":792,
-                 "y":596
+                 "x":272,
+                 "y":1664
                 }, 
                 {
                  "gid":3259,
@@ -264,8 +264,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":656,
-                 "y":1348
+                 "x":176,
+                 "y":1184
                 }, 
                 {
                  "gid":3259,
@@ -296,8 +296,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1144,
-                 "y":1220
+                 "x":752,
+                 "y":1200
                 }, 
                 {
                  "gid":99,
@@ -518,6 +518,102 @@
                  "width":16,
                  "x":192,
                  "y":480
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":41,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"dogSpritesheet",
+                     "attack":"8",
+                     "defense":"2",
+                     "health":"24",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1184,
+                 "y":848
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":42,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"dogSpritesheet",
+                     "attack":"8",
+                     "defense":"2",
+                     "health":"24",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1392,
+                 "y":480
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":43,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"dogSpritesheet",
+                     "attack":"8",
+                     "defense":"2",
+                     "health":"24",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":672,
+                 "y":1856
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -526,7 +622,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":41,
+ "nextobjectid":44,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,

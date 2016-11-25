@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" nextobjectid="41">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" nextobjectid="44">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="9408" columns="56">
   <image source="../images/tileset.png" width="896" height="2688"/>
  </tileset>
@@ -842,7 +842,7 @@
     <property name="type" value="item"/>
    </properties>
   </object>
-  <object id="11" gid="3259" x="64" y="688" width="16" height="16">
+  <object id="11" gid="3259" x="960" y="1520" width="16" height="16">
    <properties>
     <property name="asset" value="dogSpritesheet"/>
     <property name="attack" value="8"/>
@@ -853,7 +853,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="12" gid="3259" x="792" y="596" width="16" height="16">
+  <object id="12" gid="3259" x="272" y="1664" width="16" height="16">
    <properties>
     <property name="asset" value="dogSpritesheet"/>
     <property name="attack" value="8"/>
@@ -886,7 +886,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="15" gid="3259" x="656" y="1348" width="16" height="16">
+  <object id="15" gid="3259" x="176" y="1184" width="16" height="16">
    <properties>
     <property name="asset" value="dogSpritesheet"/>
     <property name="attack" value="8"/>
@@ -897,7 +897,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="17" gid="3259" x="1144" y="1220" width="16" height="16">
+  <object id="17" gid="3259" x="752" y="1200" width="16" height="16">
    <properties>
     <property name="asset" value="dogSpritesheet"/>
     <property name="attack" value="8"/>
@@ -976,6 +976,39 @@
     <property name="name" value="Villager"/>
     <property name="speed" value="0.0001"/>
     <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="41" gid="3259" x="1184" y="848" width="16" height="16">
+   <properties>
+    <property name="asset" value="dogSpritesheet"/>
+    <property name="attack" value="8"/>
+    <property name="defense" value="2"/>
+    <property name="health" value="24"/>
+    <property name="name" value="Wolf"/>
+    <property name="speed" value="75"/>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="42" gid="3259" x="1392" y="480" width="16" height="16">
+   <properties>
+    <property name="asset" value="dogSpritesheet"/>
+    <property name="attack" value="8"/>
+    <property name="defense" value="2"/>
+    <property name="health" value="24"/>
+    <property name="name" value="Wolf"/>
+    <property name="speed" value="75"/>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="43" gid="3259" x="672" y="1856" width="16" height="16">
+   <properties>
+    <property name="asset" value="dogSpritesheet"/>
+    <property name="attack" value="8"/>
+    <property name="defense" value="2"/>
+    <property name="health" value="24"/>
+    <property name="name" value="Wolf"/>
+    <property name="speed" value="75"/>
+    <property name="type" value="enemy"/>
    </properties>
   </object>
  </objectgroup>
