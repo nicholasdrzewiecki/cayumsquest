@@ -199,6 +199,7 @@ CAYUMSQUEST.GameState = {
     this.backgroundLayer = this.world.createLayer('backgroundLayer');
     this.collisionLayer = this.world.createLayer('collisionLayer');
     this.foregroundLayer = this.world.createLayer('foregroundLayer');
+    this.foregroundLayerTwo = this.world.createLayer('foregroundLayerTwo');
     this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
     this.backgroundLayer.renderSettings.enableScrollDelta = false; // Optimization
     this.game.world.sendToBack(this.backgroundLayer);
