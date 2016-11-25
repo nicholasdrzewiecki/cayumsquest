@@ -6,7 +6,7 @@
          "name":"backgroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"collisionLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -28,7 +28,7 @@
          "name":"foregroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -326,6 +326,7 @@
                      "asset":"npcFishermanSpritesheet",
                      "dialogue":"Hello world!",
                      "name":"Fisherman Dylan",
+                     "speed":"0.0001",
                      "type":"npc"
                     },
                  "propertytypes":
@@ -333,6 +334,7 @@
                      "asset":"string",
                      "dialogue":"string",
                      "name":"string",
+                     "speed":"string",
                      "type":"string"
                     },
                  "rotation":0,
