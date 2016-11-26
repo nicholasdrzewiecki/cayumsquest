@@ -200,6 +200,7 @@ CAYUMSQUEST.GameState = {
         this.collisionLayer = this.world.createLayer('collisionLayer');
         this.foregroundLayer = this.world.createLayer('foregroundLayer');
         this.foregroundLayerTwo = this.world.createLayer('foregroundLayerTwo');
+        this.treeTopsLayer = this.world.createLayer('treeTopsLayer');
         this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
         this.backgroundLayer.renderSettings.enableScrollDelta = false; // Optimization
         this.game.world.sendToBack(this.backgroundLayer);
@@ -264,6 +265,7 @@ CAYUMSQUEST.GameState = {
         this.loadItems();
         this.loadEnemies();
         this.loadNpcs();
+        this.game.world.bringToTop(this.treeTopsLayer);
         this.initInterface();
     },
 

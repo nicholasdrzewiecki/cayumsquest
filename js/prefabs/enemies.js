@@ -17,6 +17,7 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.healthBar = new Phaser.Sprite(state.game, this.x, this.y, 'healthBar');
     this.game.add.existing(this.healthBar);
     this.healthBar.anchor.setTo(0.5);
+    this.healthBar.bringToTop();
     this.refreshHealth();
 
     this.enemyNameStyle = {
@@ -28,6 +29,7 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.enemyName.stroke = "#000000";
     this.enemyName.strokeThickness = 2;
     this.enemyName.anchor.setTo(0.5);
+    this.enemyName.bringToTop();
 
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
