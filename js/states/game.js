@@ -92,19 +92,35 @@ CAYUMSQUEST.GameState = {
         this.speed = this.player.data.speed;
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
-            this.player.body.velocity.x = -this.speed;
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+                this.player.body.velocity.x = -this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.x = -this.speed;
+            }
             this.player.direction = 3;
             this.player.animations.play('left');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.D) || this.player.buttonsPressed.right) {
-            this.player.body.velocity.x = this.speed;
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+                this.player.body.velocity.x = this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.x = this.speed;
+            }
             this.player.direction = 4;
             this.player.animations.play('right');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.W) || this.player.buttonsPressed.up) {
-            this.player.body.velocity.y = -this.speed;
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+                this.player.body.velocity.y = -this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.y = -this.speed;
+            }
             this.player.direction = 2;
             this.player.animations.play('up');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S) || this.player.buttonsPressed.down) {
-            this.player.body.velocity.y = this.speed;
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+                this.player.body.velocity.y = this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.y = this.speed;
+            }
             this.player.direction = 1;
             this.player.animations.play('down');
         } else {
@@ -406,10 +422,19 @@ CAYUMSQUEST.GameState = {
         enemiesArray.forEach(function(enemy) {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
-            enemiesObject.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
-            enemiesObject.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
-            enemiesObject.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
-            enemiesObject.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
+            if (enemy.properties.name == "Wolf") {
+                enemiesObject.animations.add('down', [0, 2], 10, true); // Spritesheet animates from frame 0-2
+                enemiesObject.animations.add('left', [3, 5], 10, true); // Spritesheet animates from frame 3-5
+                enemiesObject.animations.add('right', [6, 8], 10, true); // Spritesheet animates from frame 6-8
+                enemiesObject.animations.add('up', [9, 11], 10, true); // Spritesheet animates from frame 9-11
+            } else if (enemy.properties.name == "Ramin") {
+                // Easy way to change the least code for animations :D
+                enemiesObject.animations.add('down', [0, 3], 6, true); // Spritesheet animates from frame 0-3
+                enemiesObject.animations.add('left', [0, 3], 6, true); // Spritesheet animates from frame 0-3
+                enemiesObject.animations.add('right', [0, 3], 6, true); // Spritesheet animates from frame 0-3
+                enemiesObject.animations.add('up', [0, 3], 6, true); // Spritesheet animates from frame 0-3
+            }
+            
         }, this);
     },
 
@@ -428,8 +453,6 @@ CAYUMSQUEST.GameState = {
     },
 
     attack: function(player, enemy) {
-        console.log(this.vulnerable, this.game.time.now, this.vulnerable - this.game.time.now);
-
         if ((this.game.time.now - this.vulnerable > 500) || this.vulnerable === null) {
             this.battle.attack(player, enemy);
             this.battle.attack(enemy, player);
