@@ -183,6 +183,7 @@ CAYUMSQUEST.GameState = {
 
     npcMovement: function() {
         var npc = this.npcs.getFirstExists();
+        player = this.player;
 
         if (!npc) {
             return;
@@ -192,6 +193,18 @@ CAYUMSQUEST.GameState = {
             if (npc.visible && npc.inCamera) {
                 this.game.physics.arcade.moveToObject(npc, this.player, npc.data.speed);
                 this.npcDirection(npc);
+                if (this.game.physics.arcade.distanceBetween(player, npc) < 50) {
+                    this.dialogueTextStyle = {
+                        font: "8px Press Start 2P",
+                        fill: "#e5e5e5"
+                    };
+
+                    this.dialogueText = this.game.add.text(npc.x, npc.y - 50, npc.data.dialogue, this.dialogueTextStyle);
+                    this.dialogueText.stroke = "#000000";
+                    this.dialogueText.strokeThickness = 2;
+                    this.dialogueText.anchor.setTo(0.5);
+                    this.game.time.events.add(1000, this.dialogueText.destroy, this.dialogueText);
+                }
             }
         }, this);
     },
@@ -434,7 +447,7 @@ CAYUMSQUEST.GameState = {
                 enemiesObject.animations.add('right', [0, 3], 6, true); // Spritesheet animates from frame 0-3
                 enemiesObject.animations.add('up', [0, 3], 6, true); // Spritesheet animates from frame 0-3
             }
-            
+
         }, this);
     },
 
