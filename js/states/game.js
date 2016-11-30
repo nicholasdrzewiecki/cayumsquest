@@ -36,7 +36,7 @@ CAYUMSQUEST.GameState = {
 
         this.fireRate = 1000;
         this.nextFire = 0;
-        
+
         // Music
         this.gameSound = this.game.add.audio('gameMusic');
         this.gameSound.loop = true;
@@ -143,14 +143,9 @@ CAYUMSQUEST.GameState = {
         }
     },
 
-    teleport: function(portal, player) {
-        player = this.player;
-        var portal = this.portals.getFirstExists();
-        console.log(portal);
-
+    teleport: function(player, portal) {
         player.x = portal.data.x;
         player.y = portal.data.y;
-
     },
 
     fire: function() {
