@@ -94,6 +94,7 @@ CAYUMSQUEST.GameState = {
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+                console.log(this.player.position);
                 this.player.body.velocity.x = -this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.x = -this.speed;
@@ -138,11 +139,12 @@ CAYUMSQUEST.GameState = {
     },
 
     teleport: function(portal, player) {
-      player = this.player;
-      var portal = this.portals.getFirstExists();
-      console.log(portal);
+        player = this.player;
+        var portal = this.portals.getFirstExists();
+        console.log(portal);
 
-      player.x = portal.data.x;
+        player.x = portal.data.x;
+        player.y = portal.data.y;
 
     },
 
