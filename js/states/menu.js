@@ -21,6 +21,10 @@ CAYUMSQUEST.MenuState = {
             boundsAlignV: "middle"
         };
         
+        this.menuSound = this.game.add.audio('menuMusic');
+        this.menuSound.loop = true;
+        this.menuSound.play();
+        
         this.legendSplash = this.game.add.image(0, 20, 'legend');
         this.legendSplash.scale.set(0.33);
         this.legendSplash.centerX = this.game.width / 2;
@@ -38,6 +42,7 @@ CAYUMSQUEST.MenuState = {
 
     start: function() {
         this.game.state.start('game');
+        this.menuSound.pause();
     },
 
 };

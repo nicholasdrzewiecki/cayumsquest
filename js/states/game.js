@@ -36,6 +36,11 @@ CAYUMSQUEST.GameState = {
 
         this.fireRate = 1000;
         this.nextFire = 0;
+        
+        // Music
+        this.gameSound = this.game.add.audio('gameMusic');
+        this.gameSound.loop = true;
+        this.gameSound.play();
 
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
