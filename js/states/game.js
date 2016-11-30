@@ -53,6 +53,7 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
+        this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
 
         // Player can't pass world bounds
         this.player.body.collideWorldBounds = true;
@@ -136,6 +137,15 @@ CAYUMSQUEST.GameState = {
         }
     },
 
+    teleport: function(portal, player) {
+      player = this.player;
+      var portal = this.portals.getFirstExists();
+      console.log(portal);
+
+      player.x = portal.data.x;
+
+    },
+
     fire: function() {
         if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0 && this.player.data.hasBow === 1) {
             this.nextFire = this.game.time.now + this.fireRate;
@@ -196,7 +206,9 @@ CAYUMSQUEST.GameState = {
                 if (this.game.physics.arcade.distanceBetween(player, npc) < 50) {
                     this.dialogueTextStyle = {
                         font: "8px Press Start 2P",
-                        fill: "#e5e5e5"
+                        fill: "#e5e5e5",
+                        wordWrap: true,
+                        wordWrapWidth: 50
                     };
 
                     this.dialogueText = this.game.add.text(npc.x, npc.y - 50, npc.data.dialogue, this.dialogueTextStyle);
@@ -287,6 +299,9 @@ CAYUMSQUEST.GameState = {
         // Group of npcs
         this.npcs = this.add.group();
 
+        // Group of portals
+        this.portals = this.add.group();
+
         // Battle reference
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
@@ -294,6 +309,7 @@ CAYUMSQUEST.GameState = {
         this.loadItems();
         this.loadEnemies();
         this.loadNpcs();
+        this.loadPortals();
         this.game.world.bringToTop(this.treeTopsLayer);
         this.initInterface();
     },
@@ -462,6 +478,16 @@ CAYUMSQUEST.GameState = {
             npcsObject.animations.add('left', [1], 1, true);
             npcsObject.animations.add('right', [2], 1, true);
             npcsObject.animations.add('up', [3], 1, true);
+        }, this);
+    },
+
+    loadPortals: function() {
+        var portalsArray = this.findObjectsByType('portal', this.world, 'objectsLayer');
+        var portalsObject;
+
+        portalsArray.forEach(function(portal) {
+            portalsObject = new CAYUMSQUEST.Portals(this, portal.x, portal.y, portal.properties.asset, portal.properties);
+            this.portals.add(portalsObject);
         }, this);
     },
 
