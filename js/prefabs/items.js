@@ -14,8 +14,9 @@ CAYUMSQUEST.Item = function(state, x, y, key, data) {
     this.data.attack = +this.data.attack;
     this.data.speed = +this.data.speed;
     this.data.hasBow = +this.data.hasBow;
-
+    this.data.i = data.i;
     this.game.physics.arcade.enable(this);
+    console.log(this.data, data);
 };
 
 CAYUMSQUEST.Item.prototype = Object.create(Phaser.Sprite.prototype);

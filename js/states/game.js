@@ -42,6 +42,12 @@ CAYUMSQUEST.GameState = {
         this.gameSound.loop = true;
         this.gameSound.play();
 
+        this.triggers = {
+            scrollOne: 0,
+            scrollTwo: 0,
+        };
+
+        this.scrollStuff = {};
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
 
@@ -90,6 +96,19 @@ CAYUMSQUEST.GameState = {
         this.movement();
         this.enemyMovement();
         this.npcMovement();
+        this.checkTrigger();
+    },
+
+    checkTrigger: function() {
+        if (this.triggers.scrollOne == 1) {
+            this.scrollStuff.scrollOne.visible = true;
+            this.triggers.scrollOne++;
+            console.log(this.scrollStuff, this.scrollStuff.scrollOne);
+        }
+        if (this.triggers.scrollTwo == 1) {
+            this.scrollStuff.scrollTwo.visible = true;
+            this.triggers.scrollTwo++;
+        }
     },
 
     movement: function() {
@@ -99,7 +118,6 @@ CAYUMSQUEST.GameState = {
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
-                console.log(this.player.position);
                 this.player.body.velocity.x = -this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.x = -this.speed;
@@ -210,14 +228,19 @@ CAYUMSQUEST.GameState = {
                         font: "8px Press Start 2P",
                         fill: "#e5e5e5",
                         wordWrap: true,
-                        wordWrapWidth: 50
+                        wordWrapWidth: 150
                     };
-
                     this.dialogueText = this.game.add.text(npc.x, npc.y - 50, npc.data.dialogue, this.dialogueTextStyle);
                     this.dialogueText.stroke = "#000000";
                     this.dialogueText.strokeThickness = 2;
                     this.dialogueText.anchor.setTo(0.5);
                     this.game.time.events.add(1000, this.dialogueText.destroy, this.dialogueText);
+                    if (npc.data.name === "Villager" && this.triggers.scrollOne === 0) {
+                        this.triggers.scrollOne = 1;
+                    }
+                    if (npc.data.name === "Fisherman Dylan" && this.triggers.scrollTwo === 0) {
+                        this.triggers.scrollTwo = 1;
+                    }
                 }
             }
         }, this);
@@ -314,6 +337,16 @@ CAYUMSQUEST.GameState = {
         this.loadPortals();
         this.game.world.bringToTop(this.treeTopsLayer);
         this.initInterface();
+
+        for (var i = 0; i < this.items.children.length; i++) {
+            if (this.items.children[i].key === "scroll") {
+                this.items.children[i].visible = false;
+                console.log(this.items.children[i]);
+                this.scrollStuff[this.items.children[i].data.i] = this.items.children[i];
+            }
+        }
+
+        console.log(this.items.children);
     },
 
     initInterface: function() {
