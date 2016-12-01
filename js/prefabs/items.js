@@ -1,8 +1,8 @@
-// Item information will go here so we don't have a massive game.js file
-var CAYUMSQUEST = CAYUMSQUEST || {};
+var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 // Data is an object that will contain different Item properties such as health and damage
 CAYUMSQUEST.Item = function(state, x, y, key, data) {
+
     Phaser.Sprite.call(this, state.game, x, y, key); // Not every item will be the same so we will pass the key
 
     this.state = state;
@@ -16,7 +16,6 @@ CAYUMSQUEST.Item = function(state, x, y, key, data) {
     this.data.hasBow = +this.data.hasBow;
     this.data.i = data.i;
     this.game.physics.arcade.enable(this);
-    console.log(this.data, data);
 };
 
 CAYUMSQUEST.Item.prototype = Object.create(Phaser.Sprite.prototype);

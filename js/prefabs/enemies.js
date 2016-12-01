@@ -1,7 +1,7 @@
-// Enemy information will go here so we don't have a massive game.js file
-var CAYUMSQUEST = CAYUMSQUEST || {};
+var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
+
     Phaser.Sprite.call(this, state.game, x, y, key);
 
     this.state = state;
@@ -38,6 +38,7 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.body.velocity.y = 20;
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
+
 };
 
 CAYUMSQUEST.Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -49,16 +50,20 @@ CAYUMSQUEST.Enemy.prototype.refreshHealth = function() {
 };
 
 CAYUMSQUEST.Enemy.prototype.update = function() {
+
     this.healthBar.x = this.x;
     this.healthBar.y = this.y - 25;
     this.healthBar.body.velocity = this.body.velocity;
 
     this.enemyName.x = this.x;
     this.enemyName.y = this.y - 35;
+
 };
 
 CAYUMSQUEST.Enemy.prototype.kill = function() {
+
     Phaser.Sprite.prototype.kill.call(this);
     this.healthBar.kill();
     this.enemyName.kill();
+
 };
