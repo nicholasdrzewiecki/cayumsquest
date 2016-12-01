@@ -307,6 +307,11 @@ CAYUMSQUEST.GameState = {
             hasBow: 0
         };
 
+        // Group of portals
+        this.portals = this.add.group();
+
+        this.loadPortals();
+
         // Create player
         this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
         this.player.anchor.setTo(0.5, 0.5);
@@ -332,16 +337,12 @@ CAYUMSQUEST.GameState = {
         // Group of npcs
         this.npcs = this.add.group();
 
-        // Group of portals
-        this.portals = this.add.group();
-
         // Battle reference
         this.battle = new CAYUMSQUEST.Battle(this.game);
 
         this.loadItems();
         this.loadEnemies();
         this.loadNpcs();
-        this.loadPortals();
         this.game.world.bringToTop(this.treeTopsLayer);
         this.initInterface();
 
