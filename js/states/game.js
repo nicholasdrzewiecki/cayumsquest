@@ -3,7 +3,6 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.GameState = {
 
     init: function(currentLevel) {
-
         this.currentLevel = currentLevel ? currentLevel : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 
@@ -14,11 +13,9 @@ CAYUMSQUEST.GameState = {
             left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
             right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
         };
-
     },
 
     create: function() {
-
         // Particle emitter for arrows
         this.emitter = this.game.add.emitter(0, 0, 1);
         this.emitter.makeParticles('arrow');
@@ -61,7 +58,6 @@ CAYUMSQUEST.GameState = {
     },
 
     update: function() {
-
         // Set collision and overlap handlers
         this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
         this.game.physics.arcade.collide(this.player, this.collisionLayer);
@@ -103,11 +99,9 @@ CAYUMSQUEST.GameState = {
         this.enemyHandler();
         this.npcHandler();
         this.checkTrigger();
-
     },
 
     checkTrigger: function() {
-
         if (this.triggers.scrollOne == 1) {
             this.scrollObject.scrollOne.visible = true;
             this.triggers.scrollOne++;
@@ -117,7 +111,6 @@ CAYUMSQUEST.GameState = {
             this.scrollObject.scrollTwo.visible = true;
             this.triggers.scrollTwo++;
         }
-
     },
 
     movement: function() {
@@ -221,7 +214,6 @@ CAYUMSQUEST.GameState = {
     },
 
     npcHandler: function() {
-
         var npc = this.npcs.getFirstExists();
         player = this.player;
 
@@ -230,14 +222,11 @@ CAYUMSQUEST.GameState = {
         }
 
         this.npcs.forEachAlive(function(npc) {
-
             if (npc.visible && npc.inCamera) {
-
                 this.game.physics.arcade.moveToObject(npc, this.player, npc.data.speed);
                 this.npcDirection(npc);
 
                 if (this.game.physics.arcade.distanceBetween(player, npc) < 50) {
-
                     this.dialogueTextStyle = {
                         font: "8px Press Start 2P",
                         fill: "#e5e5e5",
@@ -258,17 +247,13 @@ CAYUMSQUEST.GameState = {
                     if (npc.data.name === "Fisherman Dylan" && this.triggers.scrollTwo === 0) {
                         this.triggers.scrollTwo = 1;
                     }
-
                 }
-
             }
 
         }, this);
-
     },
 
     npcDirection: function(npc) {
-
         if (npc.body.velocity.x < 0 && npc.body.velocity.x <= -Math.abs(npc.body.velocity.y)) { // Absolute distance between two values
             npc.animations.play('left');
         } else if (npc.body.velocity.x > 0 && npc.body.velocity.x >= Math.abs(npc.body.velocity.y)) {
@@ -278,11 +263,9 @@ CAYUMSQUEST.GameState = {
         } else {
             npc.animations.play('down');
         }
-
     },
 
     loadWorld: function() {
-
         // Create world from tiled layers
         this.world = this.add.tilemap(this.currentLevel);
         this.world.addTilesetImage('tileset', 'tileset');
@@ -363,18 +346,14 @@ CAYUMSQUEST.GameState = {
         this.initInterface();
 
         for (var i = 0; i < this.items.children.length; i++) {
-
             if (this.items.children[i].key === "scroll") {
                 this.items.children[i].visible = false;
                 this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
             }
-
         }
-
     },
 
     initInterface: function() {
-
         this.game.mobileControls.setup(this.player, {
             up: true,
             down: true,
@@ -383,26 +362,24 @@ CAYUMSQUEST.GameState = {
         });
 
         this.initHud();
-
     },
 
     collect: function(player, item) {
-
         this.player.collectItem(item);
 
-        this.game.add.tween(player.scale).to({
+        this.game.add.tween(player.scale)
+            .to({
                 x: 1.2,
                 y: 1.2
-            }, 50).to({
+            }, 50)
+            .to({
                 x: 1,
                 y: 1
             }, 100)
             .start();
-
     },
 
     initHud: function() {
-
         var style = {
             font: "12px Press Start 2P",
             fill: "#e5e5e5",
@@ -466,7 +443,6 @@ CAYUMSQUEST.GameState = {
     },
 
     showQuests: function() {
-
         this.showPanelTween = this.add.tween(this.questHudGroup);
         this.showPanelTween.to({
             y: 0
@@ -485,7 +461,6 @@ CAYUMSQUEST.GameState = {
         }, this);
 
         this.showPanelTween.start();
-
     },
 
     hideQuests: function() {
@@ -499,25 +474,20 @@ CAYUMSQUEST.GameState = {
     },
 
     findObjectsByType: function(type, tilemap, layer) {
-
         var result = [];
 
         tilemap.objects[layer].forEach(function(item) {
-
             if (item.properties.type === type) {
                 item.y -= tilemap.tileHeight / 2;
                 item.x += tilemap.tileHeight / 2;
                 result.push(item);
             }
-
         }, this);
 
         return result;
-
     },
 
     loadItems: function() {
-
         var itemsArray = this.findObjectsByType('item', this.world, 'objectsLayer');
         var itemsObject;
 
@@ -525,16 +495,13 @@ CAYUMSQUEST.GameState = {
             itemsObject = new CAYUMSQUEST.Item(this, item.x, item.y, item.properties.asset, item.properties);
             this.items.add(itemsObject);
         }, this);
-
     },
 
     loadEnemies: function() {
-
         var enemiesArray = this.findObjectsByType('enemy', this.world, 'objectsLayer');
         var enemiesObject;
 
         enemiesArray.forEach(function(enemy) {
-
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
 
@@ -551,29 +518,23 @@ CAYUMSQUEST.GameState = {
             }
 
         }, this);
-
     },
 
     loadNpcs: function() {
-
         var npcsArray = this.findObjectsByType('npc', this.world, 'objectsLayer');
         var npcsObject;
 
         npcsArray.forEach(function(npc) {
-
             npcsObject = new CAYUMSQUEST.Npcs(this, npc.x, npc.y, npc.properties.asset, npc.properties);
             this.npcs.add(npcsObject);
             npcsObject.animations.add('down', [0], 1, true);
             npcsObject.animations.add('left', [1], 1, true);
             npcsObject.animations.add('right', [2], 1, true);
             npcsObject.animations.add('up', [3], 1, true);
-
         }, this);
-
     },
 
     loadPortals: function() {
-
         var portalsArray = this.findObjectsByType('portal', this.world, 'objectsLayer');
         var portalsObject;
 
@@ -581,28 +542,29 @@ CAYUMSQUEST.GameState = {
             portalsObject = new CAYUMSQUEST.Portals(this, portal.x, portal.y, portal.properties.asset, portal.properties);
             this.portals.add(portalsObject);
         }, this);
-
     },
 
     attack: function(player, enemy) {
-
         if ((this.game.time.now - this.vulnerable > 500) || this.vulnerable === null) {
-
             this.battle.attack(player, enemy);
             this.battle.attack(enemy, player);
 
-            this.game.add.tween(enemy.scale).to({
+            this.game.add.tween(enemy.scale)
+                .to({
                     x: 1.2,
                     y: 1.2
-                }, 50).to({
+                }, 50)
+                .to({
                     x: 1,
                     y: 1
                 }, 100)
                 .start();
 
-            this.game.add.tween(enemy).to({
+            this.game.add.tween(enemy)
+                .to({
                     tint: 0xf44b42
-                }, 50).to({
+                }, 50)
+                .to({
                     tint: 0xffffff
                 }, 100)
                 .start();
@@ -652,9 +614,7 @@ CAYUMSQUEST.GameState = {
 
             // We want to see the updated stats after combat
             this.refreshStats();
-
         }
-
     },
 
     killArrows: function(arrows) {

@@ -3,7 +3,6 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.MenuState = {
 
     create: function() {
-
         // Game stage default background color
         this.game.stage.backgroundColor = "#1a1a1a";
 
@@ -35,18 +34,17 @@ CAYUMSQUEST.MenuState = {
         this.legendSplash.centerX = this.game.width / 2;
 
         // Brief game instructions
-        this.instructions = this.game.add.text(0, 0, "WASD to Move", this.instrStyle);
-        this.instructions.setTextBounds(0, this.game.height * 0.75 , this.game.width);
+        this.instructions = this.game.add.text(0, 0, "W A S D to move", this.instrStyle);
+        this.instructions.setTextBounds(0, this.game.height * 0.75, this.game.width);
 
         // How to switch to game state
-        this.startText = this.game.add.text(0, 0, "Press Up or Click to Start", this.startStyle);
-        this.startText.setTextBounds(0, this.game.height * 0.85 , this.game.width);
+        this.startText = this.game.add.text(0, 0, "Press up or click to start", this.startStyle);
+        this.startText.setTextBounds(0, this.game.height * 0.85, this.game.width);
 
         // Keys to switch to game state
         this.upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
         this.upKey.onDown.addOnce(this.start, this);
         this.game.input.onTap.add(this.start, this);
-
     },
 
     start: function() {

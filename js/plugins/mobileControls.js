@@ -1,7 +1,6 @@
-// Phaser comes with Phaser.Plugin
 Phaser.Plugin.mobileControls = function(game, parent) {
     Phaser.Plugin.call(this, game, parent);
-    this.game = game; // Gain access to game
+    this.game = game;
 };
 
 Phaser.Plugin.mobileControls.prototype = Object.create(Phaser.Plugin.prototype);
@@ -9,6 +8,7 @@ Phaser.Plugin.mobileControls.prototype = Object.create(Phaser.Plugin.prototype);
 Phaser.Plugin.mobileControls.prototype.constructor = Phaser.Plugin.mobileControls;
 
 Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
+    // Define reference for player
     this.player = player;
 
     // Object in the player that keeps track of which buttons have been pressed
@@ -138,6 +138,7 @@ Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
             this.player.buttonsPressed.down = false;
         }, this);
     }
+
     /*
         if (buttons.upLeft) {
             this.upLeftArrow = this.game.add.button(leftX, upY, this.bitmapDirection);
@@ -245,7 +246,6 @@ Phaser.Plugin.mobileControls.prototype.setup = function(player, buttons) {
         }
 
     */
-
 };
 
 Phaser.Plugin.mobileControls.prototype.stopMovement = function() {

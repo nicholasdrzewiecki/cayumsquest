@@ -1,7 +1,6 @@
 var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 CAYUMSQUEST.Player = function(state, x, y, data) {
-
     Phaser.Sprite.call(this, state.game, x, y, 'player');
 
     this.state = state;
@@ -24,7 +23,6 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
 
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
-
 };
 
 CAYUMSQUEST.Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -32,7 +30,6 @@ CAYUMSQUEST.Player.prototype = Object.create(Phaser.Sprite.prototype);
 CAYUMSQUEST.Player.prototype.constructor = CAYUMSQUEST.Player;
 
 CAYUMSQUEST.Player.prototype.collectItem = function(item) {
-
     if (item.data.isQuestItem) {
         this.data.items.push(item);
         this.checkQuestCompletion(item);
@@ -49,11 +46,9 @@ CAYUMSQUEST.Player.prototype.collectItem = function(item) {
     this.state.refreshStats();
     this.refreshHealth();
     item.kill();
-
 };
 
 CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
-
     var i = 0;
 
     while (i < this.data.quests.length) {
@@ -80,32 +75,26 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
         }
 
         i++;
-
     }
 
 };
 
 CAYUMSQUEST.Player.prototype.refreshHealth = function() {
-
     this.healthBar.scale.setTo(this.data.health, 5);
-
 };
 
 CAYUMSQUEST.Player.prototype.update = function() {
-
     this.healthBar.x = this.x;
     this.healthBar.y = this.y - 25;
     this.healthBar.body.velocity = this.body.velocity;
     this.refreshHealth();
-
 };
 
 CAYUMSQUEST.Player.prototype.healthRegeneration = function() {
-
     if (this.data.health >= 50) {
         this.data.health = 49;
     }
+
     this.data.health += 1;
     this.state.refreshStats();
-    
 };

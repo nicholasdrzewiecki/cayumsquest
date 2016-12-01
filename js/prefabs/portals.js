@@ -1,7 +1,6 @@
 var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 CAYUMSQUEST.Portals = function(state, x, y, key, data) {
-
     Phaser.Sprite.call(this, state.game, x, y, key);
 
     this.state = state;
@@ -15,7 +14,6 @@ CAYUMSQUEST.Portals = function(state, x, y, key, data) {
 
     this.game.physics.arcade.enable(this);
     this.body.immovable = true;
-
 };
 
 CAYUMSQUEST.Portals.prototype = Object.create(Phaser.Sprite.prototype);

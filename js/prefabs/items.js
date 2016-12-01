@@ -2,7 +2,6 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 // Data is an object that will contain different Item properties such as health and damage
 CAYUMSQUEST.Item = function(state, x, y, key, data) {
-
     Phaser.Sprite.call(this, state.game, x, y, key); // Not every item will be the same so we will pass the key
 
     this.state = state;

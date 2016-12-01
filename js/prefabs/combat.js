@@ -1,5 +1,4 @@
-// Combat information will go here so we don't have a massive game.js file
-var CAYUMSQUEST = CAYUMSQUEST || {};
+var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 CAYUMSQUEST.Battle = function(game) {
     this.game = game;

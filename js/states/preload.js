@@ -3,7 +3,6 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.LoadState = {
 
     preload: function() {
-
         this.progressBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progressBar');
         this.progressBar.anchor.setTo(0.5);
         this.load.setPreloadSprite(this.progressBar);
@@ -42,7 +41,6 @@ CAYUMSQUEST.LoadState = {
         this.game.load.audio('hit', ['assets/audio/hit.wav']);
         this.game.load.audio('menuMusic', ['assets/audio/MenuMusic.mp3']);
         this.game.load.audio('gameMusic', ['assets/audio/GameMusic.mp3']);
-
     },
 
     create: function() {

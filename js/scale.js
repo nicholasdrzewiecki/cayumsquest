@@ -1,7 +1,6 @@
 var CAYUMSQUEST = CAYUMSQUEST || {}; // Create a namespace
 
 CAYUMSQUEST.getGameLandscapeDimensions = function(maxWidth, maxHeight) {
-
     var width = window.innerWidth * window.devicePixelRatio;
     var height = window.innerHeight * window.devicePixelRatio;
     var landscapeWidth = Math.max(width, height);
@@ -23,5 +22,4 @@ CAYUMSQUEST.getGameLandscapeDimensions = function(maxWidth, maxHeight) {
         width: landscapeWidth,
         height: landscapeHeight
     };
-
 };
