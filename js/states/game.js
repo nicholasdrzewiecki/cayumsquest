@@ -18,7 +18,6 @@ CAYUMSQUEST.GameState = {
     create: function() {
         // Particles emitter
         this.emitter = this.game.add.emitter(0, 0, 1);
-        this.emitter.makeParticles('heart');
         this.emitter.makeParticles('arrow');
 
         // Enemies
@@ -40,6 +39,7 @@ CAYUMSQUEST.GameState = {
         // Music
         this.gameSound = this.game.add.audio('gameMusic');
         this.gameSound.loop = true;
+        this.gameSound.volume = 0.1;
         this.gameSound.play();
 
         this.triggers = {
@@ -48,6 +48,7 @@ CAYUMSQUEST.GameState = {
         };
 
         this.scrollStuff = {};
+
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
 
@@ -228,7 +229,7 @@ CAYUMSQUEST.GameState = {
                         font: "8px Press Start 2P",
                         fill: "#e5e5e5",
                         wordWrap: true,
-                        wordWrapWidth: 150
+                        wordWrapWidth: 300
                     };
                     this.dialogueText = this.game.add.text(npc.x, npc.y - 50, npc.data.dialogue, this.dialogueTextStyle);
                     this.dialogueText.stroke = "#000000";
