@@ -13,7 +13,8 @@ CAYUMSQUEST.LoadState = {
         this.load.image('portal', 'assets/images/portal.png');
         this.load.image('doorTop', 'assets/images/doorTop.png');
         this.load.image('doorBottom', 'assets/images/doorBottom.png');
-        this.load.image('doorBottom', 'assets/images/portal.png');
+        this.load.image('blackTele', 'assets/images/blackTele.png');
+        this.load.image('stairTele', 'assets/images/stairTele.png');
         this.load.image('heart', 'assets/images/heart.png');
         this.load.image('arrow', 'assets/images/arrow.png');
         this.load.image('bomb', 'assets/images/bomb.png');
