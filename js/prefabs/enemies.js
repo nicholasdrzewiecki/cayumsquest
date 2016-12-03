@@ -33,8 +33,6 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.game.physics.arcade.enable(this);
     this.game.physics.arcade.enable(this.healthBar);
     this.body.immovable = true;
-    this.body.velocity.x = 20;
-    this.body.velocity.y = 20;
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
 };
