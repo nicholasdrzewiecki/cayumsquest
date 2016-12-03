@@ -540,6 +540,11 @@ CAYUMSQUEST.GameState = {
                 enemiesObject.animations.add('left', [0, 3], 6, true);
                 enemiesObject.animations.add('right', [0, 3], 6, true);
                 enemiesObject.animations.add('up', [0, 3], 6, true);
+            } else if (enemy.properties.name == "Hapoo") {
+                enemiesObject.animations.add('down', [0, 2], 10, true);
+                enemiesObject.animations.add('left', [3, 5], 10, true);
+                enemiesObject.animations.add('right', [6, 8], 10, true);
+                enemiesObject.animations.add('up', [9, 11], 10, true);
             }
 
         }, this);

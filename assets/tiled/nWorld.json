@@ -863,8 +863,8 @@
                     {
                      "asset":"doorBottom",
                      "type":"portal",
-                     "x":"4184",
-                     "y":"2848"
+                     "x":"4385",
+                     "y":"2947"
                     },
                  "propertytypes":
                     {
@@ -889,8 +889,8 @@
                     {
                      "asset":"doorTop",
                      "type":"portal",
-                     "x":"4184",
-                     "y":"2848"
+                     "x":"4385",
+                     "y":"2947"
                     },
                  "propertytypes":
                     {
@@ -970,7 +970,7 @@
                      "defense":"4",
                      "health":"150",
                      "name":"Ramin",
-                     "speed":"1",
+                     "speed":"5",
                      "type":"enemy"
                     },
                  "propertytypes":
@@ -1283,6 +1283,38 @@
                  "width":16,
                  "x":3686,
                  "y":3012
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":110,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"hapooSpritesheet",
+                     "attack":"15",
+                     "defense":"4",
+                     "health":"50",
+                     "name":"Hapoo",
+                     "speed":"50",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1776,
+                 "y":113
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1291,7 +1323,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":110,
+ "nextobjectid":111,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,

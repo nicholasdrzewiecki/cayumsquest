@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="16" tileheight="16" nextobjectid="110">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="16" tileheight="16" nextobjectid="111">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="9408" columns="56">
   <image source="../images/tileset.png" width="896" height="2688"/>
  </tileset>
@@ -1295,16 +1295,16 @@
    <properties>
     <property name="asset" value="doorBottom"/>
     <property name="type" value="portal"/>
-    <property name="x" value="4184"/>
-    <property name="y" value="2848"/>
+    <property name="x" value="4385"/>
+    <property name="y" value="2947"/>
    </properties>
   </object>
   <object id="63" gid="6600" x="528" y="224" width="16" height="16">
    <properties>
     <property name="asset" value="doorTop"/>
     <property name="type" value="portal"/>
-    <property name="x" value="4184"/>
-    <property name="y" value="2848"/>
+    <property name="x" value="4385"/>
+    <property name="y" value="2947"/>
    </properties>
   </object>
   <object id="64" gid="6656" x="4352" y="2896" width="16" height="16">
@@ -1330,7 +1330,7 @@
     <property name="defense" value="4"/>
     <property name="health" value="150"/>
     <property name="name" value="Ramin"/>
-    <property name="speed" value="1"/>
+    <property name="speed" value="5"/>
     <property name="type" value="enemy"/>
    </properties>
   </object>
@@ -1424,6 +1424,17 @@
     <property name="name" value="Lumberjack Evan"/>
     <property name="speed" value="0.0001"/>
     <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="110" gid="3259" x="1776" y="113" width="16" height="16">
+   <properties>
+    <property name="asset" value="hapooSpritesheet"/>
+    <property name="attack" value="15"/>
+    <property name="defense" value="4"/>
+    <property name="health" value="50"/>
+    <property name="name" value="Hapoo"/>
+    <property name="speed" value="50"/>
+    <property name="type" value="enemy"/>
    </properties>
   </object>
  </objectgroup>

@@ -30,6 +30,7 @@ CAYUMSQUEST.LoadState = {
         // Enemies
         this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png', 15, 17);
         this.load.spritesheet('raminSpritesheet', 'assets/images/raminSpritesheet.png', 48, 80);
+        this.load.spritesheet('hapooSpritesheet', 'assets/images/hapooSpritesheet.png', 44, 50);
 
         // Npcs
         this.load.spritesheet('npcDefaultSpritesheet', 'assets/images/npcDefaultSpritesheet.png', 17, 30);
