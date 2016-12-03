@@ -8,10 +8,11 @@ CAYUMSQUEST.Enemy = function(state, x, y, key, data) {
     this.game = state.game;
     this.anchor.setTo(0.5);
 
-    this.data.attack = +this.data.attack;
-    this.data.defense = +this.data.defense;
-    this.data.health = +this.data.health;
-    this.data.speed = +this.data.speed;
+    this.data.attack = this.data.attack;
+    this.data.defense = this.data.defense;
+    this.data.health = this.data.health;
+    this.data.speed = this.data.speed;
+    this.data.i = data.i;
 
     this.healthBar = new Phaser.Sprite(state.game, this.x, this.y, 'healthBar');
     this.game.add.existing(this.healthBar);

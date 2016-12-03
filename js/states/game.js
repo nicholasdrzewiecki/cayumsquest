@@ -45,10 +45,14 @@ CAYUMSQUEST.GameState = {
         this.triggers = {
             scrollOne: 0,
             scrollTwo: 0,
+            spawnWolves: 0
         };
 
         // Container for children
         this.scrollObject = {};
+
+        // Container for children
+        this.enemyObject = {};
 
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
@@ -111,6 +115,15 @@ CAYUMSQUEST.GameState = {
             this.scrollObject.scrollTwo.visible = true;
             this.triggers.scrollTwo++;
         }
+
+        if (this.triggers.spawnWolves == 1) {
+            for (i = 0; i < this.enemies.children.length; i++) {
+                if (this.enemies.children[i].data.i === "spawnedWolf") {
+                    this.enemies.children[i].visible = true;
+                }
+            }
+            this.triggers.spawnWolves++;
+        }
     },
 
     movement: function() {
@@ -119,7 +132,7 @@ CAYUMSQUEST.GameState = {
         this.speed = this.player.data.speed;
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
                 this.player.body.velocity.x = -this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.x = -this.speed;
@@ -127,7 +140,7 @@ CAYUMSQUEST.GameState = {
             this.player.direction = 3;
             this.player.animations.play('left');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.D) || this.player.buttonsPressed.right) {
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
                 this.player.body.velocity.x = this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.x = this.speed;
@@ -135,7 +148,7 @@ CAYUMSQUEST.GameState = {
             this.player.direction = 4;
             this.player.animations.play('right');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.W) || this.player.buttonsPressed.up) {
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
                 this.player.body.velocity.y = -this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.y = -this.speed;
@@ -143,7 +156,7 @@ CAYUMSQUEST.GameState = {
             this.player.direction = 2;
             this.player.animations.play('up');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S) || this.player.buttonsPressed.down) {
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.F)) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
                 this.player.body.velocity.y = this.speed * 5; // F for FAST!
             } else {
                 this.player.body.velocity.y = this.speed;
@@ -247,6 +260,10 @@ CAYUMSQUEST.GameState = {
                     if (npc.data.name === "Fisherman Dylan" && this.triggers.scrollTwo === 0) {
                         this.triggers.scrollTwo = 1;
                     }
+
+                    if (npc.data.name === "James" && this.triggers.spawnWolves === 0) {
+                        this.triggers.spawnWolves = 1;
+                    }
                 }
             }
 
@@ -346,10 +363,17 @@ CAYUMSQUEST.GameState = {
         this.game.world.bringToTop(this.treeTopsLayer);
         this.initInterface();
 
-        for (var i = 0; i < this.items.children.length; i++) {
+        for (i = 0; i < this.items.children.length; i++) {
             if (this.items.children[i].key === "scroll") {
                 this.items.children[i].visible = false;
                 this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
+            }
+        }
+
+        for (i = 0; i < this.enemies.children.length; i++) {
+            if (this.enemies.children[i].data.i === "spawnedWolf") {
+                this.enemies.children[i].visible = false;
+                this.enemyObject[this.enemies.children[i].data.i] = this.enemies.children[i];
             }
         }
     },
