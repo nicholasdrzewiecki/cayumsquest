@@ -30,11 +30,16 @@ CAYUMSQUEST.LoadState = {
         // Enemies
         this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png', 15, 17);
         this.load.spritesheet('raminSpritesheet', 'assets/images/raminSpritesheet.png', 48, 80);
-        this.load.spritesheet('hapooSpritesheet', 'assets/images/hapooSpritesheet.png', 44, 50);
+        this.load.spritesheet('hapooSpritesheet', 'assets/images/hapooSpritesheet.png', 32, 34);
+        this.load.spritesheet('darkLordSpritesheet', 'assets/images/darkLordSpritesheet.png', 17, 30);
+        this.load.spritesheet('goblinSpritesheet', 'assets/images/goblinSpritesheet.png', 19, 26);
 
         // Npcs
         this.load.spritesheet('npcDefaultSpritesheet', 'assets/images/npcDefaultSpritesheet.png', 17, 30);
         this.load.spritesheet('npcFishermanSpritesheet', 'assets/images/npcFishermanSpritesheet.png', 17, 30);
+        this.load.spritesheet('npcFarmerSpritesheet', 'assets/images/npcFarmerSpritesheet.png', 17, 30);
+        this.load.spritesheet('npcBabeSpritesheet', 'assets/images/npcBabeSpritesheet.png', 17, 30);
+        this.load.spritesheet('npcBBabeSpritesheet', 'assets/images/npcBBabeSpritesheet.png', 17, 30);
 
         // Tilemap
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json', null, Phaser.Tilemap.TILED_JSON); // Map json data
