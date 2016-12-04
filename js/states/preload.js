@@ -33,6 +33,8 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('hapooSpritesheet', 'assets/images/hapooSpritesheet.png', 32, 34);
         this.load.spritesheet('darkLordSpritesheet', 'assets/images/darkLordSpritesheet.png', 17, 30);
         this.load.spritesheet('goblinSpritesheet', 'assets/images/goblinSpritesheet.png', 19, 26);
+        this.load.spritesheet('skeletonSpritesheet', 'assets/images/skeletonSpritesheet.png', 19, 33);
+        this.load.spritesheet('illusionSpritesheet', 'assets/images/illusionSpritesheet.png', 27, 37);
 
         // Npcs
         this.load.spritesheet('npcDefaultSpritesheet', 'assets/images/npcDefaultSpritesheet.png', 17, 30);

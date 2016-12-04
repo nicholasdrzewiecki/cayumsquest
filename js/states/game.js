@@ -35,11 +35,12 @@ CAYUMSQUEST.GameState = {
         this.enemies.enableBody = true;
         this.vulnerable = null;
 
-        // Music
+        /* Music
         this.gameSound = this.game.add.audio('gameMusic');
         this.gameSound.loop = true;
         this.gameSound.volume = 0.1;
         this.gameSound.play();
+        */
 
         // Set event triggers
         this.triggers = {
@@ -116,10 +117,17 @@ CAYUMSQUEST.GameState = {
             this.triggers.scrollTwo++;
         }
 
+        if (this.triggers.scrollThree == 1) {
+            this.scrollObject.scrollThree.visible = true;
+            this.triggers.scrollThree++;
+        }
+
         if (this.triggers.spawnWolves == 1) {
             for (i = 0; i < this.enemies.children.length; i++) {
-                if (this.enemies.children[i].data.i === "spawnedWolf") {
+                if (this.enemies.children[i].data.i === "spawnedIllusion") {
                     this.enemies.children[i].visible = true;
+                    this.enemies.children[i].enemyName.visible = true;
+                    this.enemies.children[i].healthBar.visible = true;
                 }
             }
             this.triggers.spawnWolves++;
@@ -228,6 +236,7 @@ CAYUMSQUEST.GameState = {
 
     npcHandler: function() {
         var npc = this.npcs.getFirstExists();
+        var item = this.items.getFirstExists();
         player = this.player;
 
         if (!npc) {
@@ -259,9 +268,10 @@ CAYUMSQUEST.GameState = {
 
                     if (npc.data.name === "Fisherman Dylan" && this.triggers.scrollTwo === 0) {
                         this.triggers.scrollTwo = 1;
+                        this.triggers.scrollThree = 1;
                     }
 
-                    if (npc.data.name === "James" && this.triggers.spawnWolves === 0) {
+                    if (npc.data.name === "Shady James" && this.triggers.spawnWolves === 0) {
                         this.triggers.spawnWolves = 1;
                     }
                 }
@@ -315,6 +325,10 @@ CAYUMSQUEST.GameState = {
             }, {
                 questName: 'Found the second scroll',
                 questCode: 'getSecondScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the third scroll',
+                questCode: 'getThirdScroll',
                 questCompleted: false
             }],
             health: 50,
@@ -371,8 +385,10 @@ CAYUMSQUEST.GameState = {
         }
 
         for (i = 0; i < this.enemies.children.length; i++) {
-            if (this.enemies.children[i].data.i === "spawnedWolf") {
+            if (this.enemies.children[i].data.i === "spawnedIllusion") {
                 this.enemies.children[i].visible = false;
+                this.enemies.children[i].enemyName.visible = false;
+                this.enemies.children[i].healthBar.visible = false;
                 this.enemyObject[this.enemies.children[i].data.i] = this.enemies.children[i];
             }
         }
@@ -459,7 +475,6 @@ CAYUMSQUEST.GameState = {
         this.questDescription.fixedToCamera = true;
         this.questHudGroup.add(this.questDescription);
 
-
         this.questHud.inputEnabled = true;
         this.questHud.events.onInputDown.add(this.hideQuests, this);
 
@@ -530,7 +545,7 @@ CAYUMSQUEST.GameState = {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
 
-            if (enemy.properties.name == "Wolf") {
+            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin") {
                 enemiesObject.animations.add('down', [0, 2], 10, true);
                 enemiesObject.animations.add('left', [3, 5], 10, true);
                 enemiesObject.animations.add('right', [6, 8], 10, true);
@@ -540,13 +555,12 @@ CAYUMSQUEST.GameState = {
                 enemiesObject.animations.add('left', [0, 3], 6, true);
                 enemiesObject.animations.add('right', [0, 3], 6, true);
                 enemiesObject.animations.add('up', [0, 3], 6, true);
-            } else if (enemy.properties.name == "Hapoo") {
-                enemiesObject.animations.add('down', [0, 2], 10, true);
-                enemiesObject.animations.add('left', [3, 5], 10, true);
-                enemiesObject.animations.add('right', [6, 8], 10, true);
-                enemiesObject.animations.add('up', [9, 11], 10, true);
+            } else if (enemy.properties.name == "Skeleton" || enemy.properties.name == "Illusion") {
+                enemiesObject.animations.add('down', [0, 2], 6, true);
+                enemiesObject.animations.add('left', [3, 5], 6, true);
+                enemiesObject.animations.add('right', [6, 8], 6, true);
+                enemiesObject.animations.add('up', [9, 11], 6, true);
             }
-
         }, this);
     },
 

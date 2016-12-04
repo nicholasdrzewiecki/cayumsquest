@@ -18,7 +18,7 @@ CAYUMSQUEST.Player = function(state, x, y, data) {
     this.healthBar = new Phaser.Sprite(state.game, this.x, this.y, 'healthBar');
     this.game.add.existing(this.healthBar);
     this.healthBar.anchor.setTo(0.5);
-    this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.healthRegeneration, this);
+    this.game.time.events.loop(Phaser.Timer.SECOND * 1, this.healthRegeneration, this);
     this.refreshHealth();
 
     this.game.physics.arcade.enable(this);
