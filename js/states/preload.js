@@ -3,51 +3,49 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.LoadState = {
 
     preload: function() {
-        this.progressBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progressBar');
+        this.progressBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loading');
         this.progressBar.anchor.setTo(0.5);
         this.load.setPreloadSprite(this.progressBar);
 
         // General assets
-        this.load.image('tileset', 'assets/images/tileset.png'); // Map tileset
-        this.load.image('healthBar', 'assets/images/healthBar.png');
-        this.load.image('portal', 'assets/images/portal.png');
-        this.load.image('doorTop', 'assets/images/doorTop.png');
-        this.load.image('doorBottom', 'assets/images/doorBottom.png');
-        this.load.image('blackTele', 'assets/images/blackTele.png');
-        this.load.image('stairTele', 'assets/images/stairTele.png');
-        this.load.image('heart', 'assets/images/heart.png');
-        this.load.image('arrow', 'assets/images/arrow.png');
-        this.load.image('bomb', 'assets/images/bomb.png');
-        this.load.image('bow', 'assets/images/bow.png');
+        this.load.image('tileset', 'assets/images/tiles/tileset.png'); // Map tileset
+        this.load.image('healthBar', 'assets/images/icons/healthbar.png');
+        this.load.image('doorTop', 'assets/images/icons/doortop.png');
+        this.load.image('doorBottom', 'assets/images/icons/doorbottom.png');
+        this.load.image('blackTeleport', 'assets/images/icons/blackteleport.png');
+        this.load.image('stairTeleport', 'assets/images/icons/stairteleport.png');
+        this.load.image('heart', 'assets/images/icons/heart.png');
+        this.load.image('arrow', 'assets/images/icons/arrow.png');
+        this.load.image('bow', 'assets/images/icons/bow.png');
 
         // Title Screen
-        this.load.image('legend', 'assets/images/LEGEND_8_BIT.jpg');
+        this.load.image('logo', 'assets/images/interface/logo.jpg');
 
         // Quest items
-        this.load.image('boots', 'assets/images/boots.png');
-        this.load.image('scroll', 'assets/images/scroll.png');
+        this.load.image('boots', 'assets/images/icons/boots.png');
+        this.load.image('scroll', 'assets/images/icons/scroll.png');
 
         // Enemies
-        this.load.spritesheet('dogSpritesheet', 'assets/images/dogSpritesheet.png', 15, 17);
-        this.load.spritesheet('raminSpritesheet', 'assets/images/raminSpritesheet.png', 48, 80);
-        this.load.spritesheet('hapooSpritesheet', 'assets/images/hapooSpritesheet.png', 32, 34);
-        this.load.spritesheet('darkLordSpritesheet', 'assets/images/darkLordSpritesheet.png', 17, 30);
-        this.load.spritesheet('goblinSpritesheet', 'assets/images/goblinSpritesheet.png', 19, 26);
-        this.load.spritesheet('skeletonSpritesheet', 'assets/images/skeletonSpritesheet.png', 19, 33);
-        this.load.spritesheet('illusionSpritesheet', 'assets/images/illusionSpritesheet.png', 27, 37);
+        this.load.spritesheet('wolf', 'assets/images/enemies/wolf.png', 15, 17);
+        this.load.spritesheet('ramin', 'assets/images/enemies/ramin.png', 48, 80);
+        this.load.spritesheet('hapoo', 'assets/images/enemies/hapoo.png', 32, 34);
+        this.load.spritesheet('darkLord', 'assets/images/enemies/darklord.png', 17, 30);
+        this.load.spritesheet('goblin', 'assets/images/enemies/goblin.png', 19, 26);
+        this.load.spritesheet('skeleton', 'assets/images/enemies/skeleton.png', 19, 33);
+        this.load.spritesheet('illusion', 'assets/images/enemies/illusion.png', 27, 37);
 
         // Npcs
-        this.load.spritesheet('npcDefaultSpritesheet', 'assets/images/npcDefaultSpritesheet.png', 17, 30);
-        this.load.spritesheet('npcFishermanSpritesheet', 'assets/images/npcFishermanSpritesheet.png', 17, 30);
-        this.load.spritesheet('npcFarmerSpritesheet', 'assets/images/npcFarmerSpritesheet.png', 17, 30);
-        this.load.spritesheet('npcBabeSpritesheet', 'assets/images/npcBabeSpritesheet.png', 17, 30);
-        this.load.spritesheet('npcBBabeSpritesheet', 'assets/images/npcBBabeSpritesheet.png', 17, 30);
+        this.load.spritesheet('villager', 'assets/images/npcs/villager.png', 17, 30);
+        this.load.spritesheet('fisherman', 'assets/images/npcs/fisherman.png', 17, 30);
+        this.load.spritesheet('farmer', 'assets/images/npcs/farmer.png', 17, 30);
+        this.load.spritesheet('greenFemale', 'assets/images/npcs/greenfemale.png', 17, 30);
+        this.load.spritesheet('purpleFemale', 'assets/images/npcs/purplefemale.png', 17, 30);
 
         // Tilemap
         this.load.tilemap('nWorld', 'assets/tiled/nWorld.json', null, Phaser.Tilemap.TILED_JSON); // Map json data
 
         // Load player spritesheets:
-        this.load.spritesheet('player', 'assets/images/spritesheet.png', 19, 30);
+        this.load.spritesheet('player', 'assets/images/npcs/player.png', 19, 30);
 
         // Audio
         this.game.load.audio('hit', ['assets/audio/hit.wav']);

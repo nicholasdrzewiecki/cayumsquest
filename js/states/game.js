@@ -3,6 +3,7 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.GameState = {
 
     init: function(currentLevel) {
+        this.game.stage.backgroundColor = "#354149";
         this.currentLevel = currentLevel ? currentLevel : 'nWorld';
         this.game.physics.arcade.gravity.y = 0;
 

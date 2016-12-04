@@ -3,8 +3,6 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 CAYUMSQUEST.MenuState = {
 
     create: function() {
-        // Game stage default background color
-        this.game.stage.backgroundColor = "#1a1a1a";
 
         // Style for title font
         this.instrStyle = {
@@ -21,7 +19,7 @@ CAYUMSQUEST.MenuState = {
             boundsAlignH: "center",
             boundsAlignV: "middle"
         };
-        
+
         // Style for credits
         this.creditStyle = {
             font: "10pt",
@@ -37,7 +35,7 @@ CAYUMSQUEST.MenuState = {
         this.menuSound.play();
 
         // Splash art for our logo
-        this.legendSplash = this.game.add.image(0, 20, 'legend');
+        this.legendSplash = this.game.add.image(0, 20, 'logo');
         this.legendSplash.scale.set(0.33);
         this.legendSplash.centerX = this.game.width / 2;
         this.game.add.tween(this.legendSplash).to({
@@ -58,9 +56,9 @@ CAYUMSQUEST.MenuState = {
             }, 500).to({
                 alpha: 1
             }, 500).loop().start();
-        
+
         // Credits
-        this.credits = this.game.add.text(0, 0, "Game created by Nick Drzewiecki & Dylan Warrington", this.creditStyle);
+        this.credits = this.game.add.text(0, 0, "Game Developed by Nick Drzewiecki and Dylan Warrington", this.creditStyle);
         this.credits.setTextBounds(0, this.game.height * 0.90, this.game.width);
         this.game.add.tween(this.credits).to({
                 alpha: 0.8

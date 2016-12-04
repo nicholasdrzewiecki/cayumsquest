@@ -17,7 +17,7 @@ CAYUMSQUEST.BootState = {
     },
 
     preload: function() {
-        this.load.image('progressBar', 'assets/images/loadingBar.png');
+        this.load.image('loading', 'assets/images/interface/loading.png');
     },
 
     create: function() {
