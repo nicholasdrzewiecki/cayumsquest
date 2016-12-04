@@ -249,7 +249,7 @@ CAYUMSQUEST.GameState = {
                 this.game.physics.arcade.moveToObject(npc, this.player, npc.data.speed);
                 this.npcDirection(npc);
 
-                if (this.game.physics.arcade.distanceBetween(player, npc) < 50) {
+                if (this.game.physics.arcade.distanceBetween(player, npc, item) < 50) {
                     this.dialogueTextStyle = {
                         font: "8px Press Start 2P",
                         fill: "#e5e5e5",
@@ -274,6 +274,10 @@ CAYUMSQUEST.GameState = {
 
                     if (npc.data.name === "Shady James" && this.triggers.spawnWolves === 0) {
                         this.triggers.spawnWolves = 1;
+                    }
+
+                    if (item.data.name === "Anvil") {
+                        player.data.attack += 6;
                     }
                 }
             }
@@ -305,7 +309,7 @@ CAYUMSQUEST.GameState = {
         this.backgroundLayer.renderSettings.enableScrollDelta = false;
         this.game.world.sendToBack(this.backgroundLayer);
         this.game.world.bringToTop(this.arrows);
-        this.world.setCollisionBetween(1, 10000, true, 'collisionLayer');
+        this.world.setCollisionBetween(1, 12000, true, 'collisionLayer');
         this.collisionLayer.resizeWorld();
 
         // Player data
@@ -546,7 +550,7 @@ CAYUMSQUEST.GameState = {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
 
-            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin") {
+            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Big Goblin") {
                 enemiesObject.animations.add('down', [0, 2], 10, true);
                 enemiesObject.animations.add('left', [3, 5], 10, true);
                 enemiesObject.animations.add('right', [6, 8], 10, true);
