@@ -80,7 +80,9 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.collide(this.player, this.npcs);
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
         this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
+        this.game.physics.arcade.collide(this.proj, this.collisionLayer, this.killProj, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
+        this.game.physics.arcade.overlap(this.proj, this.player, this.projHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
         this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
 
@@ -215,8 +217,8 @@ CAYUMSQUEST.GameState = {
             this.projFire = this.game.time.now + this.projRate;
             this.projectile = this.proj.getFirstDead();
             this.projectile.data.attack = 12; // Arrow damage value
-            this.projectile.reset(this.enemy.x - 8, this.enemy.y - 8);
-            this.projectile.rotation = this.game.physics.arcade.moveToPointer(this.projectile, 500);
+            this.projectile.reset(enemy.position.x, enemy.position.y);
+            this.projectile.rotation = this.game.physics.arcade.moveToObject(this.projectile, this.player, 200);
         }
     },
 
@@ -235,12 +237,15 @@ CAYUMSQUEST.GameState = {
             return;
         }
         
-        this.shoot(enemy.data.name);
-
         this.enemies.forEachAlive(function(enemy) {
             if (enemy.visible && enemy.inCamera) {
                 this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
                 this.enemyDirection(enemy);
+                
+                if (enemy.key == "ramin") {
+                    console.log(enemy.position, enemy.position.x, enemy.position.y);
+                    this.shoot(enemy);
+                }
             }
         }, this);
     },
@@ -683,10 +688,19 @@ CAYUMSQUEST.GameState = {
     killArrows: function(arrows) {
         arrows.kill();
     },
+    
+    killProj: function(proj) {
+        proj.kill();
+    },
 
     collisionHandler: function(arrows, enemies) {
         this.attack(arrows, enemies);
         arrows.kill();
+    },
+    
+    projHandler: function(proj, player) {
+        this.attack(proj, player);
+        proj.kill();
     },
 
     gameOver: function() {
