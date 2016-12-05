@@ -31,7 +31,7 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('hapoo', 'assets/images/enemies/hapoo.png', 32, 34);
         this.load.spritesheet('darkLord', 'assets/images/enemies/darklord.png', 17, 30);
         this.load.spritesheet('goblin', 'assets/images/enemies/goblin.png', 19, 26);
-        this.load.spritesheet('goblinboss', 'assets/images/enemies/goblinboss.png', 38, 52);
+        this.load.spritesheet('goblinboss', 'assets/images/enemies/goblinBoss.png', 38, 52);
         this.load.spritesheet('skeleton', 'assets/images/enemies/skeleton.png', 19, 33);
         this.load.spritesheet('illusion', 'assets/images/enemies/illusion.png', 27, 37);
 
