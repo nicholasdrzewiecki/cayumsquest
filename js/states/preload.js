@@ -17,6 +17,7 @@ CAYUMSQUEST.LoadState = {
         this.load.image('heart', 'assets/images/icons/heart.png');
         this.load.image('arrow', 'assets/images/icons/arrow.png');
         this.load.image('bow', 'assets/images/icons/bow.png');
+        this.load.image('pewpew', 'assets/images/icons/pewpew.png');
 
         // Title Screen
         this.load.image('logo', 'assets/images/interface/logo.jpg');

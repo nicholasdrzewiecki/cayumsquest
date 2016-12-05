@@ -30,6 +30,16 @@ CAYUMSQUEST.GameState = {
         this.arrows.setAll('outOfBoundsKill', true);
         this.fireRate = 1000;
         this.nextFire = 0;
+        
+        // Ramin projectiles
+        this.proj = this.game.add.group();
+        this.proj.enableBody = true;
+        this.proj.physicsBodyType = Phaser.Physics.ARCADE;
+        this.proj.createMultiple(100, 'pewpew');
+        this.proj.setAll('checkWorldBounds', true);
+        this.proj.setAll('outOfBoundsKill', true);
+        this.projRate = 3000;
+        this.projFire = 0;
 
         // Add enemies group
         this.enemies = this.game.add.group();
@@ -199,6 +209,16 @@ CAYUMSQUEST.GameState = {
             this.arrow.rotation = this.game.physics.arcade.moveToPointer(this.arrow, 500);
         }
     },
+    
+    shoot: function(enemy) {
+        if (this.game.time.now > this.projFire && this.proj.countDead() > 0) {
+            this.projFire = this.game.time.now + this.projRate;
+            this.projectile = this.proj.getFirstDead();
+            this.projectile.data.attack = 12; // Arrow damage value
+            this.projectile.reset(this.enemy.x - 8, this.enemy.y - 8);
+            this.projectile.rotation = this.game.physics.arcade.moveToPointer(this.projectile, 500);
+        }
+    },
 
     playerDie: function() {
         this.player.kill();
@@ -214,6 +234,8 @@ CAYUMSQUEST.GameState = {
         if (!enemy) {
             return;
         }
+        
+        this.shoot(enemy.data.name);
 
         this.enemies.forEachAlive(function(enemy) {
             if (enemy.visible && enemy.inCamera) {
