@@ -20,6 +20,8 @@ CAYUMSQUEST.GameState = {
         // Particle emitter for arrows
         this.emitter = this.game.add.emitter(0, 0, 1);
         this.emitter.makeParticles('arrow');
+        this.projemitter = this.game.add.emitter(0, 0, 1);
+        this.projemitter.makeParticles('pewpew');
 
         // Add arrows group
         this.arrows = this.game.add.group();
@@ -30,7 +32,7 @@ CAYUMSQUEST.GameState = {
         this.arrows.setAll('outOfBoundsKill', true);
         this.fireRate = 1000;
         this.nextFire = 0;
-        
+
         // Ramin projectiles
         this.proj = this.game.add.group();
         this.proj.enableBody = true;
@@ -82,7 +84,7 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
         this.game.physics.arcade.collide(this.proj, this.collisionLayer, this.killProj, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
-        this.game.physics.arcade.overlap(this.proj, this.player, this.projHandler, null, this);
+        this.game.physics.arcade.overlap(this.player, this.proj, this.projHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
         this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
 
@@ -211,7 +213,7 @@ CAYUMSQUEST.GameState = {
             this.arrow.rotation = this.game.physics.arcade.moveToPointer(this.arrow, 500);
         }
     },
-    
+
     shoot: function(enemy) {
         if (this.game.time.now > this.projFire && this.proj.countDead() > 0) {
             this.projFire = this.game.time.now + this.projRate;
@@ -236,12 +238,12 @@ CAYUMSQUEST.GameState = {
         if (!enemy) {
             return;
         }
-        
+
         this.enemies.forEachAlive(function(enemy) {
             if (enemy.visible && enemy.inCamera) {
                 this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
                 this.enemyDirection(enemy);
-                
+
                 if (enemy.key == "ramin") {
                     console.log(enemy.position, enemy.position.x, enemy.position.y);
                     this.shoot(enemy);
@@ -688,7 +690,7 @@ CAYUMSQUEST.GameState = {
     killArrows: function(arrows) {
         arrows.kill();
     },
-    
+
     killProj: function(proj) {
         proj.kill();
     },
@@ -697,9 +699,9 @@ CAYUMSQUEST.GameState = {
         this.attack(arrows, enemies);
         arrows.kill();
     },
-    
-    projHandler: function(proj, player) {
-        this.attack(proj, player);
+
+    projHandler: function(player, proj) {
+        this.attack(player, proj);
         proj.kill();
     },
 
