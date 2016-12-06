@@ -377,9 +377,28 @@ CAYUMSQUEST.GameState = {
                         this.triggers.scrollOne = 1;
                     }
 
-                    if (npc.data.name === "Fisherman Dylan" && this.triggers.scrollTwo === 0) {
+                    if (npc.data.name === "Lumberjack Evan" && this.triggers.scrollTwo === 0) {
                         this.triggers.scrollTwo = 1;
+                    }
+
+                    if (item.data.i === "scrollTwo" && this.triggers.scrollThree === 0) {
                         this.triggers.scrollThree = 1;
+                    }
+
+                    if (item.data.i === "scrollThree" && this.triggers.scrollFour === 0) {
+                        this.triggers.scrollFour = 1;
+                    }
+
+                    if (item.data.i === "scrollFour" && this.triggers.scrollFive === 0) {
+                        this.triggers.scrollFive = 1;
+                    }
+
+                    if (item.data.i === "scrollFive" && this.triggers.scrollSix === 0) {
+                        this.triggers.scrollSix = 1;
+                    }
+
+                    if (item.data.i === "scrollSix" && this.triggers.scrollSeven === 0) {
+                        this.triggers.scrollSeven = 1;
                     }
 
                     if (npc.data.name === "Shady James" && this.triggers.spawnWolves === 0) {
