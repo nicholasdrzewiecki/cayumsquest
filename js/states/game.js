@@ -138,6 +138,7 @@ CAYUMSQUEST.GameState = {
 
         this.movement();
         this.enemyHandler();
+        this.itemHandler();
         this.npcHandler();
         this.checkTrigger();
     },
@@ -316,7 +317,7 @@ CAYUMSQUEST.GameState = {
                             .start();
                     }
 
-                    if (enemy.data.health < 100) {
+                    if (enemy.data.health < 50) {
                         enemy.data.speed = 30;
                         this.raminProjRate = 750;
                         this.game.add.tween(enemy)
@@ -328,6 +329,9 @@ CAYUMSQUEST.GameState = {
                     this.pewpew(enemy);
                 } else if (enemy.key == "darkLord") {
                     this.shoot(enemy);
+                    if (enemy.data.health < 10 && this.triggers.scrollNine === 0) {
+                        this.triggers.scrollNine = 1;
+                    }
                 }
             }
         }, this);
@@ -343,6 +347,43 @@ CAYUMSQUEST.GameState = {
         } else {
             enemy.animations.play('down');
         }
+    },
+
+    itemHandler: function() {
+        var item = this.items.getFirstExists();
+        player = this.player;
+
+        this.items.forEachAlive(function(item) {
+            if (this.game.physics.arcade.distanceBetween(player, item) < 50) {
+                if (item.data.i === "scrollOne" && this.triggers.scrollTwo === 0) {
+                    this.triggers.scrollTwo = 1;
+                }
+
+                if (item.data.i === "scrollThree" && this.triggers.scrollFour === 0) {
+                    this.triggers.scrollFour = 1;
+                }
+
+                if (item.data.i === "scrollFour" && this.triggers.scrollFive === 0) {
+                    this.triggers.scrollFive = 1;
+                }
+
+                if (item.data.i === "scrollFive" && this.triggers.scrollSix === 0) {
+                    this.triggers.scrollSix = 1;
+                }
+
+                if (item.data.i === "scrollSix" && this.triggers.scrollSeven === 0) {
+                    this.triggers.scrollSeven = 1;
+                }
+
+                if (item.data.i === "scrollSeven" && this.triggers.scrollEight === 0) {
+                    this.triggers.scrollEight = 1;
+                }
+
+                if (item.data.name === "Anvil") {
+                    player.data.attack += 6;
+                }
+            }
+        }, this);
     },
 
     npcHandler: function() {
@@ -377,38 +418,15 @@ CAYUMSQUEST.GameState = {
                         this.triggers.scrollOne = 1;
                     }
 
-                    if (npc.data.name === "Lumberjack Evan" && this.triggers.scrollTwo === 0) {
-                        this.triggers.scrollTwo = 1;
-                    }
-
-                    if (item.data.i === "scrollTwo" && this.triggers.scrollThree === 0) {
+                    if (npc.data.name === "Lumberjack Evan" && this.triggers.scrollThree === 0) {
                         this.triggers.scrollThree = 1;
-                    }
-
-                    if (item.data.i === "scrollThree" && this.triggers.scrollFour === 0) {
-                        this.triggers.scrollFour = 1;
-                    }
-
-                    if (item.data.i === "scrollFour" && this.triggers.scrollFive === 0) {
-                        this.triggers.scrollFive = 1;
-                    }
-
-                    if (item.data.i === "scrollFive" && this.triggers.scrollSix === 0) {
-                        this.triggers.scrollSix = 1;
-                    }
-
-                    if (item.data.i === "scrollSix" && this.triggers.scrollSeven === 0) {
-                        this.triggers.scrollSeven = 1;
                     }
 
                     if (npc.data.name === "Shady James" && this.triggers.spawnWolves === 0) {
                         this.triggers.spawnWolves = 1;
                     }
-
-                    if (item.data.name === "Anvil") {
-                        player.data.attack += 6;
-                    }
                 }
+
             }
 
         }, this);

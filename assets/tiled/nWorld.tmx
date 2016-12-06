@@ -1098,7 +1098,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="28" gid="99" x="272" y="240" width="16" height="16">
+  <object id="28" gid="99" x="42.6667" y="690.667" width="16" height="16">
    <properties>
     <property name="asset" value="villager"/>
     <property name="dialogue" value="I'm not sure where you came from but welcome to the overworld. Feel free to meet the locals in our village!"/>

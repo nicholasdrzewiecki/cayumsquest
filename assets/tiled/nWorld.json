@@ -2511,6 +2511,108 @@
                  "width":16,
                  "x":3760,
                  "y":672
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":172,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"wolf",
+                     "attack":"15",
+                     "defense":"2",
+                     "health":"16",
+                     "i":"spawnedIllusion",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "i":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":448,
+                 "y":1824
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":175,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"wolf",
+                     "attack":"15",
+                     "defense":"2",
+                     "health":"16",
+                     "i":"spawnedIllusion",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "i":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":496,
+                 "y":1856
+                }, 
+                {
+                 "gid":3259,
+                 "height":16,
+                 "id":176,
+                 "name":"",
+                 "properties":
+                    {
+                     "asset":"wolf",
+                     "attack":"15",
+                     "defense":"2",
+                     "health":"16",
+                     "i":"spawnedIllusion",
+                     "name":"Wolf",
+                     "speed":"75",
+                     "type":"enemy"
+                    },
+                 "propertytypes":
+                    {
+                     "asset":"string",
+                     "attack":"string",
+                     "defense":"string",
+                     "health":"string",
+                     "i":"string",
+                     "name":"string",
+                     "speed":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":544,
+                 "y":1824
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2519,7 +2621,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":172,
+ "nextobjectid":177,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":16,
