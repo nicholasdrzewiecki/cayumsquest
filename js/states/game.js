@@ -22,6 +22,8 @@ CAYUMSQUEST.GameState = {
         this.emitter.makeParticles('arrow');
         this.projemitter = this.game.add.emitter(0, 0, 1);
         this.projemitter.makeParticles('pewpew');
+        this.dungeonemitter = this.game.add.emitter(0, 0, 1);
+        this.dungeonemitter.makeParticles('darklordProj');
 
         // Add arrows group
         this.arrows = this.game.add.group();
@@ -37,11 +39,21 @@ CAYUMSQUEST.GameState = {
         this.proj = this.game.add.group();
         this.proj.enableBody = true;
         this.proj.physicsBodyType = Phaser.Physics.ARCADE;
-        this.proj.createMultiple(100, 'pewpew');
+        this.proj.createMultiple(100, 'darklordProj');
         this.proj.setAll('checkWorldBounds', true);
         this.proj.setAll('outOfBoundsKill', true);
         this.projRate = 3000;
         this.projFire = 0;
+
+        // Dark Lord projectiles
+        this.raminProj = this.game.add.group();
+        this.raminProj.enableBody = true;
+        this.raminProj.physicsBodyType = Phaser.Physics.ARCADE;
+        this.raminProj.createMultiple(100, 'pewpew');
+        this.raminProj.setAll('checkWorldBounds', true);
+        this.raminProj.setAll('outOfBoundsKill', true);
+        this.raminProjRate = 1500;
+        this.raminProjFire = 0;
 
         // Add enemies group
         this.enemies = this.game.add.group();
@@ -90,8 +102,10 @@ CAYUMSQUEST.GameState = {
         this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
         this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
         this.game.physics.arcade.collide(this.proj, this.collisionLayer, this.killProj, null, this);
+        this.game.physics.arcade.collide(this.raminProj, this.collisionLayer, this.killProj, null, this);
         this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.proj, this.projHandler, null, this);
+        this.game.physics.arcade.overlap(this.player, this.raminProj, this.projHandler, null, this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
         this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
 
@@ -261,6 +275,16 @@ CAYUMSQUEST.GameState = {
         }
     },
 
+    pewpew: function(enemy) {
+        if (this.game.time.now > this.raminProjFire && this.raminProj.countDead() > 0) {
+            this.raminProjFire = this.game.time.now + this.raminProjRate;
+            this.raminProjectile = this.raminProj.getFirstDead();
+            this.raminProjectile.data.attack = 12; // Arrow damage value
+            this.raminProjectile.reset(enemy.position.x, enemy.position.y);
+            this.raminProjectile.rotation = this.game.physics.arcade.moveToObject(this.raminProjectile, this.player, 200);
+        }
+    },
+
     playerDie: function() {
         this.player.kill();
         this.emitter.x = this.player.x;
@@ -282,7 +306,27 @@ CAYUMSQUEST.GameState = {
                 this.enemyDirection(enemy);
 
                 if (enemy.key == "ramin") {
-                    console.log(enemy.position, enemy.position.x, enemy.position.y);
+                    if (enemy.data.health < 100) {
+                        enemy.data.speed = 20;
+                        this.raminProjRate = 1000;
+                        this.game.add.tween(enemy)
+                            .to({
+                                tint: 0xf44b42
+                            }, 50)
+                            .start();
+                    }
+
+                    if (enemy.data.health < 100) {
+                        enemy.data.speed = 30;
+                        this.raminProjRate = 750;
+                        this.game.add.tween(enemy)
+                            .to({
+                                tint: 0xff0000
+                            }, 50)
+                            .start();
+                    }
+                    this.pewpew(enemy);
+                } else if (enemy.key == "darkLord") {
                     this.shoot(enemy);
                 }
             }
@@ -400,6 +444,30 @@ CAYUMSQUEST.GameState = {
             }, {
                 questName: 'Found the third scroll',
                 questCode: 'getThirdScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the fourth scroll',
+                questCode: 'getFourthScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the fifth scroll',
+                questCode: 'getFifthScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the sixth scroll',
+                questCode: 'getSixthScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the seventh scroll',
+                questCode: 'getSeventhScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the eighth scroll',
+                questCode: 'getEighthScroll',
+                questCompleted: false
+            }, {
+                questName: 'Found the ninth scroll',
+                questCode: 'getNinthScroll',
                 questCompleted: false
             }],
             health: 50,
