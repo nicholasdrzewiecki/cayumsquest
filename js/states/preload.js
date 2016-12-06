@@ -19,6 +19,7 @@ CAYUMSQUEST.LoadState = {
         this.load.image('bow', 'assets/images/icons/bow.png');
         this.load.image('pewpew', 'assets/images/icons/raminProj.png');
         this.load.image('darklordProj', 'assets/images/icons/pewpew.png');
+        this.load.image('d', 'assets/images/icons/d.png');
 
         // Title Screen
         this.load.image('logo', 'assets/images/interface/logo.jpg');
