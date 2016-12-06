@@ -59,6 +59,13 @@ CAYUMSQUEST.GameState = {
         this.triggers = {
             scrollOne: 0,
             scrollTwo: 0,
+            scrollThree: 0,
+            scrollFour: 0,
+            scrollFive: 0,
+            scrollSix: 0,
+            scrollSeven: 0,
+            scrollEight: 0,
+            scrollNine: 0,
             spawnWolves: 0
         };
 
@@ -135,6 +142,36 @@ CAYUMSQUEST.GameState = {
         if (this.triggers.scrollThree == 1) {
             this.scrollObject.scrollThree.visible = true;
             this.triggers.scrollThree++;
+        }
+
+        if (this.triggers.scrollFour == 1) {
+            this.scrollObject.scrollFour.visible = true;
+            this.triggers.scrollFour++;
+        }
+
+        if (this.triggers.scrollFive == 1) {
+            this.scrollObject.scrollFive.visible = true;
+            this.triggers.scrollFive++;
+        }
+
+        if (this.triggers.scrollSix == 1) {
+            this.scrollObject.scrollSix.visible = true;
+            this.triggers.scrollSix++;
+        }
+
+        if (this.triggers.scrollSeven == 1) {
+            this.scrollObject.scrollSeven.visible = true;
+            this.triggers.scrollSeven++;
+        }
+
+        if (this.triggers.scrollEight == 1) {
+            this.scrollObject.scrollEight.visible = true;
+            this.triggers.scrollEight++;
+        }
+
+        if (this.triggers.scrollNine == 1) {
+            this.scrollObject.scrollNine.visible = true;
+            this.triggers.scrollNine++;
         }
 
         if (this.triggers.spawnWolves == 1) {
@@ -413,6 +450,13 @@ CAYUMSQUEST.GameState = {
 
         for (i = 0; i < this.items.children.length; i++) {
             if (this.items.children[i].key === "scroll") {
+                this.items.children[i].visible = false;
+                this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
+            }
+        }
+
+        for (i = 0; i < this.items.children.length; i++) {
+            if (this.items.children[i].key === "d") {
                 this.items.children[i].visible = false;
                 this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
             }
