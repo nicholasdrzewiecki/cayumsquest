@@ -17,7 +17,8 @@ CAYUMSQUEST.LoadState = {
         this.load.image('heart', 'assets/images/icons/heart.png');
         this.load.image('arrow', 'assets/images/icons/arrow.png');
         this.load.image('bow', 'assets/images/icons/bow.png');
-        this.load.image('pewpew', 'assets/images/icons/pewpew.png');
+        this.load.image('pewpew', 'assets/images/icons/raminProj.png');
+        this.load.image('darklordProj', 'assets/images/icons/pewpew.png');
 
         // Title Screen
         this.load.image('logo', 'assets/images/interface/logo.jpg');
@@ -32,6 +33,7 @@ CAYUMSQUEST.LoadState = {
         this.load.spritesheet('hapoo', 'assets/images/enemies/hapoo.png', 32, 34);
         this.load.spritesheet('darkLord', 'assets/images/enemies/darklord.png', 17, 30);
         this.load.spritesheet('goblin', 'assets/images/enemies/goblin.png', 19, 26);
+        this.load.spritesheet('darkGoblin', 'assets/images/enemies/darkGoblin.png', 19, 26);
         this.load.spritesheet('goblinboss', 'assets/images/enemies/goblinBoss.png', 38, 52);
         this.load.spritesheet('skeleton', 'assets/images/enemies/skeleton.png', 19, 33);
         this.load.spritesheet('illusion', 'assets/images/enemies/illusion.png', 27, 37);

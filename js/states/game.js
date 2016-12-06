@@ -579,7 +579,7 @@ CAYUMSQUEST.GameState = {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
 
-            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Big Goblin") {
+            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Big Goblin" || enemy.properties.name == "Morgoth" || enemy.properties.name == "Grablin") {
                 enemiesObject.animations.add('down', [0, 2], 10, true);
                 enemiesObject.animations.add('left', [3, 5], 10, true);
                 enemiesObject.animations.add('right', [6, 8], 10, true);
