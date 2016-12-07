@@ -78,6 +78,9 @@ CAYUMSQUEST.GameState = {
             scrollSeven: 0,
             scrollEight: 0,
             scrollNine: 0,
+            dOne: 0,
+            dTwo: 0,
+            dThree: 0,
             spawnWolves: 0
         };
 
@@ -86,6 +89,9 @@ CAYUMSQUEST.GameState = {
 
         // Container for children
         this.enemyObject = {};
+
+        // Container for children
+        this.portalObject = {};
 
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
@@ -189,16 +195,48 @@ CAYUMSQUEST.GameState = {
             this.triggers.scrollNine++;
         }
 
-        if (this.triggers.spawnWolves == 1) {
-            for (i = 0; i < this.enemies.children.length; i++) {
-                if (this.enemies.children[i].data.i === "spawnedIllusion") {
-                    this.enemies.children[i].visible = true;
-                    this.enemies.children[i].enemyName.visible = true;
-                    this.enemies.children[i].healthBar.visible = true;
-                }
+        if (this.triggers.dOne == 1) {
+          this.scrollObject.dOne.visible = true;
+          this.triggers.dOne++;
+        }
+
+        if (this.triggers.dTwo == 1) {
+          this.scrollObject.dTwo.visible = true;
+          this.triggers.dTwo++;
+        }
+
+        if (this.triggers.dThree == 1) {
+          this.scrollObject.dThree.visible = true;
+          this.triggers.dThree++;
+        }
+        
+        //console.log(this.triggers.spawnWolves);
+
+        if (this.triggers.spawnWolves == 2) {
+            var obj = {
+                attack: 5,
+                defense: 2,
+                health: 16,
+                speed: 75,
+                name: "Ambushing Wolf",
+                i: "spawnedWolves"
+            };
+            for (var i = 0; i < 3; i++) {
+                this.createWolf(400 + (i * 16), 1832 + (i * 16), obj);
             }
             this.triggers.spawnWolves++;
         }
+
+
+    },
+
+    createWolf: function(x, y, obj) {
+        var enemiesObject = new CAYUMSQUEST.Enemy(this, x, y, "wolf", obj);
+        this.enemies.add(enemiesObject);
+        enemiesObject.animations.add('down', [0, 2], 10, true);
+        enemiesObject.animations.add('left', [3, 5], 10, true);
+        enemiesObject.animations.add('right', [6, 8], 10, true);
+        enemiesObject.animations.add('up', [9, 11], 10, true);
     },
 
     movement: function() {
@@ -254,6 +292,10 @@ CAYUMSQUEST.GameState = {
     teleport: function(player, portal) {
         player.x = portal.data.x;
         player.y = portal.data.y;
+
+        if (this.triggers.spawnWolves === 1) {
+            this.triggers.spawnWolves = 2;
+        }
     },
 
     fire: function() {
@@ -302,7 +344,14 @@ CAYUMSQUEST.GameState = {
         }
 
         this.enemies.forEachAlive(function(enemy) {
+            //console.log(enemy.data.i);
+            if (enemy.data.i == "spawnedWolves") {
+                console.log(enemy.visible, enemy.inCamera);
+            }
             if (enemy.visible && enemy.inCamera) {
+                if (enemy.data.i == "spawnedWolves") {
+                    console.log(enemy);
+                }
                 this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
                 this.enemyDirection(enemy);
 
@@ -329,8 +378,9 @@ CAYUMSQUEST.GameState = {
                     this.pewpew(enemy);
                 } else if (enemy.key == "darkLord") {
                     this.shoot(enemy);
-                    if (enemy.data.health < 10 && this.triggers.scrollNine === 0) {
+                    if (enemy.data.health < 15 && this.triggers.scrollNine === 0) {
                         this.triggers.scrollNine = 1;
+                        this.triggers.dThree = 1;
                     }
                 }
             }
@@ -361,6 +411,7 @@ CAYUMSQUEST.GameState = {
 
                 if (item.data.i === "scrollThree" && this.triggers.scrollFour === 0) {
                     this.triggers.scrollFour = 1;
+                    this.triggers.dOne = 1;
                 }
 
                 if (item.data.i === "scrollFour" && this.triggers.scrollFive === 0) {
@@ -373,6 +424,7 @@ CAYUMSQUEST.GameState = {
 
                 if (item.data.i === "scrollSix" && this.triggers.scrollSeven === 0) {
                     this.triggers.scrollSeven = 1;
+                    this.triggers.dTwo = 1;
                 }
 
                 if (item.data.i === "scrollSeven" && this.triggers.scrollEight === 0) {
@@ -418,12 +470,9 @@ CAYUMSQUEST.GameState = {
                         this.triggers.scrollOne = 1;
                     }
 
-                    if (npc.data.name === "Lumberjack Evan" && this.triggers.scrollThree === 0) {
-                        this.triggers.scrollThree = 1;
-                    }
-
-                    if (npc.data.name === "Shady James" && this.triggers.spawnWolves === 0) {
+                    if (npc.data.name === "Lumberjack Evan" && this.triggers.spawnWolves === 0) {
                         this.triggers.spawnWolves = 1;
+                        this.triggers.scrollThree = 1;
                     }
                 }
 
@@ -509,8 +558,8 @@ CAYUMSQUEST.GameState = {
             }],
             health: 50,
             attack: 10,
-            defense: 5,
-            speed: 50,
+            defense: 50,
+            speed: 150,
             hasBow: 0
         };
 
@@ -520,7 +569,7 @@ CAYUMSQUEST.GameState = {
         this.loadPortals();
 
         // Create player
-        this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
+        this.player = new CAYUMSQUEST.Player(this, 4800, 1300, playerData);
         this.player.anchor.setTo(0.5, 0.5);
         this.player.direction = 0;
         this.add.existing(this.player);
@@ -564,15 +613,6 @@ CAYUMSQUEST.GameState = {
             if (this.items.children[i].key === "d") {
                 this.items.children[i].visible = false;
                 this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
-            }
-        }
-
-        for (i = 0; i < this.enemies.children.length; i++) {
-            if (this.enemies.children[i].data.i === "spawnedIllusion") {
-                this.enemies.children[i].visible = false;
-                this.enemies.children[i].enemyName.visible = false;
-                this.enemies.children[i].healthBar.visible = false;
-                this.enemyObject[this.enemies.children[i].data.i] = this.enemies.children[i];
             }
         }
     },
@@ -727,7 +767,7 @@ CAYUMSQUEST.GameState = {
         enemiesArray.forEach(function(enemy) {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
-
+            //console.log(enemy.properties.i);
             if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Big Goblin" || enemy.properties.name == "Morgoth" || enemy.properties.name == "Grablin") {
                 enemiesObject.animations.add('down', [0, 2], 10, true);
                 enemiesObject.animations.add('left', [3, 5], 10, true);
