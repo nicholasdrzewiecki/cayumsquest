@@ -179,16 +179,55 @@ CAYUMSQUEST.GameState = {
         if (this.triggers.dOne == 1) {
             this.scrollObject.dOne.visible = true;
             this.triggers.dOne++;
+            this.style = {
+                font: "8px Press Start 2P",
+                fill: "#e5e5e5",
+                boundsAlignH: "center",
+                boundsAlignV: "middle"
+            };
+
+            this.text = this.game.add.text(0, 75, "You hear a rumbling in the distance...", this.style);
+            this.text.stroke = "#000000";
+            this.text.strokeThickness = 2;
+            this.text.fixedToCamera = true;
+            this.text.setTextBounds(0, 0, this.game.width, this.game.height);
+            this.game.time.events.add(3000, this.text.destroy, this.text);
         }
 
         if (this.triggers.dTwo == 1) {
             this.scrollObject.dTwo.visible = true;
             this.triggers.dTwo++;
+            this.style = {
+                font: "8px Press Start 2P",
+                fill: "#e5e5e5",
+                boundsAlignH: "center",
+                boundsAlignV: "middle"
+            };
+
+            this.text = this.game.add.text(0, 75, "You hear a rumbling in the distance...", this.style);
+            this.text.stroke = "#000000";
+            this.text.strokeThickness = 2;
+            this.text.fixedToCamera = true;
+            this.text.setTextBounds(0, 0, this.game.width, this.game.height);
+            this.game.time.events.add(3000, this.text.destroy, this.text);
         }
 
         if (this.triggers.dThree == 1) {
             this.scrollObject.dThree.visible = true;
             this.triggers.dThree++;
+            this.style = {
+                font: "8px Press Start 2P",
+                fill: "#e5e5e5",
+                boundsAlignH: "center",
+                boundsAlignV: "middle"
+            };
+
+            this.text = this.game.add.text(0, 75, "You hear a rumbling in the distance...", this.style);
+            this.text.stroke = "#000000";
+            this.text.strokeThickness = 2;
+            this.text.fixedToCamera = true;
+            this.text.setTextBounds(0, 0, this.game.width, this.game.height);
+            this.game.time.events.add(3000, this.text.destroy, this.text);
         }
 
         if (this.triggers.spawnWolves == 2) {
@@ -402,6 +441,20 @@ CAYUMSQUEST.GameState = {
 
                 if (item.data.name === "Anvil") {
                     player.data.attack += 6;
+                    this.style = {
+                        font: "8px Press Start 2P",
+                        fill: "#e5e5e5",
+                        boundsAlignH: "center",
+                        boundsAlignV: "middle"
+                    };
+
+                    this.text = this.game.add.text(0, 100, item.data.description, this.style);
+                    this.text.stroke = "#000000";
+                    this.text.strokeThickness = 2;
+                    this.text.fixedToCamera = true;
+                    this.text.setTextBounds(0, 0, this.game.width, this.game.height);
+
+                    this.game.time.events.add(3000, this.text.destroy, this.text);
                 }
             }
         }, this);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="400" height="200" tilewidth="16" tileheight="16" nextobjectid="172">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="400" height="200" tilewidth="16" tileheight="16" nextobjectid="176">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="10304" columns="56">
   <image source="../images/tiles/tileset.png" width="896" height="2957"/>
  </tileset>
@@ -1098,7 +1098,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="28" gid="99" x="42.6667" y="690.667" width="16" height="16">
+  <object id="28" gid="99" x="272" y="240" width="16" height="16">
    <properties>
     <property name="asset" value="villager"/>
     <property name="dialogue" value="I'm not sure where you came from but welcome to the overworld. Feel free to meet the locals in our village!"/>
@@ -1206,7 +1206,7 @@
   <object id="48" gid="3259" x="2128" y="1188" width="16" height="16">
    <properties>
     <property name="asset" value="goblin"/>
-    <property name="attack" value="22"/>
+    <property name="attack" value="18"/>
     <property name="defense" value="4"/>
     <property name="health" value="24"/>
     <property name="name" value="Goblin"/>
@@ -1297,7 +1297,7 @@
     <property name="type" value="npc"/>
    </properties>
   </object>
-  <object id="110" gid="3259" x="1776" y="113" width="16" height="16">
+  <object id="110" gid="3259" x="1776" y="160" width="16" height="16">
    <properties>
     <property name="asset" value="hapoo"/>
     <property name="attack" value="25"/>
@@ -1308,46 +1308,10 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="111" gid="3259" x="240" y="404" width="16" height="16">
-   <properties>
-    <property name="asset" value="illusion"/>
-    <property name="attack" value="8"/>
-    <property name="defense" value="2"/>
-    <property name="health" value="8"/>
-    <property name="i" value="spawnedIllusion"/>
-    <property name="name" value="Illusion"/>
-    <property name="speed" value="75"/>
-    <property name="type" value="enemy"/>
-   </properties>
-  </object>
-  <object id="112" gid="3259" x="288" y="372" width="16" height="16">
-   <properties>
-    <property name="asset" value="illusion"/>
-    <property name="attack" value="8"/>
-    <property name="defense" value="2"/>
-    <property name="health" value="8"/>
-    <property name="i" value="spawnedIllusion"/>
-    <property name="name" value="Illusion"/>
-    <property name="speed" value="75"/>
-    <property name="type" value="enemy"/>
-   </properties>
-  </object>
-  <object id="113" gid="3259" x="192" y="372" width="16" height="16">
-   <properties>
-    <property name="asset" value="illusion"/>
-    <property name="attack" value="8"/>
-    <property name="defense" value="2"/>
-    <property name="health" value="8"/>
-    <property name="i" value="spawnedIllusion"/>
-    <property name="name" value="Illusion"/>
-    <property name="speed" value="75"/>
-    <property name="type" value="enemy"/>
-   </properties>
-  </object>
   <object id="115" gid="3259" x="1568" y="1232" width="16" height="16">
    <properties>
     <property name="asset" value="goblin"/>
-    <property name="attack" value="22"/>
+    <property name="attack" value="18"/>
     <property name="defense" value="4"/>
     <property name="health" value="24"/>
     <property name="name" value="Goblin"/>
@@ -1358,6 +1322,8 @@
   <object id="116" gid="3637" x="2168" y="1728" width="16" height="16">
    <properties>
     <property name="attack" value="4"/>
+    <property name="description" value="+4 attack"/>
+    <property name="name" value="Anvil"/>
     <property name="type" value="item"/>
    </properties>
   </object>
@@ -1450,19 +1416,13 @@
     <property name="type" value="item"/>
    </properties>
   </object>
-  <object id="128" gid="3637" x="5572" y="2744" width="16" height="16">
-   <properties>
-    <property name="attack" value="4"/>
-    <property name="type" value="item"/>
-   </properties>
-  </object>
   <object id="129" gid="3259" x="2304" y="1616" width="16" height="16">
    <properties>
     <property name="asset" value="goblinboss"/>
     <property name="attack" value="30"/>
     <property name="defense" value="4"/>
     <property name="health" value="64"/>
-    <property name="name" value="Big Goblin"/>
+    <property name="name" value="Goblin King"/>
     <property name="speed" value="75"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1470,7 +1430,7 @@
   <object id="130" gid="3259" x="1440" y="1532" width="16" height="16">
    <properties>
     <property name="asset" value="goblin"/>
-    <property name="attack" value="22"/>
+    <property name="attack" value="18"/>
     <property name="defense" value="4"/>
     <property name="health" value="24"/>
     <property name="name" value="Goblin"/>
@@ -1481,7 +1441,7 @@
   <object id="131" gid="3259" x="1680" y="1500" width="16" height="16">
    <properties>
     <property name="asset" value="goblin"/>
-    <property name="attack" value="22"/>
+    <property name="attack" value="18"/>
     <property name="defense" value="4"/>
     <property name="health" value="24"/>
     <property name="name" value="Goblin"/>
@@ -1789,7 +1749,7 @@
     <property name="type" value="item"/>
    </properties>
   </object>
-  <object id="167" gid="3638" x="2208" y="1744" width="16" height="16">
+  <object id="167" gid="3638" x="2448" y="1608" width="16" height="16">
    <properties>
     <property name="asset" value="scroll"/>
     <property name="i" value="scrollSeven"/>
@@ -1822,6 +1782,38 @@
     <property name="i" value="scrollFour"/>
     <property name="isQuestItem" value="1"/>
     <property name="questCode" value="getFourthScroll"/>
+    <property name="type" value="item"/>
+   </properties>
+  </object>
+  <object id="172" gid="3637" x="1728" y="112" width="16" height="16">
+   <properties>
+    <property name="asset" value="d"/>
+    <property name="attack" value="4"/>
+    <property name="i" value="dOne"/>
+    <property name="type" value="item"/>
+   </properties>
+  </object>
+  <object id="173" gid="3637" x="1784" y="112" width="16" height="16">
+   <properties>
+    <property name="asset" value="d"/>
+    <property name="attack" value="4"/>
+    <property name="i" value="dTwo"/>
+    <property name="type" value="item"/>
+   </properties>
+  </object>
+  <object id="174" gid="3637" x="1840" y="112" width="16" height="16">
+   <properties>
+    <property name="asset" value="d"/>
+    <property name="attack" value="4"/>
+    <property name="i" value="dThree"/>
+    <property name="type" value="item"/>
+   </properties>
+  </object>
+  <object id="175" gid="3637" x="5564" y="2740" width="16" height="16">
+   <properties>
+    <property name="attack" value="4"/>
+    <property name="description" value="+4 attack"/>
+    <property name="name" value="Anvil"/>
     <property name="type" value="item"/>
    </properties>
   </object>

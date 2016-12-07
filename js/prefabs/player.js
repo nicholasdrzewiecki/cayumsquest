@@ -69,7 +69,7 @@ CAYUMSQUEST.Player.prototype.checkQuestCompletion = function(item) {
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, 0, this.game.width, this.game.height);
 
-            this.game.time.events.add(5000, this.text.destroy, this.text);
+            this.game.time.events.add(3000, this.text.destroy, this.text);
             break;
 
         }
