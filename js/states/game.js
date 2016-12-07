@@ -2,379 +2,358 @@ var CAYUMSQUEST = CAYUMSQUEST || {}; // Define namespace
 
 CAYUMSQUEST.GameState = {
 
-        init: function(currentLevel) {
-            this.game.stage.backgroundColor = "#354149";
-            this.currentLevel = currentLevel ? currentLevel : 'nWorld';
-            this.game.physics.arcade.gravity.y = 0;
+    init: function(currentLevel) {
+        this.game.stage.backgroundColor = "#354149";
+        this.currentLevel = currentLevel ? currentLevel : 'nWorld';
+        this.game.physics.arcade.gravity.y = 0;
 
-            // Define the controls
-            this.wasd = {
-                up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
-                down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
-                left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-                right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
-            };
-        },
+        // Define the controls
+        this.wasd = {
+            up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
+            down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
+            left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
+            right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
+        };
+    },
 
-        create: function() {
-            // Particle emitter for arrows
-            this.emitter = this.game.add.emitter(0, 0, 1);
-            this.emitter.makeParticles('arrow');
-            this.projemitter = this.game.add.emitter(0, 0, 1);
-            this.projemitter.makeParticles('pewpew');
-            this.dungeonemitter = this.game.add.emitter(0, 0, 1);
-            this.dungeonemitter.makeParticles('darklordProj');
+    create: function() {
+        // Particle emitter for arrows
+        this.emitter = this.game.add.emitter(0, 0, 1);
+        this.emitter.makeParticles('arrow');
+        this.projemitter = this.game.add.emitter(0, 0, 1);
+        this.projemitter.makeParticles('pewpew');
+        this.dungeonemitter = this.game.add.emitter(0, 0, 1);
+        this.dungeonemitter.makeParticles('darklordProj');
 
-            // Add arrows group
-            this.arrows = this.game.add.group();
-            this.arrows.enableBody = true;
-            this.arrows.physicsBodyType = Phaser.Physics.ARCADE;
-            this.arrows.createMultiple(100, 'arrow');
-            this.arrows.setAll('checkWorldBounds', true);
-            this.arrows.setAll('outOfBoundsKill', true);
-            this.fireRate = 1000;
-            this.nextFire = 0;
+        // Add arrows group
+        this.arrows = this.game.add.group();
+        this.arrows.enableBody = true;
+        this.arrows.physicsBodyType = Phaser.Physics.ARCADE;
+        this.arrows.createMultiple(100, 'arrow');
+        this.arrows.setAll('checkWorldBounds', true);
+        this.arrows.setAll('outOfBoundsKill', true);
+        this.fireRate = 1000;
+        this.nextFire = 0;
 
-            // Ramin projectiles
-            this.proj = this.game.add.group();
-            this.proj.enableBody = true;
-            this.proj.physicsBodyType = Phaser.Physics.ARCADE;
-            this.proj.createMultiple(100, 'darklordProj');
-            this.proj.setAll('checkWorldBounds', true);
-            this.proj.setAll('outOfBoundsKill', true);
-            this.projRate = 3000;
-            this.projFire = 0;
+        // Ramin projectiles
+        this.proj = this.game.add.group();
+        this.proj.enableBody = true;
+        this.proj.physicsBodyType = Phaser.Physics.ARCADE;
+        this.proj.createMultiple(100, 'darklordProj');
+        this.proj.setAll('checkWorldBounds', true);
+        this.proj.setAll('outOfBoundsKill', true);
+        this.projRate = 3000;
+        this.projFire = 0;
 
-            // Dark Lord projectiles
-            this.raminProj = this.game.add.group();
-            this.raminProj.enableBody = true;
-            this.raminProj.physicsBodyType = Phaser.Physics.ARCADE;
-            this.raminProj.createMultiple(100, 'pewpew');
-            this.raminProj.setAll('checkWorldBounds', true);
-            this.raminProj.setAll('outOfBoundsKill', true);
-            this.raminProjRate = 1500;
-            this.raminProjFire = 0;
+        // Dark Lord projectiles
+        this.raminProj = this.game.add.group();
+        this.raminProj.enableBody = true;
+        this.raminProj.physicsBodyType = Phaser.Physics.ARCADE;
+        this.raminProj.createMultiple(100, 'pewpew');
+        this.raminProj.setAll('checkWorldBounds', true);
+        this.raminProj.setAll('outOfBoundsKill', true);
+        this.raminProjRate = 1500;
+        this.raminProjFire = 0;
 
-            // Add enemies group
-            this.enemies = this.game.add.group();
-            this.enemies.enableBody = true;
-            this.vulnerable = null;
+        // Add enemies group
+        this.enemies = this.game.add.group();
+        this.enemies.enableBody = true;
+        this.vulnerable = null;
 
-            /* Music
+        /* Music
             this.gameSound = this.game.add.audio('gameMusic');
             this.gameSound.loop = true;
             this.gameSound.volume = 0.1;
             this.gameSound.play();
             */
 
-            // Set event triggers
-            this.triggers = {
-                scrollOne: 0,
-                scrollTwo: 0,
-                scrollThree: 0,
-                scrollFour: 0,
-                scrollFive: 0,
-                scrollSix: 0,
-                scrollSeven: 0,
-                scrollEight: 0,
-                scrollNine: 0,
-                dOne: 0,
-                dTwo: 0,
-                dThree: 0,
-                spawnWolves: 0
+        // Set event triggers
+        this.triggers = {
+            scrollOne: 0,
+            scrollTwo: 0,
+            scrollThree: 0,
+            scrollFour: 0,
+            scrollFive: 0,
+            scrollSix: 0,
+            scrollSeven: 0,
+            scrollEight: 0,
+            scrollNine: 0,
+            dOne: 0,
+            dTwo: 0,
+            dThree: 0,
+            spawnWolves: 0
+        };
+
+        // Container for children
+        this.scrollObject = {};
+
+        // Container for children
+        this.enemyObject = {};
+
+        // Container for children
+        this.portalObject = {};
+
+        // Add mobile controls plugin
+        this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
+
+        // Load the world
+        this.loadWorld();
+    },
+
+    update: function() {
+        // Set collision and overlap handlers
+        this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
+        this.game.physics.arcade.collide(this.player, this.collisionLayer);
+        this.game.physics.arcade.collide(this.player, this.npcs);
+        this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
+        this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
+        this.game.physics.arcade.collide(this.proj, this.collisionLayer, this.killProj, null, this);
+        this.game.physics.arcade.collide(this.raminProj, this.collisionLayer, this.killProj, null, this);
+        this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
+        this.game.physics.arcade.overlap(this.player, this.proj, this.projHandler, null, this);
+        this.game.physics.arcade.overlap(this.player, this.raminProj, this.projHandler, null, this);
+        this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
+        this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
+
+        // Player can't pass world edges
+        this.player.body.collideWorldBounds = true;
+
+        // Fire in direction of mouse pointer
+        if (this.game.input.activePointer.isDown) {
+            this.fire();
+        }
+
+        this.movement();
+        this.enemyHandler();
+        this.itemHandler();
+        this.npcHandler();
+        this.checkTrigger();
+    },
+
+    checkTrigger: function() {
+        if (this.triggers.scrollOne == 1) {
+            this.scrollObject.scrollOne.visible = true;
+            this.triggers.scrollOne++;
+        }
+
+        if (this.triggers.scrollTwo == 1) {
+            this.scrollObject.scrollTwo.visible = true;
+            this.triggers.scrollTwo++;
+        }
+
+        if (this.triggers.scrollThree == 1) {
+            this.scrollObject.scrollThree.visible = true;
+            this.triggers.scrollThree++;
+        }
+
+        if (this.triggers.scrollFour == 1) {
+            this.scrollObject.scrollFour.visible = true;
+            this.triggers.scrollFour++;
+        }
+
+        if (this.triggers.scrollFive == 1) {
+            this.scrollObject.scrollFive.visible = true;
+            this.triggers.scrollFive++;
+        }
+
+        if (this.triggers.scrollSix == 1) {
+            this.scrollObject.scrollSix.visible = true;
+            this.triggers.scrollSix++;
+        }
+
+        if (this.triggers.scrollSeven == 1) {
+            this.scrollObject.scrollSeven.visible = true;
+            this.triggers.scrollSeven++;
+        }
+
+        if (this.triggers.scrollEight == 1) {
+            this.scrollObject.scrollEight.visible = true;
+            this.triggers.scrollEight++;
+        }
+
+        if (this.triggers.scrollNine == 1) {
+            this.scrollObject.scrollNine.visible = true;
+            this.triggers.scrollNine++;
+        }
+
+        if (this.triggers.dOne == 1) {
+            this.scrollObject.dOne.visible = true;
+            this.triggers.dOne++;
+        }
+
+        if (this.triggers.dTwo == 1) {
+            this.scrollObject.dTwo.visible = true;
+            this.triggers.dTwo++;
+        }
+
+        if (this.triggers.dThree == 1) {
+            this.scrollObject.dThree.visible = true;
+            this.triggers.dThree++;
+        }
+
+        if (this.triggers.spawnWolves == 2) {
+            var obj = {
+                attack: 5,
+                defense: 2,
+                health: 16,
+                speed: 75,
+                name: "Ambushing Wolf",
+                i: "spawnedWolves"
             };
 
-            // Container for children
-            this.scrollObject = {};
-
-            // Container for children
-            this.enemyObject = {};
-
-            // Container for children
-            this.portalObject = {};
-
-            // Add mobile controls plugin
-            this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
-
-            // Load the world
-            this.loadWorld();
-        },
-
-        update: function() {
-            // Set collision and overlap handlers
-            this.game.physics.arcade.collide(this.enemies, this.collisionLayer);
-            this.game.physics.arcade.collide(this.player, this.collisionLayer);
-            this.game.physics.arcade.collide(this.player, this.npcs);
-            this.game.physics.arcade.collide(this.player, this.enemies, this.attack, null, this);
-            this.game.physics.arcade.collide(this.arrows, this.collisionLayer, this.killArrows, null, this);
-            this.game.physics.arcade.collide(this.proj, this.collisionLayer, this.killProj, null, this);
-            this.game.physics.arcade.collide(this.raminProj, this.collisionLayer, this.killProj, null, this);
-            this.game.physics.arcade.overlap(this.arrows, this.enemies, this.collisionHandler, null, this);
-            this.game.physics.arcade.overlap(this.player, this.proj, this.projHandler, null, this);
-            this.game.physics.arcade.overlap(this.player, this.raminProj, this.projHandler, null, this);
-            this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
-            this.game.physics.arcade.overlap(this.player, this.portals, this.teleport, null, this);
-
-            // Player can't pass world edges
-            this.player.body.collideWorldBounds = true;
-
-            // Fire in direction of mouse pointer
-            if (this.game.input.activePointer.isDown) {
-                this.fire();
+            for (var i = 0; i < 3; i++) {
+                this.createWolf(400 + (i * 16), 1832 + (i * 16), obj);
             }
 
-            // Camera for smartphones: avoids constantly re-drawing the screen every pixel of movement
-            if (!this.game.device.desktop) {
-                var camera = this.game.camera;
-                var player = this.player;
+            this.triggers.spawnWolves++;
+        }
 
-                var horizontalEdge = player.x - camera.x;
-                var verticalEdge = player.y - camera.y;
+    },
 
-                if (horizontalEdge < this.cameraDeadzone.left || horizontalEdge > this.cameraDeadzone.right || verticalEdge < this.cameraDeadzone.top || verticalEdge > this.cameraDeadzone.bottom) {
-                    var cameraCenter = {
-                        x: camera.x + (camera.width / 2),
-                        y: camera.y + (camera.height / 2)
-                    };
-                    var difference = Phaser.Point.subtract(player, cameraCenter);
-                    camera.x += difference.x * 1.8;
-                    camera.y += difference.y * 1.8;
-                }
-            }
+    createWolf: function(x, y, obj) {
+        var enemiesObject = new CAYUMSQUEST.Enemy(this, x, y, "wolf", obj);
+        this.enemies.add(enemiesObject);
+        enemiesObject.animations.add('down', [0, 2], 10, true);
+        enemiesObject.animations.add('left', [3, 5], 10, true);
+        enemiesObject.animations.add('right', [6, 8], 10, true);
+        enemiesObject.animations.add('up', [9, 11], 10, true);
+    },
 
-            this.movement();
-            this.enemyHandler();
-            this.itemHandler();
-            this.npcHandler();
-            this.checkTrigger();
-        },
+    movement: function() {
+        this.player.body.velocity.x = 0;
+        this.player.body.velocity.y = 0;
+        this.speed = this.player.data.speed;
 
-        checkTrigger: function() {
-            if (this.triggers.scrollOne == 1) {
-                this.scrollObject.scrollOne.visible = true;
-                this.triggers.scrollOne++;
-            }
-
-            if (this.triggers.scrollTwo == 1) {
-                this.scrollObject.scrollTwo.visible = true;
-                this.triggers.scrollTwo++;
-            }
-
-            if (this.triggers.scrollThree == 1) {
-                this.scrollObject.scrollThree.visible = true;
-                this.triggers.scrollThree++;
-            }
-
-            if (this.triggers.scrollFour == 1) {
-                this.scrollObject.scrollFour.visible = true;
-                this.triggers.scrollFour++;
-            }
-
-            if (this.triggers.scrollFive == 1) {
-                this.scrollObject.scrollFive.visible = true;
-                this.triggers.scrollFive++;
-            }
-
-            if (this.triggers.scrollSix == 1) {
-                this.scrollObject.scrollSix.visible = true;
-                this.triggers.scrollSix++;
-            }
-
-            if (this.triggers.scrollSeven == 1) {
-                this.scrollObject.scrollSeven.visible = true;
-                this.triggers.scrollSeven++;
-            }
-
-            if (this.triggers.scrollEight == 1) {
-                this.scrollObject.scrollEight.visible = true;
-                this.triggers.scrollEight++;
-            }
-
-            if (this.triggers.scrollNine == 1) {
-                this.scrollObject.scrollNine.visible = true;
-                this.triggers.scrollNine++;
-            }
-
-            if (this.triggers.dOne == 1) {
-                this.scrollObject.dOne.visible = true;
-                this.triggers.dOne++;
-            }
-
-            if (this.triggers.dTwo == 1) {
-                this.scrollObject.dTwo.visible = true;
-                this.triggers.dTwo++;
-            }
-
-            if (this.triggers.dThree == 1) {
-                this.scrollObject.dThree.visible = true;
-                this.triggers.dThree++;
-            }
-
-            if (this.triggers.spawnWolves == 2) {
-                var obj = {
-                    attack: 5,
-                    defense: 2,
-                    health: 16,
-                    speed: 75,
-                    name: "Ambushing Wolf",
-                    i: "spawnedWolves"
-                };
-                for (var i = 0; i < 3; i++) {
-                    this.createWolf(400 + (i * 16), 1832 + (i * 16), obj);
-                }
-                this.triggers.spawnWolves++;
-            }
-
-
-        },
-
-        createWolf: function(x, y, obj) {
-            var enemiesObject = new CAYUMSQUEST.Enemy(this, x, y, "wolf", obj);
-            this.enemies.add(enemiesObject);
-            enemiesObject.animations.add('down', [0, 2], 10, true);
-            enemiesObject.animations.add('left', [3, 5], 10, true);
-            enemiesObject.animations.add('right', [6, 8], 10, true);
-            enemiesObject.animations.add('up', [9, 11], 10, true);
-        },
-
-        movement: function() {
-            this.player.body.velocity.x = 0;
-            this.player.body.velocity.y = 0;
-            this.speed = this.player.data.speed;
-
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
-                if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                    this.player.body.velocity.x = -this.speed * 5; // F for FAST!
-                } else {
-                    this.player.body.velocity.x = -this.speed;
-                }
-                this.player.direction = 3;
-                this.player.animations.play('left');
-            } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.D) || this.player.buttonsPressed.right) {
-                if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                    this.player.body.velocity.x = this.speed * 5; // F for FAST!
-                } else {
-                    this.player.body.velocity.x = this.speed;
-                }
-                this.player.direction = 4;
-                this.player.animations.play('right');
-            } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.W) || this.player.buttonsPressed.up) {
-                if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                    this.player.body.velocity.y = -this.speed * 5; // F for FAST!
-                } else {
-                    this.player.body.velocity.y = -this.speed;
-                }
-                this.player.direction = 2;
-                this.player.animations.play('up');
-            } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S) || this.player.buttonsPressed.down) {
-                if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                    this.player.body.velocity.y = this.speed * 5; // F for FAST!
-                } else {
-                    this.player.body.velocity.y = this.speed;
-                }
-                this.player.direction = 1;
-                this.player.animations.play('down');
+        if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
+                this.player.body.velocity.x = -this.speed * 5; // F for FAST!
             } else {
-                if (this.player.direction == 1)
-                    this.player.frame = 1;
-                else if (this.player.direction == 2)
-                    this.player.frame = 5;
-                else if (this.player.direction == 3)
-                    this.player.frame = 7;
-                else if (this.player.direction == 4)
-                    this.player.frame = 9;
-                this.player.animations.stop();
+                this.player.body.velocity.x = -this.speed;
             }
-        },
-
-        teleport: function(player, portal) {
-            player.x = portal.data.x;
-            player.y = portal.data.y;
-
-            if (this.triggers.spawnWolves === 1) {
-                this.triggers.spawnWolves = 2;
+            this.player.direction = 3;
+            this.player.animations.play('left');
+        } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.D) || this.player.buttonsPressed.right) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
+                this.player.body.velocity.x = this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.x = this.speed;
             }
-        },
-
-        fire: function() {
-            if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0 && this.player.data.hasBow === 1) {
-                this.nextFire = this.game.time.now + this.fireRate;
-                this.arrow = this.arrows.getFirstDead();
-                this.arrow.data.attack = 12; // Arrow damage value
-                this.arrow.reset(this.player.x - 8, this.player.y - 8);
-                this.arrow.rotation = this.game.physics.arcade.moveToPointer(this.arrow, 500);
+            this.player.direction = 4;
+            this.player.animations.play('right');
+        } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.W) || this.player.buttonsPressed.up) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
+                this.player.body.velocity.y = -this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.y = -this.speed;
             }
-        },
-
-        shoot: function(enemy) {
-            if (this.game.time.now > this.projFire && this.proj.countDead() > 0) {
-                this.projFire = this.game.time.now + this.projRate;
-                this.projectile = this.proj.getFirstDead();
-                this.projectile.data.attack = 12; // Arrow damage value
-                this.projectile.reset(enemy.position.x, enemy.position.y);
-                this.projectile.rotation = this.game.physics.arcade.moveToObject(this.projectile, this.player, 200);
+            this.player.direction = 2;
+            this.player.animations.play('up');
+        } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S) || this.player.buttonsPressed.down) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
+                this.player.body.velocity.y = this.speed * 5; // F for FAST!
+            } else {
+                this.player.body.velocity.y = this.speed;
             }
-        },
+            this.player.direction = 1;
+            this.player.animations.play('down');
+        } else {
+            if (this.player.direction == 1)
+                this.player.frame = 1;
+            else if (this.player.direction == 2)
+                this.player.frame = 5;
+            else if (this.player.direction == 3)
+                this.player.frame = 7;
+            else if (this.player.direction == 4)
+                this.player.frame = 9;
+            this.player.animations.stop();
+        }
+    },
 
-        pewpew: function(enemy) {
-            if (this.game.time.now > this.raminProjFire && this.raminProj.countDead() > 0) {
-                this.raminProjFire = this.game.time.now + this.raminProjRate;
-                this.raminProjectile = this.raminProj.getFirstDead();
-                this.raminProjectile.data.attack = 12; // Arrow damage value
-                this.raminProjectile.reset(enemy.position.x, enemy.position.y);
-                this.raminProjectile.rotation = this.game.physics.arcade.moveToObject(this.raminProjectile, this.player, 200);
-            }
-        },
+    teleport: function(player, portal) {
+        player.x = portal.data.x;
+        player.y = portal.data.y;
 
-        playerDie: function() {
-            this.player.kill();
-            this.emitter.x = this.player.x;
-            this.emitter.y = this.player.y;
-            this.emitter.start(true, 600, null, 15);
-            this.game.time.events.add(1000, this.gameOver, this);
-        },
+        if (this.triggers.spawnWolves === 1) {
+            this.triggers.spawnWolves = 2;
+        }
+    },
 
-        enemyHandler: function() {
-            var enemy = this.enemies.getFirstExists();
+    fire: function() {
+        if (this.game.time.now > this.nextFire && this.arrows.countDead() > 0 && this.player.data.hasBow === 1) {
+            this.nextFire = this.game.time.now + this.fireRate;
+            this.arrow = this.arrows.getFirstDead();
+            this.arrow.data.attack = 14; // Arrow damage value
+            this.arrow.reset(this.player.x - 8, this.player.y - 8);
+            this.arrow.rotation = this.game.physics.arcade.moveToPointer(this.arrow, 500);
+        }
+    },
 
-            if (!enemy) {
-                return;
-            }
+    shoot: function(enemy) {
+        if (this.game.time.now > this.projFire && this.proj.countDead() > 0) {
+            this.projFire = this.game.time.now + this.projRate;
+            this.projectile = this.proj.getFirstDead();
+            this.projectile.data.attack = 12; // Arrow damage value
+            this.projectile.reset(enemy.position.x, enemy.position.y);
+            this.projectile.rotation = this.game.physics.arcade.moveToObject(this.projectile, this.player, 200);
+        }
+    },
 
-            this.enemies.forEachAlive(function(enemy) {
-                    this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
-                    this.enemyDirection(enemy);
+    pewpew: function(enemy) {
+        if (this.game.time.now > this.raminProjFire && this.raminProj.countDead() > 0) {
+            this.raminProjFire = this.game.time.now + this.raminProjRate;
+            this.raminProjectile = this.raminProj.getFirstDead();
+            this.raminProjectile.data.attack = 12; // Arrow damage value
+            this.raminProjectile.reset(enemy.position.x, enemy.position.y);
+            this.raminProjectile.rotation = this.game.physics.arcade.moveToObject(this.raminProjectile, this.player, 200);
+        }
+    },
 
-                    if (enemy.key == "ramin") {
-                        if (enemy.data.health < 100) {
-                            enemy.data.speed = 20;
-                            this.raminProjRate = 1000;
-                            this.game.add.tween(enemy)
-                                .to({
-                                    tint: 0xf44b42
-                                }, 50)
-                                .start();
-                        }
+    playerDie: function() {
+        this.player.kill();
+        this.emitter.x = this.player.x;
+        this.emitter.y = this.player.y;
+        this.emitter.start(true, 600, null, 15);
+        this.game.time.events.add(1000, this.gameOver, this);
+    },
 
-                        if (enemy.data.health < 50) {
-                            enemy.data.speed = 30;
-                            this.raminProjRate = 750;
-                            this.game.add.tween(enemy)
-                                .to({
-                                    tint: 0xff0000
-                                }, 50)
-                                .start();
-                        }
-                        this.pewpew(enemy);
-                    } else if (enemy.key == "darkLord") {
-                        this.shoot(enemy);
-                        if (enemy.data.health < 15 && this.triggers.scrollNine === 0) {
-                            this.triggers.scrollNine = 1;
-                            this.triggers.dThree = 1;
-                        }
+    enemyHandler: function() {
+        var enemy = this.enemies.getFirstExists();
+
+        if (!enemy) {
+            return;
+        }
+
+        this.enemies.forEachAlive(function(enemy) {
+            if (enemy.visible && enemy.inCamera) {
+              this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
+              this.enemyDirection(enemy);
+
+              if (enemy.key == "ramin") {
+                  if (enemy.data.health < 100) {
+                      enemy.data.speed = 20;
+                      this.raminProjRate = 1000;
+                      this.game.add.tween(enemy).to({
+                          tint: 0xf44b42
+                      }, 50).start();
+                  }
+
+                  if (enemy.data.health < 50) {
+                      enemy.data.speed = 30;
+                      this.raminProjRate = 750;
+                      this.game.add.tween(enemy).to({
+                          tint: 0xff0000
+                      }, 50).start();
+                  }
+                  this.pewpew(enemy);
+              } else if (enemy.key == "darkLord") {
+                  this.shoot(enemy);
+                  if (enemy.data.health < 15 && this.triggers.scrollNine === 0) {
+                      this.triggers.scrollNine = 1;
+                      this.triggers.dThree = 1;
                     }
                 }
-            }, this);
+            }
+        }, this);
     },
 
     enemyDirection: function(enemy) {
@@ -501,55 +480,57 @@ CAYUMSQUEST.GameState = {
         // Player data
         var playerData = {
             items: [],
-            quests: [{
-                questName: 'Found a pair of running boots',
-                questCode: 'getBoots',
-                questCompleted: false
-            }, {
-                questName: 'Found a bow',
-                questCode: 'getBow',
-                questCompleted: false
-            }, {
-                questName: 'Found the first scroll',
-                questCode: 'getFirstScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the second scroll',
-                questCode: 'getSecondScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the third scroll',
-                questCode: 'getThirdScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the fourth scroll',
-                questCode: 'getFourthScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the fifth scroll',
-                questCode: 'getFifthScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the sixth scroll',
-                questCode: 'getSixthScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the seventh scroll',
-                questCode: 'getSeventhScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the eighth scroll',
-                questCode: 'getEighthScroll',
-                questCompleted: false
-            }, {
-                questName: 'Found the ninth scroll',
-                questCode: 'getNinthScroll',
-                questCompleted: false
-            }],
+            quests: [
+                {
+                    questName: 'Found a pair of running boots',
+                    questCode: 'getBoots',
+                    questCompleted: false
+                }, {
+                    questName: 'Found a bow',
+                    questCode: 'getBow',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the first scroll',
+                    questCode: 'getFirstScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the second scroll',
+                    questCode: 'getSecondScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the third scroll',
+                    questCode: 'getThirdScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the fourth scroll',
+                    questCode: 'getFourthScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the fifth scroll',
+                    questCode: 'getFifthScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the sixth scroll',
+                    questCode: 'getSixthScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the seventh scroll',
+                    questCode: 'getSeventhScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the eighth scroll',
+                    questCode: 'getEighthScroll',
+                    questCompleted: false
+                }, {
+                    questName: 'Found the ninth scroll',
+                    questCode: 'getNinthScroll',
+                    questCompleted: false
+                }
+            ],
             health: 50,
             attack: 10,
-            defense: 50,
-            speed: 150,
+            defense: 5,
+            speed: 50,
             hasBow: 0
         };
 
@@ -559,7 +540,7 @@ CAYUMSQUEST.GameState = {
         this.loadPortals();
 
         // Create player
-        this.player = new CAYUMSQUEST.Player(this, 4800, 1300, playerData);
+        this.player = new CAYUMSQUEST.Player(this, 150, 150, playerData);
         this.player.anchor.setTo(0.5, 0.5);
         this.player.direction = 0;
         this.add.existing(this.player);
@@ -612,7 +593,7 @@ CAYUMSQUEST.GameState = {
             up: true,
             down: true,
             left: true,
-            right: true,
+            right: true
         });
 
         this.initHud();
@@ -621,22 +602,19 @@ CAYUMSQUEST.GameState = {
     collect: function(player, item) {
         this.player.collectItem(item);
 
-        this.game.add.tween(player.scale)
-            .to({
-                x: 1.2,
-                y: 1.2
-            }, 50)
-            .to({
-                x: 1,
-                y: 1
-            }, 100)
-            .start();
+        this.game.add.tween(player.scale).to({
+            x: 1.2,
+            y: 1.2
+        }, 50).to({
+            x: 1,
+            y: 1
+        }, 100).start();
     },
 
     initHud: function() {
         var style = {
             font: "12px Press Start 2P",
-            fill: "#e5e5e5",
+            fill: "#e5e5e5"
         };
 
         var questStyle = {
@@ -706,7 +684,7 @@ CAYUMSQUEST.GameState = {
             var questText = 'Quests:\n\n';
 
             this.player.data.quests.forEach(function(quest) {
-                questText += quest.questName + (quest.questCompleted ? ' has been completed' : '') + '\n\n';
+                questText += quest.questName + (quest.questCompleted? ' has been completed': '') + '\n\n';
             }, this);
 
             this.questDescription.text = questText;
@@ -806,25 +784,19 @@ CAYUMSQUEST.GameState = {
             this.battle.attack(player, enemy);
             this.battle.attack(enemy, player);
 
-            this.game.add.tween(enemy.scale)
-                .to({
-                    x: 1.2,
-                    y: 1.2
-                }, 50)
-                .to({
-                    x: 1,
-                    y: 1
-                }, 100)
-                .start();
+            this.game.add.tween(enemy.scale).to({
+                x: 1.2,
+                y: 1.2
+            }, 50).to({
+                x: 1,
+                y: 1
+            }, 100).start();
 
-            this.game.add.tween(enemy)
-                .to({
-                    tint: 0xf44b42
-                }, 50)
-                .to({
-                    tint: 0xffffff
-                }, 100)
-                .start();
+            this.game.add.tween(enemy).to({
+                tint: 0xf44b42
+            }, 50).to({
+                tint: 0xffffff
+            }, 100).start();
 
             /* Temporary fix for knockback, player is overlapping collisionLayer every time
                for some reason but the difference in coordinates makes it so character
