@@ -91,7 +91,7 @@ CAYUMSQUEST.GameState = {
         this.enemyObject = {};
 
         // Container for children
-        this.portalObject = {};
+        this.blockObject = {};
 
         // Add mobile controls plugin
         this.game.mobileControls = this.game.plugins.add(Phaser.Plugin.mobileControls);
@@ -228,6 +228,11 @@ CAYUMSQUEST.GameState = {
             this.text.fixedToCamera = true;
             this.text.setTextBounds(0, 0, this.game.width, this.game.height);
             this.game.time.events.add(3000, this.text.destroy, this.text);
+
+            this.blockObject.blockage1.visible = false;
+            this.blockObject.blockage2.visible = false;
+            this.blockObject.blockage3.visible = false;
+            this.blockObject.blockage4.visible = false;
         }
 
         if (this.triggers.spawnWolves == 2) {
@@ -265,7 +270,9 @@ CAYUMSQUEST.GameState = {
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A) || this.player.buttonsPressed.left) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                this.player.body.velocity.x = -this.speed * 5; // F for FAST!
+                this.player.body.velocity.x = -this.speed * 5;
+            } else if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
+                this.player.body.velocity.x = -this.speed * 3;
             } else {
                 this.player.body.velocity.x = -this.speed;
             }
@@ -273,7 +280,9 @@ CAYUMSQUEST.GameState = {
             this.player.animations.play('left');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.D) || this.player.buttonsPressed.right) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                this.player.body.velocity.x = this.speed * 5; // F for FAST!
+                this.player.body.velocity.x = this.speed * 5;
+            } else if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
+                this.player.body.velocity.x = this.speed * 3;
             } else {
                 this.player.body.velocity.x = this.speed;
             }
@@ -281,7 +290,9 @@ CAYUMSQUEST.GameState = {
             this.player.animations.play('right');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.W) || this.player.buttonsPressed.up) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                this.player.body.velocity.y = -this.speed * 5; // F for FAST!
+                this.player.body.velocity.y = -this.speed * 5;
+            } else if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
+                this.player.body.velocity.y = -this.speed * 3;
             } else {
                 this.player.body.velocity.y = -this.speed;
             }
@@ -289,7 +300,9 @@ CAYUMSQUEST.GameState = {
             this.player.animations.play('up');
         } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.S) || this.player.buttonsPressed.down) {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SHIFT)) {
-                this.player.body.velocity.y = this.speed * 5; // F for FAST!
+                this.player.body.velocity.y = this.speed * 5;
+            } else if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
+                this.player.body.velocity.y = this.speed * 3;
             } else {
                 this.player.body.velocity.y = this.speed;
             }
@@ -364,7 +377,14 @@ CAYUMSQUEST.GameState = {
 
         this.enemies.forEachAlive(function(enemy) {
             if (enemy.visible && enemy.inCamera) {
-              this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
+
+
+              if ((this.game.time.now - this.vulnerable > 300) || this.vulnerable === null) {
+                  this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
+              } else {
+                  enemy.body.velocity.setTo(0, 0);
+              }
+
               this.enemyDirection(enemy);
 
               if (enemy.key == "ramin") {
@@ -386,11 +406,13 @@ CAYUMSQUEST.GameState = {
                   this.pewpew(enemy);
               } else if (enemy.key == "darkLord") {
                   this.shoot(enemy);
-                  if (enemy.data.health < 15 && this.triggers.scrollNine === 0) {
+                  if (enemy.data.health < 25 && this.triggers.scrollNine === 0) {
                       this.triggers.scrollNine = 1;
                       this.triggers.dThree = 1;
                     }
                 }
+            } else {
+                enemy.body.velocity.setTo(0, 0);
             }
         }, this);
     },
@@ -639,6 +661,12 @@ CAYUMSQUEST.GameState = {
                 this.scrollObject[this.items.children[i].data.i] = this.items.children[i];
             }
         }
+
+        for (i = 0; i < this.npcs.children.length; i++) {
+            if (this.npcs.children[i].key === "blockage") {
+                this.blockObject[this.npcs.children[i].data.i] = this.npcs.children[i];
+            }
+        }
     },
 
     initInterface: function() {
@@ -834,6 +862,8 @@ CAYUMSQUEST.GameState = {
 
     attack: function(player, enemy) {
         if ((this.game.time.now - this.vulnerable > 500) || this.vulnerable === null) {
+            this.game.physics.arcade.moveToObject(enemy, this.player, enemy.data.speed);
+
             this.battle.attack(player, enemy);
             this.battle.attack(enemy, player);
 

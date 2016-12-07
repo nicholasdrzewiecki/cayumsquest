@@ -9,6 +9,7 @@ CAYUMSQUEST.LoadState = {
 
         // General assets
         this.load.image('tileset', 'assets/images/tiles/tileset.png'); // Map tileset
+        this.load.image('endSplash', 'assets/images/tiles/ending.png');
         this.load.image('healthBar', 'assets/images/icons/healthbar.png');
         this.load.image('doorTop', 'assets/images/icons/doortop.png');
         this.load.image('doorBottom', 'assets/images/icons/doorbottom.png');
@@ -20,6 +21,7 @@ CAYUMSQUEST.LoadState = {
         this.load.image('pewpew', 'assets/images/icons/raminProj.png');
         this.load.image('darklordProj', 'assets/images/icons/pewpew.png');
         this.load.image('d', 'assets/images/icons/d.png');
+        this.load.image('blockage', 'assets/images/icons/blockage.png');
 
         // Title Screen
         this.load.image('logo', 'assets/images/interface/logo.jpg');
