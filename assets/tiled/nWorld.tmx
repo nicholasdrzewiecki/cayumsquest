@@ -1165,7 +1165,7 @@
    <properties>
     <property name="asset" value="villager"/>
     <property name="dialogue" value="A dark silhouette dropped off a random scroll near the dock last night. Would you mind checking it out?"/>
-    <property name="name" value="Villager"/>
+    <property name="name" value="Arron"/>
     <property name="speed" value="0.0001"/>
     <property name="type" value="npc"/>
    </properties>
@@ -1301,7 +1301,7 @@
    <properties>
     <property name="asset" value="hapoo"/>
     <property name="attack" value="25"/>
-    <property name="defense" value="4"/>
+    <property name="defense" value="6"/>
     <property name="health" value="64"/>
     <property name="name" value="Hapoo"/>
     <property name="speed" value="40"/>
@@ -1619,9 +1619,9 @@
    <properties>
     <property name="asset" value="darkLord"/>
     <property name="attack" value="30"/>
-    <property name="defense" value="4"/>
+    <property name="defense" value="6"/>
     <property name="health" value="100"/>
-    <property name="name" value="Morgoth"/>
+    <property name="name" value="Henry"/>
     <property name="speed" value="15"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1632,7 +1632,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1643,7 +1643,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1654,7 +1654,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1665,7 +1665,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1676,7 +1676,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1687,7 +1687,7 @@
     <property name="attack" value="16"/>
     <property name="defense" value="4"/>
     <property name="health" value="36"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="50"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1698,7 +1698,7 @@
     <property name="attack" value="25"/>
     <property name="defense" value="4"/>
     <property name="health" value="16"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="100"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1709,7 +1709,7 @@
     <property name="attack" value="25"/>
     <property name="defense" value="4"/>
     <property name="health" value="16"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="100"/>
     <property name="type" value="enemy"/>
    </properties>
@@ -1720,7 +1720,7 @@
     <property name="attack" value="25"/>
     <property name="defense" value="4"/>
     <property name="health" value="16"/>
-    <property name="name" value="Grablin"/>
+    <property name="name" value="First Year"/>
     <property name="speed" value="100"/>
     <property name="type" value="enemy"/>
    </properties>

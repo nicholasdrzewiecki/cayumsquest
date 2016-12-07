@@ -406,7 +406,7 @@ CAYUMSQUEST.GameState = {
                   this.pewpew(enemy);
               } else if (enemy.key == "darkLord") {
                   this.shoot(enemy);
-                  if (enemy.data.health < 25 && this.triggers.scrollNine === 0) {
+                  if (enemy.data.health < 50 && this.triggers.scrollNine === 0) {
                       this.triggers.scrollNine = 1;
                       this.triggers.dThree = 1;
                     }
@@ -462,7 +462,7 @@ CAYUMSQUEST.GameState = {
                 }
 
                 if (item.data.name === "Anvil") {
-                    player.data.attack += 6;
+                    player.data.attack += 4;
                     this.style = {
                         font: "8px Press Start 2P",
                         fill: "#e5e5e5",
@@ -510,7 +510,7 @@ CAYUMSQUEST.GameState = {
                     this.dialogueText.anchor.setTo(0.5);
                     this.game.time.events.add(1000, this.dialogueText.destroy, this.dialogueText);
 
-                    if (npc.data.name === "Villager" && this.triggers.scrollOne === 0) {
+                    if (npc.data.name === "Arron" && this.triggers.scrollOne === 0) {
                         this.triggers.scrollOne = 1;
                     }
 
@@ -604,7 +604,7 @@ CAYUMSQUEST.GameState = {
             ],
             health: 50,
             attack: 10,
-            defense: 5,
+            defense: 80,
             speed: 50,
             hasBow: 0
         };
@@ -817,7 +817,7 @@ CAYUMSQUEST.GameState = {
             enemiesObject = new CAYUMSQUEST.Enemy(this, enemy.x, enemy.y, enemy.properties.asset, enemy.properties);
             this.enemies.add(enemiesObject);
 
-            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Big Goblin" || enemy.properties.name == "Morgoth" || enemy.properties.name == "Grablin") {
+            if (enemy.properties.name == "Wolf" || enemy.properties.name == "Hapoo" || enemy.properties.name == "Goblin" || enemy.properties.name == "Goblin King" || enemy.properties.name == "Henry" || enemy.properties.name == "First Year") {
                 enemiesObject.animations.add('down', [0, 2], 10, true);
                 enemiesObject.animations.add('left', [3, 5], 10, true);
                 enemiesObject.animations.add('right', [6, 8], 10, true);

@@ -483,7 +483,7 @@
                     {
                      "asset":"villager",
                      "dialogue":"A dark silhouette dropped off a random scroll near the dock last night. Would you mind checking it out?",
-                     "name":"Villager",
+                     "name":"Arron",
                      "speed":"0.0001",
                      "type":"npc"
                     },
@@ -905,7 +905,7 @@
                     {
                      "asset":"hapoo",
                      "attack":"25",
-                     "defense":"4",
+                     "defense":"6",
                      "health":"64",
                      "name":"Hapoo",
                      "speed":"40",
@@ -1891,9 +1891,9 @@
                     {
                      "asset":"darkLord",
                      "attack":"30",
-                     "defense":"4",
+                     "defense":"6",
                      "health":"100",
-                     "name":"Morgoth",
+                     "name":"Henry",
                      "speed":"15",
                      "type":"enemy"
                     },
@@ -1925,7 +1925,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -1957,7 +1957,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -1989,7 +1989,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -2021,7 +2021,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -2053,7 +2053,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -2085,7 +2085,7 @@
                      "attack":"16",
                      "defense":"4",
                      "health":"36",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"50",
                      "type":"enemy"
                     },
@@ -2117,7 +2117,7 @@
                      "attack":"25",
                      "defense":"4",
                      "health":"16",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"100",
                      "type":"enemy"
                     },
@@ -2149,7 +2149,7 @@
                      "attack":"25",
                      "defense":"4",
                      "health":"16",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"100",
                      "type":"enemy"
                     },
@@ -2181,7 +2181,7 @@
                      "attack":"25",
                      "defense":"4",
                      "health":"16",
-                     "name":"Grablin",
+                     "name":"First Year",
                      "speed":"100",
                      "type":"enemy"
                     },
